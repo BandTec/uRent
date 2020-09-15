@@ -1,6 +1,6 @@
-package com.estrutura.urent.controller;
+package com.projeto.urent.controller;
 
-import com.estrutura.urent.model.Aluguel;
+import com.projeto.urent.model.Veiculo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.estrutura.urent.controller.LoginController.isLogin;
+import static com.projeto.urent.controller.LoginController.isLogin;
 
 @RestController
-@RequestMapping("alugueis")
-public class AluguelController {
+@RequestMapping("/veiculos")
+public class VeiculoController {
 
-    List<Aluguel> alugueis = new ArrayList<Aluguel>();
+    List<Veiculo> veiculos = new ArrayList<>();
 
     @GetMapping
-    public ResponseEntity listarTodosAlugueis() {
+    public ResponseEntity listarTodosVeiculos() {
         if(isLogin()) {
-            if(!alugueis.isEmpty()) {
-                return ResponseEntity.ok(alugueis);
+            if(!veiculos.isEmpty()) {
+                return ResponseEntity.ok(veiculos);
             } else {
                 return ResponseEntity.noContent().build();
             }
@@ -30,10 +30,10 @@ public class AluguelController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity listarAlugueis(@PathVariable int id) {
+    public ResponseEntity listarVeiculos(@PathVariable int id) {
         if(isLogin()) {
-            if(!alugueis.isEmpty()) {
-                return ResponseEntity.ok(alugueis.get(id - 1));
+            if(!veiculos.isEmpty()) {
+                return ResponseEntity.ok(veiculos.get(id - 1));
             } else {
                 return ResponseEntity.noContent().build();
             }
@@ -43,9 +43,9 @@ public class AluguelController {
     }
 
     @PostMapping
-    public ResponseEntity cadastrarAluguel(@RequestBody Aluguel aluguel) {
+    public ResponseEntity cadastrarVeiculo(@RequestBody Veiculo veiculo) {
         if(isLogin()) {
-            alugueis.add(aluguel);
+            veiculos.add(veiculo);
             return ResponseEntity.created(null).build();
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -53,10 +53,10 @@ public class AluguelController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity removerGaragem(@PathVariable int id) {
+    public ResponseEntity removerVeiculo(@PathVariable int id) {
         if(isLogin()) {
-            if (!alugueis.isEmpty()) {
-                alugueis.remove(id-1);
+            if (!veiculos.isEmpty()) {
+                veiculos.remove(id-1);
                 return ResponseEntity.ok().build();
             } else {
                 return ResponseEntity.notFound().build();

@@ -1,7 +1,6 @@
-package com.estrutura.urent.controller;
+package com.projeto.urent.controller;
 
-import com.estrutura.urent.model.Garagem;
-import com.estrutura.urent.model.Usuario;
+import com.projeto.urent.model.Aluguel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,19 +8,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.estrutura.urent.controller.LoginController.isLogin;
+import static com.projeto.urent.controller.LoginController.isLogin;
 
 @RestController
-@RequestMapping("/garagens")
-public class GaragemController {
+@RequestMapping("alugueis")
+public class AluguelController {
 
-    List<Garagem> garagens = new ArrayList<>();
+    List<Aluguel> alugueis = new ArrayList<Aluguel>();
 
     @GetMapping
-    public ResponseEntity listarTodasGaragens() {
+    public ResponseEntity listarTodosAlugueis() {
         if(isLogin()) {
-            if(!garagens.isEmpty()) {
-                return ResponseEntity.ok(garagens);
+            if(!alugueis.isEmpty()) {
+                return ResponseEntity.ok(alugueis);
             } else {
                 return ResponseEntity.noContent().build();
             }
@@ -31,10 +30,10 @@ public class GaragemController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity listarGaragem(@PathVariable int id) {
+    public ResponseEntity listarAlugueis(@PathVariable int id) {
         if(isLogin()) {
-            if(!garagens.isEmpty()) {
-                return ResponseEntity.ok(garagens.get(id - 1));
+            if(!alugueis.isEmpty()) {
+                return ResponseEntity.ok(alugueis.get(id - 1));
             } else {
                 return ResponseEntity.noContent().build();
             }
@@ -44,9 +43,9 @@ public class GaragemController {
     }
 
     @PostMapping
-    public ResponseEntity cadastrarGaragem(@RequestBody Garagem garagem) {
+    public ResponseEntity cadastrarAluguel(@RequestBody Aluguel aluguel) {
         if(isLogin()) {
-            garagens.add(garagem);
+            alugueis.add(aluguel);
             return ResponseEntity.created(null).build();
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -56,8 +55,8 @@ public class GaragemController {
     @DeleteMapping("/{id}")
     public ResponseEntity removerGaragem(@PathVariable int id) {
         if(isLogin()) {
-            if (!garagens.isEmpty()) {
-                garagens.remove(id-1);
+            if (!alugueis.isEmpty()) {
+                alugueis.remove(id-1);
                 return ResponseEntity.ok().build();
             } else {
                 return ResponseEntity.notFound().build();

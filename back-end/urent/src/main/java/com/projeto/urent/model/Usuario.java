@@ -1,6 +1,4 @@
-package com.estrutura.urent.model;
-
-import java.util.Date;
+package com.projeto.urent.model;
 
 public abstract class Usuario {
 
