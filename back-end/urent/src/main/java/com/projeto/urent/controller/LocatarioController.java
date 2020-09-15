@@ -1,8 +1,7 @@
-package com.estrutura.urent.controller;
+package com.projeto.urent.controller;
 
-import com.estrutura.urent.model.Locador;
-import com.estrutura.urent.model.Locatario;
-import com.estrutura.urent.model.Usuario;
+import com.projeto.urent.model.Locatario;
+import com.projeto.urent.model.Usuario;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.estrutura.urent.controller.LoginController.isLogin;
+import static com.projeto.urent.controller.LoginController.isLogin;
 
 @RestController
 @RequestMapping("/locatarios")

@@ -1,4 +1,4 @@
-package com.estrutura.urent.model;
+package com.projeto.urent.model;
 
 import java.util.ArrayList;
 import java.util.List;

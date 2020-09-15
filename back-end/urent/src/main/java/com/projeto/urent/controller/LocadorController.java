@@ -1,7 +1,7 @@
-package com.estrutura.urent.controller;
+package com.projeto.urent.controller;
 
-import com.estrutura.urent.model.Garagem;
-import com.estrutura.urent.model.Veiculo;
+import com.projeto.urent.model.Locador;
+import com.projeto.urent.model.Usuario;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.estrutura.urent.controller.LoginController.isLogin;
+import static com.projeto.urent.controller.LoginController.isLogin;
 
 @RestController
-@RequestMapping("/veiculos")
-public class VeiculoController {
+@RequestMapping("/locadores")
+public class LocadorController {
 
-    List<Veiculo> veiculos = new ArrayList<>();
+    List<Usuario> locadores = new ArrayList<Usuario>();
 
     @GetMapping
-    public ResponseEntity listarTodosVeiculos() {
+    public ResponseEntity listarTodosLocadores() {
         if(isLogin()) {
-            if(!veiculos.isEmpty()) {
-                return ResponseEntity.ok(veiculos);
+            if(!locadores.isEmpty()) {
+                return ResponseEntity.ok(locadores);
             } else {
                 return ResponseEntity.noContent().build();
             }
@@ -31,10 +31,10 @@ public class VeiculoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity listarVeiculos(@PathVariable int id) {
+    public ResponseEntity listarLocador(@PathVariable int id) {
         if(isLogin()) {
-            if(!veiculos.isEmpty()) {
-                return ResponseEntity.ok(veiculos.get(id - 1));
+            if(!locadores.isEmpty()) {
+                return ResponseEntity.ok(locadores.get(id - 1));
             } else {
                 return ResponseEntity.noContent().build();
             }
@@ -44,20 +44,20 @@ public class VeiculoController {
     }
 
     @PostMapping
-    public ResponseEntity cadastrarVeiculo(@RequestBody Veiculo veiculo) {
+    public ResponseEntity cadastrarLocador(@RequestBody Locador locador) {
         if(isLogin()) {
-            veiculos.add(veiculo);
-            return ResponseEntity.created(null).build();
+            locadores.add(locador);
+           return ResponseEntity.created(null).build();
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity removerVeiculo(@PathVariable int id) {
+    public ResponseEntity banirLocadore(@PathVariable int id) {
         if(isLogin()) {
-            if (!veiculos.isEmpty()) {
-                veiculos.remove(id-1);
+            if (!locadores.isEmpty()) {
+                locadores.remove(id-1);
                 return ResponseEntity.ok().build();
             } else {
                 return ResponseEntity.notFound().build();

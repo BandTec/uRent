@@ -1,9 +1,8 @@
-package com.estrutura.urent.controller;
+package com.projeto.urent.controller;
 
-import com.estrutura.urent.model.Locador;
-import com.estrutura.urent.model.Locatario;
-import com.estrutura.urent.model.Login;
-import com.estrutura.urent.model.Usuario;
+import com.projeto.urent.model.Locador;
+import com.projeto.urent.model.Locatario;
+import com.projeto.urent.model.Login;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

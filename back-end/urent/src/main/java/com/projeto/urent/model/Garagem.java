@@ -1,4 +1,4 @@
-package com.estrutura.urent.model;
+package com.projeto.urent.model;
 
 public class Garagem {
 
