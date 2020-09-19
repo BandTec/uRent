@@ -16,7 +16,7 @@ function Footer() {
 			</div>
 			<div className="footer-content">
 				<h1 className="footer-title">Precisa de um help?</h1>
-				<p className="footer-text">Entre em contato conosco , através</p>
+				<p className="footer-text">Entre em contato conosco, através</p>
 				<p className="footer-text">do nosso e-mail:</p>
 			</div>
 		</div>
