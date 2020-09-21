@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import logo from '../../assets/logo.svg';
 
@@ -11,7 +12,7 @@ function Header() {
 				<img src={logo} alt="Logo uRent" />
 			</div>
 			<div className="header-nav">
-				<button className="header-button-light">Cadastre-se</button>
+				<Link to="/cadastro"><button className="header-button-light">Cadastre-se</button></Link>
 				<button className="header-button-blue">Entrar</button>
 			</div>
 		</div>

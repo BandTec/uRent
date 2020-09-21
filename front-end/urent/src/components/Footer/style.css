@@ -8,15 +8,15 @@
     justify-content: space-evenly;
     align-items: center;
 }
-.footer-title {
+.footer .footer-title {
     font-size: 20px;
     font-weight: 600;
     color: #6A6180;
 }
-.footer-text {
+.footer .footer-text {
     font-size: 18px;
     line-height: 8px;
 }
-.footer-text:hover {
+.footer .footer-text:hover {
     cursor: pointer;
 }

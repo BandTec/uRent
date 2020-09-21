@@ -8,7 +8,7 @@
     justify-content: space-between;
 }
 
-.header-logo {
+.header .header-logo {
     /* background-color: brown; */
     height: 100%;
     margin-left: 50px;
@@ -17,7 +17,7 @@
     align-items: center;
 }
 
-.header-nav {
+.header .header-nav {
     /* background-color: chartreuse; */
     height: 100%;
     width: 228px;
@@ -28,7 +28,7 @@
     font-size: 18px;
 }
 
-.header-button-light {
+.header .header-button-light {
     width: 127px;
     height: 32px;
     color: #0752DE;
@@ -38,11 +38,11 @@
     transition: all .1s;
 }
 
-.header-button-light:hover {
+.header .header-button-light:hover {
     margin-bottom: 3px;
 }
 
-.header-button-blue {
+.header .header-button-blue {
     width: 88px;
     height: 32px;
     background-color: #0752DE;
@@ -52,6 +52,6 @@
     transition: all .1s;
 }
 
-.header-button-blue:hover {
+.header .header-button-blue:hover {
     margin-bottom: 3px;
 }

@@ -41,17 +41,17 @@
     color: #6A6180;
     font-weight: 600;
 }
-.welcome-content-button {
+.index .welcome-content-button {
     /* background-color: darkblue; */
     height: 50%;
     display: flex;
     align-items: center;
     margin: 0 80px;
 }
-.welcome-button:first-child {
+.index .welcome-button:first-child {
     margin-right: 43px;
 }
-.welcome-button {
+.index .welcome-button {
     background-color: #fff;
     border: 1px solid #0752DE;
     border-radius: 15px;
@@ -60,7 +60,7 @@
     color: #0752DE;
     transition: margin-bottom .1s;
 }
-.welcome-button:hover {
+.index .welcome-button:hover {
     background-color: #0752DE;
     border: 1px solid #0752DE;
     color: #ffffff;

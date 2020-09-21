@@ -13,7 +13,7 @@ import slide3 from '../../assets/slide3.png';
 
 function Index() {
 	return (
-		<div>
+		<div className="index">
 			<Header />
 			<div className="carroussel">
 				<Carousel autoPlay={true} infiniteLoop={true} showStatus={false} showThumbs={false} interval="3000" transitionTime="150">
