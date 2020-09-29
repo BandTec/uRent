@@ -53,3 +53,16 @@ export const CadastroInput = style.input`
     font-size: 18px;
     margin-bottom: 24px;
 `;
+
+
+export const CadastroSelect = style.select`
+    height: 40px;
+    width: 96%;
+    border: 1px solid #E6E6F0;
+    border-radius: 8px;
+    background-color: #FAFAFC;
+    padding-left: 15px;
+    color: #9C98A6;
+    font-size: 15px;
+    margin-bottom: 24px;
+`;

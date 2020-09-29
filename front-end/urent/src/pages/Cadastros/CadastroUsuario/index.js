@@ -7,6 +7,7 @@ import * as S from '../style.js';
 
 function CadastroUsuario() {
 	return (
+
 		<S.Cadastro>
 			<HeaderCadastro title="Cadastro" />
 
