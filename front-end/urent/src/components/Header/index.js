@@ -3,19 +3,27 @@ import { Link } from 'react-router-dom';
 
 import logo from '../../assets/logo.svg';
 
-import './style.css';
+import * as S from './style';
+
+
 
 function Header() {
 	return (
-		<div className="header">
-			<div className="header-logo">
+
+		<S.Header>
+
+			<S.HeaderLogo>
 				<img src={logo} alt="Logo uRent" />
-			</div>
-			<div className="header-nav">
-				<Link to="/cadastro"><button className="header-button-light">Cadastre-se</button></Link>
-				<button className="header-button-blue">Entrar</button>
-			</div>
-		</div>
+			</S.HeaderLogo>
+
+			<S.HeaderNav>		
+				<Link to="/cadastro">
+					<S.ButtonLight>Cadastre-se</S.ButtonLight>
+				</Link>
+				<S.ButtonBlue>Entrar</S.ButtonBlue>
+			</S.HeaderNav>
+
+		</S.Header>
 	)
 }
 

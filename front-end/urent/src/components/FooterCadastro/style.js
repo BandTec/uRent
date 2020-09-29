@@ -1,25 +1,26 @@
-.cadastro-usuario-footer {
-    /* background-color: red; */
+import style from 'styled-components';
+
+export const Footer = style.div`
     height: 136px;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-.cadastro-usuario-footer-alert {
+`;
+export const FooterAlert = style.div`
     /* background-color: pink; */
     width: 30%;
     height: 55px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-.cadastro-usuario-footer-text {
+`;
+export const FooterText = style.p`
     /* background-color: slategrey; */
     width: 150px;
     color: #A0A0B2;
-}
-.cadastro-usuario-footer-button {
+`;
+export const FooterButton = style.button`
     width: 197px;
     height: 56px;
     background-color: #04D361;
@@ -27,7 +28,7 @@
     border-radius: 8px;
     color: #fff;
     transition: .3s;
-}
-.cadastro-usuario-footer-button:hover {
-    margin-bottom: 5px;
-}
+    &:hover {
+        margin-bottom: 5px;
+    }
+`;

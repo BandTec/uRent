@@ -1,25 +1,25 @@
 import React from 'react';
 
-import './style.css';
+import * as S from './style';
 
 function Footer() {
 	return (
-		<div className="footer">
-			<div className="footer-content">
-				<h1 className="footer-title">Sobre</h1>
-				<p className="footer-text">Como a URENT funciona?</p>
-				<p className="footer-text">Conheça nossa Equipe</p>
+		<S.Footer>
+			<div>
+				<S.FooterTitle>Sobre</S.FooterTitle>
+				<S.FooterText>Como a URENT funciona?</S.FooterText>
+				<S.FooterText>Conheça nossa Equipe</S.FooterText>
 			</div>
-			<div className="footer-content">
-				<h1 className="footer-title">Dúvidas</h1>
-				<p className="footer-text">Acesse dúvidas frequentes</p>
+			<div>
+				<S.FooterTitle>Dúvidas</S.FooterTitle>
+				<S.FooterText>Acesse dúvidas frequentes</S.FooterText>
 			</div>
-			<div className="footer-content">
-				<h1 className="footer-title">Precisa de um help?</h1>
-				<p className="footer-text">Entre em contato conosco, através</p>
-				<p className="footer-text">do nosso e-mail:</p>
+			<div>
+				<S.FooterTitle>Precisa de um help?</S.FooterTitle>
+				<S.FooterText>Entre em contato conosco, através</S.FooterText>
+				<S.FooterText>do nosso e-mail:</S.FooterText>
 			</div>
-		</div>
+		</S.Footer>
 	)
 }
 
