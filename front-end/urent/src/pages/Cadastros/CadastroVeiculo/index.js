@@ -67,4 +67,5 @@ function CadastroVeiculo() {
 
 }
 
+
 export default CadastroVeiculo;
