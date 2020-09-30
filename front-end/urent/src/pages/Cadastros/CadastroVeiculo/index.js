@@ -35,11 +35,12 @@ function CadastroVeiculo() {
                         <S.CadastroSelect title="Tipo de veiculo">
 
                             <option value=""></option>
-                            <option value="hatch">Hatch</option>
-                            <option value="sedan">Sedan</option>
-                            <option value="suv">SUV</option>
-                            <option value="picape">Picape</option>
-                            <option value="esportivo">Esportivo</option>
+                            <option value="hatch">Carro Hatch</option>
+                            <option value="sedan">Carro Sedan</option>
+                            <option value="suv">Carro SUV</option>
+                            <option value="moto">Moto</option>
+                            <option value="caminhao">Caminhão</option>
+
                         </S.CadastroSelect>
 
                     </S.CadastroContent>
