@@ -13,7 +13,7 @@ export const HeaderNav = style.nav`
     /* background-color: chocolate; */
     margin-left: 50%;
     justify-self: left;
-`;  
+`;
 export const HeaderTitle = style.div`
     justify-self: center;
 `;
@@ -21,9 +21,11 @@ export const Section = style.div`
     background-color: #2466E2;
     height: 416px;
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
 `;
 export const SectionText = style.div`
-    /* background-color: coral; */
+   // background-color: coral;
     width: fit-content;
     position: relative;
     top: 55px;
@@ -37,6 +39,7 @@ export const SectionTextTitle = style.h1`
     margin: 0;
     width: 361px;
 `;
+
 export const SectionTextSubtitle = style.h3`
     /* background-color: coral; */
     font-size: 16px;
@@ -44,4 +47,12 @@ export const SectionTextSubtitle = style.h3`
     color: #8CD0F3;
     /* margin: 0; */
     width: 283px;
+`;
+
+export const SectionIcon = style.div`
+    // background-color: coral;
+    width: fit-content;
+    position: relative;
+    top: 55px;
+    margin-left: 17%;
 `;

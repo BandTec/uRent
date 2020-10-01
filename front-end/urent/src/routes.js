@@ -7,7 +7,7 @@ import CadastroGaragem from './pages/Cadastros/CadastroGaragem/index';
 import CadastroVeiculo from './pages/Cadastros/CadastroVeiculo/index';
 
 function Routes() {
-    return(
+    return (
         <BrowserRouter>
             <Switch>
                 <Route path="/" exact component={Index} />

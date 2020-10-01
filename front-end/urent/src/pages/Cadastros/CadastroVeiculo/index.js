@@ -13,7 +13,7 @@ function CadastroVeiculo() {
 
         <S.Cadastro>
 
-            <HeaderCadastro title="CadastroVeiculo" />
+            <HeaderCadastro title="Cadastro Veiculo" />
 
             <S.CadastroContainer>
 
