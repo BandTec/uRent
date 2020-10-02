@@ -1,22 +1,26 @@
 import React from 'react';
 
-import FooterDuvidas from '../../components/Footer/index';
-import HeaderDuvidas from '../../components/HeaderDuvidasFrequentes/index';
+import Footer from '../../components/Footer/index';
 import Header from '../../components/Header/index';
+import HeaderDuvidas from '../../components/HeaderDuvidasFrequentes/index';
 
-//import * as S from './style';
+import * as S from '../DuvidasFrequentes/style';
 
-function DuvidasFrequentes() {
+function Duvidas() {
     return (
         <div>
             <Header />
+
             <HeaderDuvidas />
 
+            <S.Welcome>
 
 
-            <FooterDuvidas />
+            </S.Welcome>
+
+            <Footer />
         </div>
     )
 }
 
-export default DuvidasFrequentes;
+export default Duvidas;

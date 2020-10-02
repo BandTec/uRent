@@ -4,6 +4,7 @@ export const Carroussel = style.div`
     margin: 0 auto;
     width: 87%;
 `;
+
 export const SlideContent = style.div`
     position: absolute;
     top: 35px;
