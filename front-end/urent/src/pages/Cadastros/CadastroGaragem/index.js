@@ -21,7 +21,7 @@ function CadastroGaragem() {
 
                                         <S.CadastroContent>
                                                 <S.CadastroLabel>CEP</S.CadastroLabel>
-                                                <S.CadastroInput style={{ width: '94%' }} />
+                                                <S.CadastroInput style={{ width: '94%' }} data-mask="00/00/0000" />
                                         </S.CadastroContent>
 
                                         <S.CadastroContent>
