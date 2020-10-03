@@ -6,6 +6,7 @@ import CadastroUsuario from './pages/Cadastros/CadastroUsuario/index';
 import CadastroGaragem from './pages/Cadastros/CadastroGaragem/index';
 import CadastroVeiculo from './pages/Cadastros/CadastroVeiculo/index';
 import DuvidasFrequentes from './pages/DuvidasFrequentes';
+import Login from './pages/Login';
 
 function Routes() {
     return (
@@ -16,6 +17,7 @@ function Routes() {
                 <Route path="/cadastro-garagem" component={CadastroGaragem} />
                 <Route path="/cadastro-veiculo" component={CadastroVeiculo} />
                 <Route path="/duvidas" component={DuvidasFrequentes} />
+                <Route path="/login" component={Login} />
             </Switch>
         </BrowserRouter>
     )
