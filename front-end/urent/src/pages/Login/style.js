@@ -1,65 +1,84 @@
 import style from 'styled-components';
 
 export const Welcome = style.div`
-position: relative;
-width: 1366px;
-height: 768px;
+width: 100%;
 
 background: #E4EEFC;
 `;
 
 export const FormLogin = style.div`
-position: absolute;
-width: 1175px;
+width: 80%;
 height: 540px;
-left: 96px;
-top: 114px;
-background-color:blue;
+margin: 50px auto;
+background-color:#2466E2;
 border-radius: 8px;
+display:flex;
+justify-content:space-around;
+align-items: center;
 `;
 
-export const FormTitleEntrar = style.p`
-position: absolute;
-width: 132px;
-height: 53px;
-left: 831px;
-top: 151px;
+export const FormTitleEntrar = style.h1`
 
-font-family: Maven Pro;
-font-style: normal;
-font-weight: 500;
-font-size: 45px;
-line-height: 53px;
-/* identical to box height */
 
-text-align: center;
 
 color: #FFFFFF;
 
 `;
 
-export const FormImage = style.div`
-    height: 100%;
-    width: -132px;
-    margin-left: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+export const FormTitleLabel=style.label`
+align-self:flex-start;
+color:#FFFFFF;
+margin-bottom:5px;
+`;
+
+export const FormInput = style.input`
+width: 445px;
+height: 50px;
+padding-left:15px;
+background-color:#E4EEFC;
+border-radius: 8px;
+border: 1px solid #E4EEFC;
+margin-bottom:15px;
+
+`;
+
+
+export const Form= style.div` 
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items: center;
+`;
+
+export const FormRecursos= style.div`
+margin-bottom:30px;
+display:flex;
+justify-content:space-between;
+width:100%;
+`;
+
+export const InputCheck=style.input`
+
+`;
+
+export const LabelCheck= style.label`
+color:white;
+`;
+
+export const LogoImage = style.div`
+    height:50%;
+    margin-left:50px;
 `;
 
 export const ButtonEntrar = style.button`
-position: absolute;
-width: 445px;
+font-size:23px;
+font-weight:700;
+color:#FFFFFF;
+width: 100%;
 height: 63px;
-left: 675px;
-top: 504px;
-position: absolute;
-width: 98px;
-height: 29px;
-left: 848px;
-top: 518px;
-
+margin-bottom:20px;
+border-radius: 8px;
 background: rgba(11, 21, 34, 0.49);
-border-radius: 10px;
+border: 1px solid rgba(11, 21, 34, 0.49);
 
 `;
