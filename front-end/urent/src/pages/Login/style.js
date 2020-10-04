@@ -2,7 +2,8 @@ import style from 'styled-components';
 
 export const Welcome = style.div`
 width: 100%;
-
+height:100vh;
+position:absolute;
 background: #E4EEFC;
 `;
 
@@ -71,6 +72,10 @@ export const LogoImage = style.div`
 `;
 
 export const ButtonEntrar = style.button`
+&:hover{
+    background: rgba(20, 31, 44, 0.69);
+    border: 1px solid rgba(20, 31, 44, 0.69);
+}
 font-size:23px;
 font-weight:700;
 color:#FFFFFF;
