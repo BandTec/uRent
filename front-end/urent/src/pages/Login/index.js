@@ -15,10 +15,19 @@ function Login() {
                     <S.LogoImage><img src={logo} alt="Logo uRent" height="100%" /></S.LogoImage>
                     <S.Form>
                         <S.FormTitleEntrar>Entrar</S.FormTitleEntrar>
+
                         <S.FormTitleLabel >E-mail</S.FormTitleLabel>
-                        <S.FormInput placeholder="ex@gmail.com" />
+                        <S.FormData>
+                            <FaRegUser style={{position: 'absolute', left: '3%'}} size='25' color='#FFFFFF' />
+                            <S.FormInput placeholder="ex@gmail.com" />
+                        </S.FormData>
+                        
                         <S.FormTitleLabel>Senha</S.FormTitleLabel>
-                        <S.FormInput placeholder="*************" />
+                        <S.FormData>	
+                        <FaKey style={{position: 'absolute', left: '3%'}} size='25' color='#FFFFFF' />
+                            <S.FormInput placeholder="*************" />
+                        </S.FormData>
+
                         <S.FormRecursos>
                             <S.FormRecusosCheck style={{display: 'flex', alignItems: 'center'}}>
                                 <input type="checkbox" type="checkbox" />
@@ -26,6 +35,7 @@ function Login() {
                             </S.FormRecusosCheck>
                             <S.LabelCheck>Esqueci minha senha</S.LabelCheck>
                         </S.FormRecursos>
+                        
                         <S.ButtonEntrar>ENTRAR</S.ButtonEntrar>
                         <S.LabelCheck>Criar conta</S.LabelCheck>
                     </S.Form>

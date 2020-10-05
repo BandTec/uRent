@@ -40,6 +40,13 @@ export const FormTitleLabel = style.label`
     margin-bottom:5px;
 `;
 
+export const FormData = style.div`
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px
+`;
+
 export const FormInput = style.input`
     width: 445px;
     height: 50px;
@@ -47,7 +54,6 @@ export const FormInput = style.input`
     background-color:#E4EEFC;
     border-radius: 8px;
     border: 1px solid #E4EEFC;
-    margin-bottom:15px;
 `;
 
 export const FormRecursos= style.div`
