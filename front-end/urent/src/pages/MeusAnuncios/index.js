@@ -9,7 +9,7 @@ import FooterAnuncio from '../../components/Footer/index';
 
 import * as S from '../MeusAnuncios/style';
 
-var anuncio = 1;
+var anuncio = 0;
 function MeusAnuncios() {
     return (
      <div>   
@@ -125,14 +125,24 @@ function MeusAnuncios() {
 
                 </div>
                 :
+                <S.Background>      
                 <S.Section>
-                    {/* <S.SectionCotent>
+                    <S.SectionCotent>
                         <div>
                             <S.SectionTextTitle>Nenhum anúncio ainda...</S.SectionTextTitle>
                             <S.SectionTextSubtitle>Anuncie conosco e tenha uma renda extra.</S.SectionTextSubtitle>
+                            <S.AnunciarGarage>
+                                <S.AnunciarGarageText>
+                                Anunciar garagem
+                                </S.AnunciarGarageText>
+                            </S.AnunciarGarage>
                         </div>
-                    </S.SectionCotent> */}
+                    </S.SectionCotent>
                 </S.Section>
+                <S.BackGroundText>
+                Nenhum anúncio encontrado em seu perfil.
+                </S.BackGroundText>
+                </S.Background>
             }
 
 

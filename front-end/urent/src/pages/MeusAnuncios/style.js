@@ -235,7 +235,7 @@ export const BoxInfoContentBox2EditEnvio = style.div`
     margin-top: 10px;
 `;
 
-export const BoxInfoContentBox2 = style.div`
+export const BoxInfoContentBox2 = style.button`
     float: left;
     width: 170px;
     height: 50px;
@@ -247,14 +247,13 @@ export const BoxInfoContentBox2 = style.div`
     // flex-direction: row;
     justify-content: center;
     margin-left: 48px;
-    margin-top: 13px;
+    margin-top: 16px;
     background-color: white;
 `;
 
 export const BoxInfoContentBox2EditAnuncio = style.div`
     font-size: 18px;
     color: #0752DE;
-    margin-top: 10px;
     text-align: center;
 `;
 
@@ -287,7 +286,7 @@ export const ExcluirAnuncio = style.div`
     margin-top: 50px;
 `;
 
-export const ExcluirAnuncioBox = style.div`
+export const ExcluirAnuncioBox = style.button`
     float: left;
     width: 170px;
     height: 50px;
@@ -307,7 +306,6 @@ export const ExcluirAnuncioText = style.div`
     font-size: 18px;
     color: white;
     text-align: center;
-    margin-top: 10px;
 `;
 
 export const FooterEdit = style.div`
@@ -316,6 +314,44 @@ export const FooterEdit = style.div`
     margin-top: 90px;
 `;
 
+export const AnunciarGarageBox = style.div`
+    width: 300px;
+    height: 300px;
+    // background: blue
+
+`;
+
+export const AnunciarGarage = style.button`
+    float: left;
+    width: 206px;
+    height: 60px;
+    border: 1px solid #68BEEF;
+    border-radius: 15px;
+    margin-right: 10%;
+    display: block;
+    // align-items: center;
+    // flex-direction: row;
+    justify-content: center;
+    // margin-top: 30px;
+    background-color: #2466E2;
+`;
+    export const AnunciarGarageText = style.div`
+    text-align: center;
+    font-size: 18px;
+    color: #68BEEF;
+`;
+
+export const BackGroundText = style.div`
+    // float-left: 30%;
+    width: 100%;
+    height: 10vw;
+    text-align: center;
+    font-size: 16px;
+    color: #9C98A6;
+    background: ;
+    margin-top: 10%;
+    
+`;
 
 
 
