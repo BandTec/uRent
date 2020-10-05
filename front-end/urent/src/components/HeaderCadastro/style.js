@@ -56,3 +56,23 @@ export const SectionIcon = style.div`
     top: 55px;
     margin-left: 17%;
 `;
+
+export const ContentInfoAnuncio = style.div`
+width: 100%;
+height: 96px;
+background: red;
+margin-top:10px;
+display: inline;
+`;
+
+export const BoxInfo = style.div`
+position: absolute;
+width: 206px;
+height: 96px;
+left: 266px;
+top: 128px;
+
+border: 1px solid #68BEEF;
+box-sizing: border-box;
+border-radius: 15px;
+`;
