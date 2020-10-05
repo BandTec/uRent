@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaUser, FaKey } from 'react-icons/fa';
+import { FaRegUser, FaKey } from 'react-icons/fa';
 
 
 import logo from '../../assets/logoLogin.svg';
@@ -19,7 +19,7 @@ function Login() {
                         <S.FormTitleLabel >E-mail</S.FormTitleLabel>
                         <S.FormData>
                             <FaRegUser style={{position: 'absolute', left: '3%'}} size='25' color='#FFFFFF' />
-                            <S.FormInput placeholder="ex@gmail.com" />
+                            <S.FormInput placeholder="ex@gmail.com" placeholderTextColor='red'  />
                         </S.FormData>
                         
                         <S.FormTitleLabel>Senha</S.FormTitleLabel>
