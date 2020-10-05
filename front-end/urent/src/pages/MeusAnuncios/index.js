@@ -2,15 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import garagem01 from '../../assets/garage01.png';
+import estrelaApagada from '../../assets/Star 5.png';
+import estrelaLigada from '../../assets/Star 4.png';
 
 import FooterAnuncio from '../../components/Footer/index';
 
 import * as S from '../MeusAnuncios/style';
 
-var anuncio = 1;
+var anuncio = 0;
 function MeusAnuncios() {
     return (
-        <S.Background>
+     <div>   
+         <S.Background>
             {/* HEADER COM TITULO */}
             <S.Header>
                 <S.HeaderNav>
@@ -23,75 +26,131 @@ function MeusAnuncios() {
 
             {/* HEADER SECUNDARIO-> DEFINIDO A PARTIR SE TEM ANUNCIOS OU NAO */}
             {anuncio > 0 ?
-            <div>
-                     <S.Section>
-                    <S.SectionCotent>
+                <div>
+                    <S.Section>
+                        <S.SectionCotent>
 
-                        <S.BoxInfo>
-                            <S.BoxTitle>
-                                Quantidade de anúncios
+                            <S.BoxPaiInfo>
+                                <S.BoxInfo>
+                                    <S.BoxTitle>
+                                        Quantidade de anúncios
                             </S.BoxTitle>
 
-                            <S.BoxTitleValue>
-                                89
+                                    <S.BoxTitleValue>
+                                        89
                             </S.BoxTitleValue>
-                        </S.BoxInfo>
+                                </S.BoxInfo>
 
-                        <S.BoxInfo>
-                            <S.BoxTitle>
-                                Visualizações totais
+                                <S.BoxInfo>
+                                    <S.BoxTitle>
+                                        Visualizações totais
                             </S.BoxTitle>
-                            <S.BoxTitleValue>
-                                200
+                                    <S.BoxTitleValue>
+                                        200
                             </S.BoxTitleValue>
-                        </S.BoxInfo>
+                                </S.BoxInfo>
 
-                        <S.BoxInfoText>
-                            Atualize e exclua aqui seus anúncios.
+
+                                <S.BoxInfoText>
+                                    Atualize e exclua aqui seus anúncios.
 						</S.BoxInfoText>
+                            </S.BoxPaiInfo>
+                        </S.SectionCotent>
+                    </S.Section>
 
-                    </S.SectionCotent>
-                </S.Section>
-
-                <S.CadastroContainer>
-                    <S.ContainerTitleAnuncio>
-                    Garagem fechada aluguel diário
+                    <S.CadastroContainer>
+                        <S.ContainerTitleAnuncio>
+                            Garagem fechada aluguel diário
                     </S.ContainerTitleAnuncio>
 
-                    <S.ContainerContent>
-                        <S.ContentBox1>
-                        <img src = {garagem01} alt="imagem da garagem do Anuncio" ></img>
-                        </S.ContentBox1>
-                        <S.ContentBox2>
-                       <h3>8.0</h3>
-                       4 avaliações
+                        <S.ContainerContent>
+                            <S.ContentBox1>
+                                <img src={garagem01} alt="imagem da garagem do Anuncio" ></img>
+                            </S.ContentBox1>
+                            <S.ContentBox2>
+                                <S.Box2Avaliacao>
+                                    <S.Box2NotaGaragem>
+                                        8.0
 
-                       <S.BoxInfoContentBox2>
-                       Editar anúncio
-                       </S.BoxInfoContentBox2>
-                        </S.ContentBox2>
-                        <S.ContentBox2>
-                            
-                        </S.ContentBox2>
-                    </S.ContainerContent>
-                </S.CadastroContainer>
+                                        <S.Box2GaragemStars>
+                                            <img src={estrelaLigada} alt="Estrela Ligada" ></img>
+                                            <img src={estrelaLigada} alt="Estrela Ligada" ></img>
+                                            <img src={estrelaLigada} alt="Estrela Ligada" ></img>
+                                            <img src={estrelaLigada} alt="Estrela Ligada" ></img>
+                                            <img src={estrelaApagada} alt="Estrela apagada" ></img>
+                                        </S.Box2GaragemStars>
 
-            </div>
+                                    </S.Box2NotaGaragem>
+
+                                    <S.Box2NmrAvaliacoes>
+                                        4 avaliações
+                                </S.Box2NmrAvaliacoes>
+
+                                </S.Box2Avaliacao>
+                                <S.BoxInfoContentBox2EditEnvio>
+                                    <S.BoxInfoContentBox2>
+                                        <S.BoxInfoContentBox2EditAnuncio>
+                                            Editar anuncio
+                                    </S.BoxInfoContentBox2EditAnuncio>
+                                    </S.BoxInfoContentBox2>
+                                </S.BoxInfoContentBox2EditEnvio>
+                            </S.ContentBox2>
+                            <S.ContentBox2>
+                                <S.Preco>
+                                    <S.PrecoDiarioText>
+                                        Preço Diário:
+                                    <S.PrecoDiarioValue>
+                                            R$ 15,00
+                                    </S.PrecoDiarioValue>
+                                    </S.PrecoDiarioText>
+                                </S.Preco>
+                                <S.ExcluirAnuncio>
+                                    <S.ExcluirAnuncioBox>
+                                        <S.ExcluirAnuncioText>
+                                            Excluir anuncio
+                                </S.ExcluirAnuncioText>
+                                    </S.ExcluirAnuncioBox>
+                                </S.ExcluirAnuncio>
+                            </S.ContentBox2>
+                        </S.ContainerContent>
+                    </S.CadastroContainer>
+<S.CadastroContainer style = {{background: '#E4EEFC'}}>
+
+</S.CadastroContainer>
+
+<S.CadastroContainer style = {{background: '#E4EEFC'}}>
+    
+</S.CadastroContainer>
+                    
+
+                </div>
                 :
+                <S.Background>      
                 <S.Section>
-                    {/* <S.SectionCotent>
+                    <S.SectionCotent>
                         <div>
                             <S.SectionTextTitle>Nenhum anúncio ainda...</S.SectionTextTitle>
                             <S.SectionTextSubtitle>Anuncie conosco e tenha uma renda extra.</S.SectionTextSubtitle>
+                            <S.AnunciarGarage>
+                                <S.AnunciarGarageText>
+                                Anunciar garagem
+                                </S.AnunciarGarageText>
+                            </S.AnunciarGarage>
                         </div>
-                    </S.SectionCotent> */}
+                    </S.SectionCotent>
                 </S.Section>
+                <S.BackGroundText>
+                Nenhum anúncio encontrado em seu perfil.
+                </S.BackGroundText>
+                </S.Background>
             }
 
 
-
         </S.Background>
-
+        <S.FooterEdit>
+            <FooterAnuncio/>
+        </S.FooterEdit>
+        </div>
     )
 }
 
