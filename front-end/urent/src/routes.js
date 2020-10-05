@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import FormularioAnuncio from './pages/Cadastros/FormularioAnuncio/index';
 import MeusAnuncios from './pages/MeusAnuncios/index';
 
+
 function Routes() {
     return (
         <BrowserRouter>

@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { FiArrowLeft } from 'react-icons/fi';
 
 import Footer from '../../components/Footer/index';
 import Header from '../../components/Header/index';
-import HeaderDuvidas from '../../components/HeaderDuvidasFrequentes/index';
 
 import * as S from '../DuvidasFrequentes/style';
 
@@ -11,7 +12,14 @@ function Duvidas() {
         <div>
             <Header />
 
-            <HeaderDuvidas />
+            <S.Header>
+				<S.HeaderNav>
+					<Link to="/"><FiArrowLeft color="#fff" size="30" /></Link>
+				</S.HeaderNav>
+				<S.HeaderTitle>
+					<h1 style={{ fontSize: '20px', color: '#fff', fontWeight: 'bold', }}>Duvidas Frequentes</h1>
+				</S.HeaderTitle>
+			</S.Header>
 
             <div>
 
