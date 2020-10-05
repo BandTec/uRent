@@ -1,10 +1,10 @@
 import React from 'react';
 
-import FooterCadastro from '../../../components/FooterCadastro/index';
-import HeaderCadastro from '../../../components/HeaderCadastro/index';
+import FooterCadastro from '../../components/FooterCadastro/index';
+import HeaderCadastro from '../../components/HeaderCadastro/index';
 
 
-import * as S from '../style.js';
+import * as S from '../Cadastros/style.js';
 
 function FormularioAnuncio() {
 	return (
@@ -29,8 +29,8 @@ function FormularioAnuncio() {
 					</S.CadastroContent>
 
 					<S.CadastroContent>
-						<S.CadastroLabel style={{ color:"#0752DE"}}>+ Adicionar nova garagem</S.CadastroLabel>
-						<S.CadastroInputAddGaragem  style={{ width: '94%' }} />
+						<S.CadastroLabel style={{ color: "#0752DE" }}>+ Adicionar nova garagem</S.CadastroLabel>
+						<S.CadastroInputAddGaragem style={{ width: '94%' }} />
 					</S.CadastroContent>
 
 				</S.CadastroContentBox>
@@ -49,7 +49,7 @@ function FormularioAnuncio() {
 
 				</S.CadastroContentBox>
 
-			
+
 				<FooterCadastro />
 			</S.CadastroContainer>
 		</S.Cadastro>

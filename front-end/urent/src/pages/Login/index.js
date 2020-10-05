@@ -20,7 +20,7 @@ function Login() {
                         <S.FormTitleLabel>Senha</S.FormTitleLabel>
                         <S.FormInput placeholder="*************" />
                         <S.FormRecursos>
-                            <S.FormRecusosCheck style={{display: 'flex', alignItems: 'center'}}>
+                            <S.FormRecusosCheck style={{ display: 'flex', alignItems: 'center' }}>
                                 <input type="checkbox" type="checkbox" />
                                 <S.LabelCheck>Lembrar-me</S.LabelCheck>
                             </S.FormRecusosCheck>

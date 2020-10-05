@@ -5,6 +5,7 @@ export const Cadastro = style.div`
     width: 100%;
 `;
 
+
 export const CadastroContainer = style.div`
     background-color: #fff;
     padding: 63px 8%;
@@ -16,6 +17,7 @@ export const CadastroContainer = style.div`
     flex-direction: column;
     align-items: flex-start;
 `;
+
 export const CadastroTitle = style.h1`
     /* background-color: cyan; */
     font-size: 24px;
