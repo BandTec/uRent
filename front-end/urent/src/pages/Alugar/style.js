@@ -4,7 +4,7 @@ export const Section = style.div`
     // background-color: red;
     width: 80%;
     height: 90vh;
-    margin: 0 auto 90px auto;
+    margin: 60px auto 90px auto;
 `;
 
 export const SectionTitle = style.h1`

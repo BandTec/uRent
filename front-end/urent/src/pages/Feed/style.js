@@ -4,7 +4,7 @@ export const FeedContainer = style.div`
     // background-color: red;
     width: 60%;
     padding: 0 40px;
-    margin: 0 auto;
+    margin: 60px auto;
     border: 1px solid #C4C4C4;
     border-radius: 15px;
     box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.65);
