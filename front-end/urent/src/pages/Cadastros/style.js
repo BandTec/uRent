@@ -47,7 +47,9 @@ export const CadastroLabel = style.label`
     color: #9C98A6;
     line-height: 2;
     font-size: 16px;
+
 `;
+
 
 export const CadastroInput = style.input`
     height: 35px;
@@ -86,3 +88,4 @@ export const CadastroSelect = style.select`
     margin-bottom: 24px;
     display: none";
 `;
+
