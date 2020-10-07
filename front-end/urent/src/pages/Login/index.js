@@ -7,7 +7,7 @@ import * as S from '../Login/style';
 
 function Login() {
     return (
-        <div >
+        <div>
             <S.Welcome>
 
                 <S.FormLogin>
