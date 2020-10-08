@@ -9,6 +9,8 @@ import DuvidasFrequentes from './pages/DuvidasFrequentes';
 import Login from './pages/Login';
 import FormularioAnuncio from './pages/FormularioAnuncio/index';
 import MeusAnuncios from './pages/MeusAnuncios/index';
+import Institucional from './pages/Institucional/index';
+
 function Routes() {
     return (
         <BrowserRouter>
@@ -21,6 +23,7 @@ function Routes() {
                 <Route path="/login" component={Login} />
                 <Route path="/formulario-anuncio" component={FormularioAnuncio} />
                 <Route path="/meus-anuncios" component={MeusAnuncios} />
+                <Route path="/institucional" component={Institucional}/>
             </Switch>
         </BrowserRouter>
     )
