@@ -69,11 +69,16 @@ function HeaderCadastro({ title }) {
 													</S.ContentInfoAnuncio>
 													<S.SectionTextSubtitle>Atualize e exclua aqui seus anúncios. </S.SectionTextSubtitle>
 												</div>
-												:
-												<div>
-													<S.SectionTextTitle>Pagina não encontrada</S.SectionTextTitle>
-													<S.SectionTextSubtitle>Verifique o parametro </S.SectionTextSubtitle>
-												</div>
+												: title === 'Perfil' ?
+													<div>
+														<S.SectionTextTitle>Meu Perfil</S.SectionTextTitle>
+														<S.SectionTextSubtitle>Suas informações, você pode alterá-las quando quiser</S.SectionTextSubtitle>
+													</div>
+													:
+													<div>
+														<S.SectionTextTitle>Pagina não encontrada</S.SectionTextTitle>
+														<S.SectionTextSubtitle>Verifique o parametro </S.SectionTextSubtitle>
+													</div>
 
 					}
 				</S.SectionText>

@@ -21,7 +21,6 @@ height: 140px;
 export const ContainerPerfil = style.div`
 width: 100%;
 height: 240px;
-background-color: red;
 margin-bottom: 40px;
 display: flex;
 
@@ -31,19 +30,35 @@ display: flex;
 export const BoxPerfil = style.div`
 width: 50%;
 height: 100%;
-background-color: blue;
 
 `;
 
 
-export const BoxPerfilImg = style.div`
+export const BoxContentDados = style.div`
 width: 50%;
 height: 100%;
-background-color: green;
+display: block;
+margin-top: 20px;
+
+`;
+
+export const BoxImgPerfil = style.div`
+width: 100%;
 display: flex;
 justify-content: center;
 
 `;
+
+
+export const BoxPerfilStars = style.div`
+width: 100%;
+display: flex;
+justify-content: center;
+
+
+`;
+
+
 
 
 export const FormPerfil = style.div`

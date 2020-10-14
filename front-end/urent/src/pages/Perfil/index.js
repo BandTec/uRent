@@ -59,11 +59,24 @@ function FormularioPerfil() {
 
 
 
-                            <S.BoxPerfilImg>
+                            <S.BoxContentDados>
 
-                                <S.Image src={fotoPerfil} />
+                                <S.BoxImgPerfil>
 
-                            </S.BoxPerfilImg>
+                                    <S.Image src={fotoPerfil} />
+
+                                </S.BoxImgPerfil>
+
+
+                                <S.BoxPerfilStars>
+                                    <img src={estrelaLigada} alt="Estrela Ligada" ></img>
+                                    <img src={estrelaLigada} alt="Estrela Ligada" ></img>
+                                    <img src={estrelaLigada} alt="Estrela Ligada" ></img>
+                                    <img src={estrelaLigada} alt="Estrela Ligada" ></img>
+                                    <img src={estrelaApagada} alt="Estrela apagada" ></img>
+                                </S.BoxPerfilStars>
+
+                            </S.BoxContentDados>
 
                         </S.ContainerPerfil>
 
