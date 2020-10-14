@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -31,7 +32,7 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity cadastrar(@RequestBody Usuario usuario) {
+    public ResponseEntity cadastrar(@RequestBody @Valid Usuario usuario) {
         repository.save(usuario);
         return ResponseEntity.created(null).build();
     }
