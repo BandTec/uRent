@@ -12,6 +12,7 @@ import MeusAnuncios from './pages/MeusAnuncios/index';
 import Institucional from './pages/Institucional/index';
 import Feed from './pages/Feed/index';
 import Alugar from './pages/Alugar/index';
+import Perfil from './pages/Perfil/index';
 
 function Routes() {
     return (
@@ -25,9 +26,10 @@ function Routes() {
                 <Route path="/login" component={Login} />
                 <Route path="/formulario-anuncio" component={FormularioAnuncio} />
                 <Route path="/meus-anuncios" component={MeusAnuncios} />
-                <Route path="/institucional" component={Institucional}/>
-                <Route path="/feed" component={Feed}/>
-                <Route path="/alugar" component={Alugar}/>
+                <Route path="/institucional" component={Institucional} />
+                <Route path="/feed" component={Feed} />
+                <Route path="/alugar" component={Alugar} />
+                <Route path="/perfil" component={Perfil} />
             </Switch>
         </BrowserRouter>
     )
