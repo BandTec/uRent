@@ -49,12 +49,17 @@ export const SectionTextSubtitle = style.h3`
     width: 283px;
 `;
 
-export const SectionIcon = style.div`
-    // background-color: coral;
-    width: fit-content;
-    position: relative;
-    top: 55px;
-    margin-left: 17%;
+export const SectionIcon = style.img`
+// background-color: coral;
+// width: fit-content;
+position: relative;
+height: 90px;
+top: 55px;
+margin-left: 17%;
+@media screen and (max-width: 800px){{
+    height: 0px;
+    width: 0px;
+}
 `;
 
 export const ContentInfoAnuncio = style.div`
