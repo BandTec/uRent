@@ -1,4 +1,5 @@
 import React from 'react';
+import InputMask from 'react-input-mask';
 
 import HeaderCadastro from '../../../components/HeaderCadastro/index';
 import FooterCadastro from '../../../components/FooterCadastro/index';
@@ -24,7 +25,11 @@ function CadastroVeiculo() {
                     <S.CadastroContent>
 
                         <S.CadastroLabel>Placa</S.CadastroLabel>
-                        <S.CadastroInput style={{ width: '94%' }} />
+                        <InputMask mask='9999999'>
+                            {() =>
+                                <S.CadastroInput />
+                            }
+                        </InputMask>
 
                     </S.CadastroContent>
 

@@ -1,7 +1,7 @@
 import style from 'styled-components';
 
 export const Footer = style.div`
-    //background-color: red;
+    background-color: white;
     height: 150px;
     width: 100%;
     margin-top: 54px;

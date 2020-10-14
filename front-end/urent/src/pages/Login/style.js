@@ -40,14 +40,23 @@ export const FormTitleLabel = style.label`
     margin-bottom:5px;
 `;
 
+export const FormData = style.div`
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px
+`;
+
 export const FormInput = style.input`
     width: 445px;
     height: 50px;
-    padding-left:15px;
-    background-color:#E4EEFC;
+    padding-left:55px;
+    background-color:#82A9EF;
     border-radius: 8px;
-    border: 1px solid #E4EEFC;
-    margin-bottom:15px;
+    border: 1px solid #82A9EF;
+    &::placeholder{
+        color: white;
+    }
 `;
 
 export const FormRecursos= style.div`

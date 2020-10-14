@@ -17,22 +17,7 @@ function CadastroGaragem() {
 
                                 <S.CadastroTitle>Garagem</S.CadastroTitle>
 
-                                <S.CadastroContentBox>
-
-                                        <S.CadastroContent>
-                                                <S.CadastroLabel>CEP</S.CadastroLabel>
-                                                <S.CadastroInput style={{ width: '94%' }} data-mask="00/00/0000" />
-                                        </S.CadastroContent>
-
-                                        <S.CadastroContent>
-
-                                                <S.CadastroLabel>Número</S.CadastroLabel>
-                                                <S.CadastroInput style={{ width: '93%' }} />
-
-                                        </S.CadastroContent>
-
-                                </S.CadastroContentBox>
-
+                               
 
                                 <S.CadastroContentBox>
 

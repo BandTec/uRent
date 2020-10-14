@@ -5,6 +5,7 @@ export const Cadastro = style.div`
     width: 100%;
 `;
 
+
 export const CadastroContainer = style.div`
     background-color: #fff;
     padding: 63px 8%;
@@ -16,6 +17,7 @@ export const CadastroContainer = style.div`
     flex-direction: column;
     align-items: flex-start;
 `;
+
 export const CadastroTitle = style.h1`
     /* background-color: cyan; */
     font-size: 24px;
@@ -45,7 +47,9 @@ export const CadastroLabel = style.label`
     color: #9C98A6;
     line-height: 2;
     font-size: 16px;
+
 `;
+
 
 export const CadastroInput = style.input`
     height: 35px;
@@ -84,3 +88,4 @@ export const CadastroSelect = style.select`
     margin-bottom: 24px;
     display: none";
 `;
+
