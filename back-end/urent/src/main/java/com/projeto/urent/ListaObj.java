@@ -2,7 +2,6 @@ package com.projeto.urent;
 
 import com.projeto.urent.dominios.Usuario;
 
-import javax.swing.plaf.PanelUI;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
