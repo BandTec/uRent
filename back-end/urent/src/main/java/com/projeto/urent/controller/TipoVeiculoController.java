@@ -18,7 +18,7 @@ public class TipoVeiculoController {
 
     @GetMapping("{id}")
     public ResponseEntity buscarTipoVeiculo(@PathVariable Integer id){
-        return ResponseEntity.ok(repository.findById(id));
+        return ResponseEntity.ok(repository.findByIdTipoVeiculo(id));
     }
 
     @PostMapping
