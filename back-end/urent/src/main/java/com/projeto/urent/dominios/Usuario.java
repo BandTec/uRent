@@ -22,8 +22,7 @@ public class Usuario {
     private String nome;
 
     @NotNull(message = "É necessário preencher o CPF")
-    @Min(11)
-    @Max(11)
+    @Length(min = 11, max = 11)
     @Column(nullable = false, length = 11, unique = true)
     private String cpf;
 
@@ -32,14 +31,12 @@ public class Usuario {
     @Column(name = "data_nasc", nullable = false)
     private LocalDate dataNasc;
 
-    @Min(11)
-    @Max(11)
+    @Length(min = 11, max = 11)
     @Column(length = 11)
     private String cnh;
 
     @NotNull(message = "É necessário informar o seu CEP")
-    @Min(8)
-    @Max(8)
+    @Length(min = 8, max = 8)
     @Column(nullable = false, length = 8)
     private String cep;
 
@@ -141,5 +138,20 @@ public class Usuario {
 
     public void setAvaliacao(Double avaliacao) {
         this.avaliacao = avaliacao;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", dataNasc=" + dataNasc +
+                ", cnh='" + cnh + '\'' +
+                ", cep='" + cep + '\'' +
+                ", email='" + email + '\'' +
+                ", senha='" + senha + '\'' +
+                ", avaliacao=" + avaliacao +
+                '}';
     }
 }

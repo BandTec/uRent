@@ -8,21 +8,29 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/TipoVeiculos")
+@RequestMapping("/tipo-veiculos")
 public class TipoVeiculoController {
 
     @Autowired
     TipoVeiculoRepository repository;
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity buscarTipoVeiculo(@PathVariable Integer id){
-        return ResponseEntity.ok(repository.findByIdTipoVeiculo(id));
+
+        Optional<TipoVeiculo> tipoVeiculo = repository.findById(id);
+
+        if(!tipoVeiculo.isPresent()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(tipoVeiculo);
+        }
     }
 
     @PostMapping
-    public ResponseEntity cadastrarVeiculo(@RequestBody @Valid TipoVeiculo TipoVeiculo){
+    public ResponseEntity cadastrarTipoVeiculo(@RequestBody @Valid TipoVeiculo TipoVeiculo){
         repository.save(TipoVeiculo);
         return ResponseEntity.created(null).build();
     }

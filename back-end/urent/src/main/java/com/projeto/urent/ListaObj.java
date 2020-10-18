@@ -6,10 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Formatter;
-import java.util.FormatterClosedException;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.util.*;
 
 public class ListaObj<T> {
 
@@ -82,7 +79,7 @@ public class ListaObj<T> {
         nroElem = 0;
     }
 
-    public void gravaLista(ListaObj<Usuario> listaObj, String nomeArquivo) {
+    public void gravaLista(List<Usuario> listaObj, String nomeArquivo) {
 
         FileWriter arq = null;              //  FileWriter representa o arquivo
         Formatter saida = null;             //  Fomatter para executar a saída formatada
@@ -98,8 +95,8 @@ public class ListaObj<T> {
         }
 
         try {
-            for (int i = 0; i < listaObj.getTamanho(); i++) {
-                Usuario u = listaObj.getElemento(i);
+            for (int i = 0; i < listaObj.size(); i++) {
+                Usuario u = listaObj.get(i);
 
                 saida.format("%d;%s;%s;%s;%s;%s;%s;%s;%.2f",
                         u.getId(), u.getNome(), u.getCpf(), u.getDataNasc(), u.getCnh(), u.getCep(), u.getEmail(), u.getSenha(), u.getAvaliacao());
@@ -128,7 +125,6 @@ public class ListaObj<T> {
         FileReader arq = null;
         Scanner entrada = null;
         boolean erro = false;
-
 
         // Abre o arquivo para leitura
         try {

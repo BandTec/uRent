@@ -10,27 +10,27 @@ public class TipoVeiculo {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Integer idTipoVeiculo;
+    private Integer id;
 
     @NotNull
     @Length(min = 10, max = 20, message = "Nome Inválido")
-    @Column(nullable = false, length = 40)
+    @Column(nullable = false, length = 45)
     private String tipo;
 
     public TipoVeiculo() {
     }
 
-    public TipoVeiculo(Integer idTipoVeiculo, @NotNull @Length(min = 10, max = 20, message = "Nome Inválido") String tipo) {
-        this.idTipoVeiculo = idTipoVeiculo;
+    public TipoVeiculo(Integer id, String tipo) {
+        this.id = id;
         this.tipo = tipo;
     }
 
-    public Integer getIdTipoVeiculo() {
-        return idTipoVeiculo;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdTipoVeiculo(Integer idTipoVeiculo) {
-        this.idTipoVeiculo = idTipoVeiculo;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTipo() {

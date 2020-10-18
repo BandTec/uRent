@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping ("/veiculos")
@@ -15,19 +17,50 @@ public class VeiculoController {
     @Autowired
     VeiculoRepository repository;
 
-    @GetMapping("{id}")
+    @GetMapping
+    public ResponseEntity getVeiculos() {
+        List<Veiculo> veiculoList = repository.findAll();
+
+        if(veiculoList.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(veiculoList);
+        }
+    }
+
+    @GetMapping("/{id}")
     public ResponseEntity buscarVeiculo(@PathVariable Integer id){
-        return ResponseEntity.ok(repository.findById(id));
+
+        Optional<Veiculo> veiculo = repository.findById(id);
+
+        if(!veiculo.isPresent()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(veiculo);
+        }
     }
 
-    @GetMapping("{fkTipoVeiculo}")
-    public ResponseEntity buscarVeiculoFkVeic(@PathVariable Integer fkTipoVeiculo){
-        return ResponseEntity.ok(repository.findById(fkTipoVeiculo));
+    @GetMapping("/tipo/{tipo}")
+    public ResponseEntity buscarVeiculoFkVeic(@PathVariable String tipo){
+
+        List<Veiculo> veiculoList = repository.findAllByTipo(tipo);
+
+        if(veiculoList.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(veiculoList);
+        }
     }
 
-    @GetMapping("{fkUsuario}")
-    public ResponseEntity buscarVeiculoFkUsu(@PathVariable Integer fkUsuario){
-        return ResponseEntity.ok(repository.findById(fkUsuario));
+    @GetMapping("/usuario/{id}")
+    public ResponseEntity buscarVeiculoUsuario(@PathVariable Integer id){
+        List<Veiculo> veiculoList = repository.findAllByUsuario(id);
+
+        if(veiculoList.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(veiculoList);
+        }
     }
 
     @PostMapping

@@ -13,23 +13,26 @@ public class Veiculo {
     private Integer id;
 
     @NotNull
-    @Length(min = 7, max = 7, message = "Número Inválido de Placa")
-    @Column(nullable = false, length = 10)
-    private String placaCarro;
+    @Length(min = 7, max = 7, message = "Número inválido de placa")
+    @Column(name = "placa", nullable = false, length = 10)
+    private String placa;
 
-    private Integer fkTipoVeiculo;
+    @NotNull
+    @ManyToOne
+    private Usuario usuario;
 
-    private Integer fkUsuario;
+    @NotNull
+    @ManyToOne
+    private TipoVeiculo tipoVeiculo;
 
     public Veiculo() {
-
     }
 
-    public Veiculo(Integer id, @NotNull @Length(min = 7, max = 7, message = "Número Inválido de Placa") String placaCarro, Integer fkTipoVeiculo, Integer fkUsuario) {
+    public Veiculo(Integer id, String placa, Usuario usuario, TipoVeiculo tipoVeiculo) {
         this.id = id;
-        this.placaCarro = placaCarro;
-        this.fkTipoVeiculo = fkTipoVeiculo;
-        this.fkUsuario = fkUsuario;
+        this.placa = placa;
+        this.usuario = usuario;
+        this.tipoVeiculo = tipoVeiculo;
     }
 
     public Integer getId() {
@@ -40,28 +43,28 @@ public class Veiculo {
         this.id = id;
     }
 
-    public String getPlacaCarro() {
-        return placaCarro;
+    public String getPlaca() {
+        return placa;
     }
 
-    public void setPlacaCarro(String placaCarro) {
-        this.placaCarro = placaCarro;
+    public void setPlaca(String placa) {
+        this.placa = placa;
     }
 
-    public Integer getFkTipoVeiculo() {
-        return fkTipoVeiculo;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setFkTipoVeiculo(Integer fkTipoVeiculo) {
-        this.fkTipoVeiculo = fkTipoVeiculo;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public Integer getFkUsuario() {
-        return fkUsuario;
+    public TipoVeiculo getTipoVeiculo() {
+        return tipoVeiculo;
     }
 
-    public void setFkUsuario(Integer fkUsuario) {
-        this.fkUsuario = fkUsuario;
+    public void setTipoVeiculo(TipoVeiculo tipoVeiculo) {
+        this.tipoVeiculo = tipoVeiculo;
     }
 }
 

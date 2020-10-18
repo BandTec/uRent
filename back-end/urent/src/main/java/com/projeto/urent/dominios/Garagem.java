@@ -1,5 +1,6 @@
 package com.projeto.urent.dominios;
 
+import org.hibernate.annotations.ManyToAny;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ public class Garagem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer IdGaragem;
+    private Integer id;
 
     @NotNull
     @Length(min = 8, max = 8, message = "Cep inválido")
@@ -19,44 +20,44 @@ public class Garagem {
     private String cep;
 
     @NotNull
-    @Length(min = 1, max = 5, message = "Cep inválido")
+    @Length(min = 1, max = 5, message = "Número inválido")
+    @Column(nullable = false, length = 5)
     private String numero;
 
     @NotNull
+    @Column(nullable = false, length = 10)
     private String latitude;
 
     @NotNull
+    @Column(nullable = false, length = 10)
     private String longitude;
-
 
     @NotNull
     @Length(min = 0, max = 5)
     private Double avaliacao;
 
-    private Integer fkUsuario;
-
-
+    @ManyToOne
+    private Usuario usuario;
 
     public Garagem() {
     }
 
-
-    public Garagem(Integer idGaragem, @NotNull @Length(min = 8, max = 8, message = "Cep inválido") String cep, @NotNull @Length(min = 1, max = 5, message = "Cep inválido") String numero, @NotNull String latitude, @NotNull String longitude, @NotNull @Length(min = 0, max = 5) Double avaliacao, Integer fkUsuario) {
-        IdGaragem = idGaragem;
+    public Garagem(Integer id, @NotNull @Length(min = 8, max = 8, message = "Cep inválido") String cep, @NotNull @Length(min = 1, max = 5, message = "Número inválido") String numero, @NotNull String latitude, @NotNull String longitude, @NotNull @Length(min = 0, max = 5) Double avaliacao, Usuario usuario) {
+        this.id = id;
         this.cep = cep;
         this.numero = numero;
         this.latitude = latitude;
         this.longitude = longitude;
         this.avaliacao = avaliacao;
-        this.fkUsuario = fkUsuario;
+        this.usuario = usuario;
     }
 
-    public Integer getIdGaragem() {
-        return IdGaragem;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdGaragem(Integer idGaragem) {
-        IdGaragem = idGaragem;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getCep() {
@@ -99,11 +100,11 @@ public class Garagem {
         this.avaliacao = avaliacao;
     }
 
-    public Integer getFkUsuario() {
-        return fkUsuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setFkUsuario(Integer fkUsuario) {
-        this.fkUsuario = fkUsuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

@@ -10,33 +10,31 @@ public class Telefone {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer IdTelefone;
+    private Integer id;
 
     @NotNull
     @Length(min = 11, max = 11, message = "Número inválido")
+    @Column(nullable = false, length = 11)
     private String numero;
 
     @ManyToOne
-    @JoinColumn(nullable = false, name = "Fk_Usuario")
-    private Usuario fkUsuario;
+    private Usuario usuario;
 
     public Telefone() {
     }
 
-
-    public Telefone(Integer idTelefone, @NotNull @Length(min = 11, max = 11, message = "Número inválido") String numero, Usuario fkUsuario) {
-        IdTelefone = idTelefone;
+    public Telefone(Integer id, String numero, Usuario usuario) {
+        this.id = id;
         this.numero = numero;
-        this.fkUsuario = fkUsuario;
+        this.usuario = usuario;
     }
 
-
-    public Integer getIdTelefone() {
-        return IdTelefone;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdTelefone(Integer idTelefone) {
-        IdTelefone = idTelefone;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNumero() {
@@ -47,11 +45,11 @@ public class Telefone {
         this.numero = numero;
     }
 
-    public Usuario getFkUsuario() {
-        return fkUsuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setFkUsuario(Usuario fkUsuario) {
-        this.fkUsuario = fkUsuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
