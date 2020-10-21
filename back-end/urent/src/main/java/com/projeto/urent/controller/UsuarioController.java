@@ -74,7 +74,6 @@ public class UsuarioController {
         } else {
             return ResponseEntity.noContent().build();
         }
-
     }
 
 

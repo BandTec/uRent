@@ -270,8 +270,8 @@ public class ListaObj<T> {
 
             if(i == 0) {
                 corpo += "02";
-                corpo += String.format("%-2d", u.getId()); // Id do usuario
-                corpo += String.format("%-45s", u.getNome()); // Nome do usuario
+                corpo += String.format("%-2d", u.getId());
+                corpo += String.format("%-45s", u.getNome());
                 corpo += String.format("%-11s", u.getCpf());
                 corpo += String.format("%-100s", u.getEmail());
 
@@ -279,8 +279,8 @@ public class ListaObj<T> {
                 gravaRegistroText(nomeArquivo, corpo);
             } else {
                 corpo = "02";
-                corpo += String.format("%-2d", u.getId()); // Id do usuario
-                corpo += String.format("%-45s", u.getNome()); // Nome do usuario
+                corpo += String.format("%-2d", u.getId());
+                corpo += String.format("%-45s", u.getNome());
                 corpo += String.format("%-11s", u.getCpf());
                 corpo += String.format("%-100s", u.getEmail());
 

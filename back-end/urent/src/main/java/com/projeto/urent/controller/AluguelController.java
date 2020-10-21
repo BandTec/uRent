@@ -21,6 +21,8 @@ public class AluguelController {
     @Autowired
     AluguelRepository repository;
 
+    Integer contador = 0;
+
     @GetMapping
     public ResponseEntity getAlugueis() {
         List<Aluguel> aluguelList = repository.findAll();
@@ -103,6 +105,58 @@ public class AluguelController {
             listaObj.gravaListaAluguel(listaObj, "aluguelLocador.csv");
 
             return new ResponseEntity(new FileSystemResource("./src/main/resources/static/aluguelLocador.csv"), headers, HttpStatus.OK);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+    @GetMapping(value = "/gerar-txt/{id}/locatario", produces = "text/txt")
+    @ResponseBody
+    public ResponseEntity baixarTxtLocatario(@PathVariable Integer id) {
+
+        contador++;
+        String arquivoNome = "locatario"+contador+".txt";
+
+        List<AluguelSimples> aluguelSimplesList = repository.findAllSimplesLocatario(id);
+
+        if(!aluguelSimplesList.isEmpty()) {
+            ListaObj listaObj = new ListaObj(aluguelSimplesList.size());
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Content-Disposition", "attachment; file=" + arquivoNome);
+
+            for(int i = 0; i < aluguelSimplesList.size(); i++) {
+                listaObj.adiciona(aluguelSimplesList.get(i));
+            }
+
+            listaObj.arquivoDeLayoutAluguel(arquivoNome, listaObj);
+            return new ResponseEntity(new FileSystemResource("src/main/resources/static/"+arquivoNome), headers, HttpStatus.OK);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+    @GetMapping(value = "/gerar-txt/{id}/locador", produces = "text/txt")
+    @ResponseBody
+    public ResponseEntity baixarTxtLocador(@PathVariable Integer id) {
+
+        contador++;
+        String arquivoNome = "locador"+contador+".txt";
+
+        List<AluguelSimples> aluguelSimplesList = repository.findAllSimplesLocador(id);
+
+        if(!aluguelSimplesList.isEmpty()) {
+            ListaObj listaObj = new ListaObj(aluguelSimplesList.size());
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Content-Disposition", "attachment; file=" + arquivoNome);
+
+            for(int i = 0; i < aluguelSimplesList.size(); i++) {
+                listaObj.adiciona(aluguelSimplesList.get(i));
+            }
+
+            listaObj.arquivoDeLayoutAluguel(arquivoNome, listaObj);
+            return new ResponseEntity(new FileSystemResource("src/main/resources/static/"+arquivoNome), headers, HttpStatus.OK);
         } else {
             return ResponseEntity.noContent().build();
         }
