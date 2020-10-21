@@ -4,8 +4,10 @@ import com.projeto.urent.ListaObj;
 import com.projeto.urent.dominios.Usuario;
 import com.projeto.urent.repositorios.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,27 +22,62 @@ public class UsuarioController {
     @Autowired
     UsuarioRepository repository;
 
+    Integer contador = 0;
+
     private boolean loginStatus = false;
 
-    @GetMapping
-//    @ResponseBody
+    @GetMapping(value = "/gerar-csv", produces = "text/csv")
+    @ResponseBody
     public ResponseEntity baixarArquivo() {
 
-        List<Usuario> usuarios = repository.findAll();
+        List<Usuario> usuarioList = repository.findAll();
 
-        ListaObj listaObj = new ListaObj(usuarios.size());
-        listaObj.gravaLista(usuarios, "usuarios.csv");
+        if(!usuarioList.isEmpty()) {
+            ListaObj listaObj = new ListaObj(usuarioList.size());
 
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.add("Content-Disposition", "attachment; file=usuarios.csv");
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Content-Disposition", "attachment; file=usuarios.csv");
 
-        if(usuarios.size() > 0) {
-            return ResponseEntity.ok().build();
-//            return new ResponseEntity(usuarios, headers, HttpStatus.OK);
+            for(int i = 0; i < usuarioList.size(); i++) {
+                listaObj.adiciona(usuarioList.get(i));
+            }
+
+            listaObj.gravaListaUsuario(listaObj, "usuario.csv");
+
+            return new ResponseEntity(new FileSystemResource("src/main/resources/static/usuario.csv"), headers, HttpStatus.OK);
         } else {
             return ResponseEntity.noContent().build();
         }
     }
+
+    @GetMapping(value = "/gerar-txt", produces = "text/txt")
+    @ResponseBody
+    public ResponseEntity baixarTxt() {
+
+        contador++;
+        String arquivoNome = "usuario"+contador+".txt";
+
+        List<Usuario> usuarioList = repository.findAll();
+
+        if(!usuarioList.isEmpty()) {
+            ListaObj listaObj = new ListaObj(usuarioList.size());
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Content-Disposition", "attachment; file=" + arquivoNome);
+
+            for(int i = 0; i < usuarioList.size(); i++) {
+                listaObj.adiciona(usuarioList.get(i));
+            }
+
+            listaObj.arquivoDeLayoutUsuario(arquivoNome, listaObj);
+            return new ResponseEntity(new FileSystemResource("src/main/resources/static/"+arquivoNome), headers, HttpStatus.OK);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+
+    }
+
+
 
     @GetMapping("/{id}")
     public ResponseEntity buscarUsuario(@PathVariable Integer id) {

@@ -1,11 +1,10 @@
 package com.projeto.urent;
 
 import com.projeto.urent.dominios.Usuario;
+import com.projeto.urent.visoes.AluguelSimples;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ListaObj<T> {
@@ -79,14 +78,14 @@ public class ListaObj<T> {
         nroElem = 0;
     }
 
-    public void gravaLista(List<Usuario> listaObj, String nomeArquivo) {
+    public void gravaListaUsuario(ListaObj<Usuario> listaObj, String nomeArquivo) {
 
         FileWriter arq = null;              //  FileWriter representa o arquivo
         Formatter saida = null;             //  Fomatter para executar a saída formatada
         boolean erro = false;               //  indica se deu erro
 
         try {
-            arq = new FileWriter(nomeArquivo, true);        // Com o append iremos indicar para ele apenas adicionar mais registros
+            arq = new FileWriter("src/main/resources/static/" + nomeArquivo, false);        // Com o append iremos indicar para ele apenas adicionar mais registros
             saida = new Formatter(arq);                             // Vamos usar o Formatter para formatar a saída do arquivo
         }
         catch (IOException e) {
@@ -95,11 +94,57 @@ public class ListaObj<T> {
         }
 
         try {
-            for (int i = 0; i < listaObj.size(); i++) {
-                Usuario u = listaObj.get(i);
+            saida.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n", "ID", "NOME", "CPF", "DATA_NASCIMENTO", "CNH", "CEP", "EMAIL", "SENHA", "AVALIACAO");
+            for (int i = 0; i < listaObj.getTamanho(); i++) {
+                Usuario u = listaObj.getElemento(i);
 
-                saida.format("%d;%s;%s;%s;%s;%s;%s;%s;%.2f",
+                saida.format(
+                        "%d;%s;%s;%s;%s;%s;%s;%s;%.2f\n",
                         u.getId(), u.getNome(), u.getCpf(), u.getDataNasc(), u.getCnh(), u.getCep(), u.getEmail(), u.getSenha(), u.getAvaliacao());
+            }
+        }
+        catch (FormatterClosedException e) {
+            System.err.println("Erro ao gravar no arquivo");
+            erro = true;
+        }
+        finally {
+            saida.close();
+            try {
+                arq.close();
+            }
+            catch (IOException e) {
+                System.err.println("Erro ao fechar o arquivo");
+                erro = true;
+            }
+            if (erro) {
+                System.exit(1);
+            }
+        }
+    }
+
+    public void gravaListaAluguel(ListaObj<AluguelSimples> listaObj, String nomeArquivo) {
+
+        FileWriter arq = null;              //  FileWriter representa o arquivo
+        Formatter saida = null;             //  Fomatter para executar a saída formatada
+        boolean erro = false;               //  indica se deu erro
+
+        try {
+            arq = new FileWriter("src/main/resources/static/" + nomeArquivo, false);        // Com o append iremos indicar para ele apenas adicionar mais registros
+            saida = new Formatter(arq);                             // Vamos usar o Formatter para formatar a saída do arquivo
+        }
+        catch (IOException e) {
+            System.err.println("Erro ao abrir arquivo");           // Antes de gravar no arquivo, ele será aberto, caso não consiga irá cair neste erro
+            System.exit(1);
+        }
+
+        try {
+            saida.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n", "DATA_INICIO", "DATA_FINAL", "CEP", "NUMERO", "LATITUDE", "LONGITUDE", "NOME", "EMAIL", "CPF", "PLACA");
+            for (int i = 0; i < listaObj.getTamanho(); i++) {
+                AluguelSimples u = listaObj.getElemento(i);
+
+                saida.format(
+                        "%s;%s;%s;%s;%s;%s;%s;%s;%s\n",
+                        u.getDataInicio(), u.getDataFinal(), u.getCep(), u.getNumero(), u.getLatitude(), u.getLongitude(), u.getNome(), u.getEmail(), u.getPlaca());
             }
         }
         catch (FormatterClosedException e) {
@@ -169,6 +214,154 @@ public class ListaObj<T> {
                 }
             }
         }
+    }
+
+    public void gravaRegistroText (String nomeArq, String registro) {
+        BufferedWriter saida = null;
+        try {
+            // o argumento true é para indicar que o arquivo não será sobrescrito e sim
+            // gravado com append (no final do arquivo)
+            saida = new BufferedWriter(new FileWriter("src/main/resources/static/" + nomeArq, true));
+        } catch (IOException e) {
+            System.err.printf("Erro na abertura do arquivo: %s.\n", e.getMessage());
+        }
+
+        try {
+            saida.append(registro + "\n");
+            saida.close();
+
+        } catch (IOException e) {
+            System.err.printf("Erro ao gravar arquivo: %s.\n", e.getMessage());
+        }
+    }
+
+    public void arquivoDeLayoutUsuario(String nomeArquivo, ListaObj<Usuario> listaObj) {
+        String header = "";
+        String corpo = "";
+        String trailer = "";
+        int contRegDados = 0;
+
+        // Montagem do header
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+        Date ano = new Date();
+        Date mes = new Date();
+        Integer semestre = 0;
+
+        if(mes.getMonth() >= 7) {
+            semestre = 2;
+        } else {
+            semestre = 1;
+        }
+
+        header += "00USUARIO2020"+semestre;
+        header += formatter.format(date);
+        header += "01";
+
+        // Grava o registro no header
+        gravaRegistroText(nomeArquivo, header);
+
+        // Montagem do corpo
+
+        for(int i = 0; i < listaObj.getTamanho(); i++) {
+
+            Usuario u = listaObj.getElemento(i);
+
+            if(i == 0) {
+                corpo += "02";
+                corpo += String.format("%-2d", u.getId()); // Id do usuario
+                corpo += String.format("%-45s", u.getNome()); // Nome do usuario
+                corpo += String.format("%-11s", u.getCpf());
+                corpo += String.format("%-100s", u.getEmail());
+
+                contRegDados++;
+                gravaRegistroText(nomeArquivo, corpo);
+            } else {
+                corpo = "02";
+                corpo += String.format("%-2d", u.getId()); // Id do usuario
+                corpo += String.format("%-45s", u.getNome()); // Nome do usuario
+                corpo += String.format("%-11s", u.getCpf());
+                corpo += String.format("%-100s", u.getEmail());
+
+                contRegDados++;
+                gravaRegistroText(nomeArquivo, corpo);
+            }
+        }
+
+        // Montagem do trailer
+        trailer += "01";
+        trailer += String.format("%010d", contRegDados);
+        gravaRegistroText(nomeArquivo, trailer);
+    }
+
+    public void arquivoDeLayoutAluguel(String nomeArquivo, ListaObj<AluguelSimples> listaObj) {
+        String header = "";
+        String corpo = "";
+        String trailer = "";
+        int contRegDados = 0;
+
+        // Montagem do header
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+        Date ano = new Date();
+        Date mes = new Date();
+        Integer semestre = 0;
+
+        if(mes.getMonth() >= 7) {
+            semestre = 2;
+        } else {
+            semestre = 1;
+        }
+
+        header += "00ALUGUEL2020"+semestre;
+        header += formatter.format(date);
+        header += "01";
+
+        // Grava o registro no header
+        gravaRegistroText(nomeArquivo, header);
+
+        // Montagem do corpo
+
+        for(int i = 0; i < listaObj.getTamanho(); i++) {
+
+            AluguelSimples a = listaObj.getElemento(i);
+
+            if(i == 0) {
+                corpo += "02";
+                corpo += String.format("%-10s", a.getDataInicio());
+                corpo += String.format("%-10s", a.getDataFinal());
+                corpo += String.format("%-11s", a.getCep());
+                corpo += String.format("%-5s", a.getNumero());
+                corpo += String.format("%-10s", a.getLatitude());
+                corpo += String.format("%-10s", a.getLongitude());
+                corpo += String.format("%-10s", a.getNome());
+                corpo += String.format("%-10s", a.getEmail());
+                corpo += String.format("%-10s", a.getPlaca());
+                contRegDados++;
+                gravaRegistroText(nomeArquivo, corpo);
+            } else {
+                corpo = "02";
+                corpo += String.format("%-10s", a.getDataInicio());
+                corpo += String.format("%-10s", a.getDataFinal());
+                corpo += String.format("%-11s", a.getCep());
+                corpo += String.format("%-5s", a.getNumero());
+                corpo += String.format("%-10s", a.getLatitude());
+                corpo += String.format("%-10s", a.getLongitude());
+                corpo += String.format("%-10s", a.getNome());
+                corpo += String.format("%-10s", a.getEmail());
+                corpo += String.format("%-10s", a.getPlaca());
+
+                contRegDados++;
+                gravaRegistroText(nomeArquivo, corpo);
+            }
+        }
+
+        // Montagem do trailer
+        trailer += "01";
+        trailer += String.format("%010d", contRegDados);
+        gravaRegistroText(nomeArquivo, trailer);
     }
 
 }
