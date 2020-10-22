@@ -56,9 +56,4 @@ public class GaragemController  {
         return ResponseEntity.created(null).build();
     }
 
-    
-
-
-
-
 }

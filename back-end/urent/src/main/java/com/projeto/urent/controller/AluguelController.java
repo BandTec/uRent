@@ -25,6 +25,7 @@ public class AluguelController {
 
     @GetMapping
     public ResponseEntity getAlugueis() {
+
         List<Aluguel> aluguelList = repository.findAll();
 
         if(aluguelList.isEmpty()) {

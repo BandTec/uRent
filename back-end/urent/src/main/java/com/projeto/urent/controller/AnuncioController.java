@@ -67,6 +67,7 @@ public class AnuncioController {
             anuncioNovo.setValorDiaria(anuncio.getValorDiaria());
             anuncioNovo.setGaragem(anuncio.getGaragem());
             anuncioNovo.setTipoVeiculo(anuncio.getTipoVeiculo());
+            repository.save(anuncioNovo);
             return ResponseEntity.ok().build();
         } else  {
             return ResponseEntity.notFound().build();
