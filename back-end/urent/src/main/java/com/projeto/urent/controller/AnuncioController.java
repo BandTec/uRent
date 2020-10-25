@@ -1,5 +1,8 @@
 package com.projeto.urent.controller;
 
+import com.projeto.urent.AnuncioListAnuncio;
+import com.projeto.urent.Iterator;
+import com.projeto.urent.ListAnuncio;
 import com.projeto.urent.dominios.Anuncio;
 import com.projeto.urent.repositorios.AnuncioRepository;
 import org.springframework.aop.config.AopNamespaceUtils;
@@ -7,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +30,26 @@ public class AnuncioController {
         } else {
             return ResponseEntity.ok(anuncioList);
         }
+    }
+
+    @GetMapping("/filtro")
+    public ResponseEntity getAnunciosPreco(@RequestParam(value = "preco") Double valor) {
+        List<Anuncio> anuncioList = repository.findAll();
+
+        ListAnuncio<Anuncio> anuncioListAnuncio = new AnuncioListAnuncio(anuncioList);
+
+        Iterator<Anuncio> iterator = anuncioListAnuncio.iterator();
+
+        List<Anuncio> anuncioFiltro = new ArrayList<>();
+
+        while (iterator.hasNext()) {
+            Anuncio currentAnuncio = iterator.next();
+            if(currentAnuncio.getValorDiaria().equals(valor)) {
+                anuncioFiltro.add(currentAnuncio);
+            }
+        }
+
+        return ResponseEntity.ok(anuncioFiltro);
     }
 
     @GetMapping("/{id}")

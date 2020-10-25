@@ -1,29 +1,27 @@
 package com.projeto.urent;
 
+import com.projeto.urent.dominios.Aluguel;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Lista {
+public class Acordo {
 
-    public List<Aluguel> aluguel = new ArrayList<>();
+    public Aluguel aluguel;
 
     public Observer observer;
 
-    public void adicionarAluguel(Aluguel novoAluguel) {
-        this.aluguel.add(novoAluguel);
-        notificarObserver();
-    }
-
-    public void removeAluguel(Aluguel aluguel) {
-        this.aluguel.remove(aluguel);
+    public String adicionarAluguel(Aluguel novoAluguel) {
+        this.aluguel = novoAluguel;
+        return notificarObserver();
     }
 
     public void adicionaObserver(Observer o) {
         this.observer = o;
     }
 
-    public void notificarObserver() {
-        observer.alertarAluguel(aluguel);
+    public String notificarObserver() {
+        return observer.alertarAluguel(aluguel);
     }
 
     @Override

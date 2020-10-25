@@ -42,4 +42,4 @@ insert into anuncio
 values
 (null, 'Vaga Boa', 20, 1, 3),
 (null, 'Vaga para Caminhão', 25, 2, 3),
-(null, 'Vaga para carro', 15, 2, 1);
+(null, 'Vaga para carro', 25, 2, 1);

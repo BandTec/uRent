@@ -1,8 +1,9 @@
 package com.projeto.urent.controller;
 
+import com.projeto.urent.Acordo;
+import com.projeto.urent.Alertar;
 import com.projeto.urent.ListaObj;
 import com.projeto.urent.dominios.Aluguel;
-import com.projeto.urent.dominios.Usuario;
 import com.projeto.urent.repositorios.AluguelRepository;
 import com.projeto.urent.visoes.AluguelSimples;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class AluguelController {
     AluguelRepository repository;
 
     Integer contador = 0;
+
+    private Acordo acordo = new Acordo();
+    private Aluguel aluguel = new Aluguel();
 
     @GetMapping
     public ResponseEntity getAlugueis() {
@@ -58,9 +62,18 @@ public class AluguelController {
     }
 
     @PostMapping
-    public ResponseEntity cadastrarGaragem(@RequestBody Aluguel aluguel) {
-        repository.save(aluguel);
+    public ResponseEntity cadastrarAluguel(@RequestBody Aluguel aluguel) {
+        this.aluguel = aluguel;
+        repository.save(this.aluguel);
+        Alertar alertar = new Alertar();
+
+        acordo.adicionaObserver(alertar);
         return ResponseEntity.created(null).build();
+    }
+    
+    @GetMapping("/acordo")
+    public ResponseEntity buscarAcordo() {
+        return ResponseEntity.ok(acordo.adicionarAluguel(this.aluguel));
     }
 
     @GetMapping(value = "/gerar-csv/{id}/locatario", produces = "text/csv")

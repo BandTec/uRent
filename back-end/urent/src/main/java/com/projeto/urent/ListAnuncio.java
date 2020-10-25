@@ -1,2 +1,6 @@
-package com.projeto.urent;public interface ListAnuncio {
+package com.projeto.urent;
+
+public interface ListAnuncio<E> {
+
+    Iterator<E> iterator();
 }
