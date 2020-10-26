@@ -126,6 +126,21 @@ public class UsuarioController {
         }
     }
 
+
+    @DeleteMapping("{id}")
+    public ResponseEntity deleteUusario(@PathVariable int id){
+
+        if (repository.existsById(id)){
+
+            repository.deleteById(id);
+            return ResponseEntity.ok().build();
+
+        }
+
+        return ResponseEntity.notFound().build();
+
+    }
+
 }
 
 

@@ -99,4 +99,18 @@ public class AnuncioController {
 
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity deleteAnuncio(@PathVariable int id){
+
+        if (repository.existsById(id)){
+
+            repository.deleteById(id);
+            return ResponseEntity.ok().build();
+
+        }
+
+        return ResponseEntity.notFound().build();
+
+    }
+
 }

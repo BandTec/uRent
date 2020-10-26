@@ -48,4 +48,19 @@ public class TelefoneController {
         repository.save(telefone);
         return ResponseEntity.created(null).build();
     }
+
+
+    @DeleteMapping("{id}")
+    public ResponseEntity deleteTelefone(@PathVariable int id){
+
+        if (repository.existsById(id)){
+
+            repository.deleteById(id);
+            return ResponseEntity.ok().build();
+
+        }
+
+        return ResponseEntity.notFound().build();
+
+    }
 }
