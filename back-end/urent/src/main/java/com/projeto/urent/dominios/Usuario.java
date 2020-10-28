@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.time.LocalDate;
 
+@Table
 @Entity
 public class Usuario {
 
@@ -50,7 +51,7 @@ public class Usuario {
     @Column(nullable = false, length = 25, unique = true)
     private String senha;
 
-    @Length(min = 0, max = 5)
+    //@Length(max = 5)
     private Double avaliacao;
 
     public Usuario() {

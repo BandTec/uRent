@@ -5,6 +5,7 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
+@Table
 @Entity
 public class Aluguel {
 
