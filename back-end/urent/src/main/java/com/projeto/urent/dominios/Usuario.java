@@ -50,8 +50,7 @@ public class Usuario {
     @Length(min = 8, max = 25)
     @Column(nullable = false, length = 25, unique = true)
     private String senha;
-
-    //@Length(max = 5)
+  
     private Double avaliacao;
 
     public Usuario() {

@@ -14,7 +14,6 @@ public class TipoVeiculo {
     private Integer id;
 
     @NotNull
-    @Length(min = 10, max = 20, message = "Nome Inválido")
     @Column(nullable = false, length = 45)
     private String tipo;
 

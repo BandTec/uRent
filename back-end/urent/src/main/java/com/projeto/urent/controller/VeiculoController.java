@@ -68,4 +68,19 @@ public class VeiculoController {
         repository.save(veiculo);
         return ResponseEntity.created(null).build();
     }
+
+
+    @DeleteMapping("{id}")
+    public ResponseEntity deleteVeiculo(@PathVariable int id){
+
+        if (repository.existsById(id)){
+
+            repository.deleteById(id);
+            return ResponseEntity.ok().build();
+
+        }
+
+        return ResponseEntity.notFound().build();
+
+    }
 }

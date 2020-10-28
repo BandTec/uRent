@@ -31,8 +31,6 @@ public class Garagem {
     @Column(nullable = false, length = 10)
     private String longitude;
 
-    @NotNull
-    @Length(min = 0, max = 5)
     private Double avaliacao;
 
     @ManyToOne
