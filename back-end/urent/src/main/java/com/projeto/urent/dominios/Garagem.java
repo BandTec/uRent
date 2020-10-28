@@ -1,12 +1,11 @@
 package com.projeto.urent.dominios;
 
-import org.hibernate.annotations.ManyToAny;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-
+@Table
 @Entity
 public class Garagem {
 
