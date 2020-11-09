@@ -1,6 +1,7 @@
 package com.projeto.urent.controller;
 
 import com.projeto.urent.ListaObj;
+import com.projeto.urent.dominios.Aluguel;
 import com.projeto.urent.dominios.Usuario;
 import com.projeto.urent.repositorios.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,18 @@ public class UsuarioController {
     Integer contador = 0;
 
     private boolean loginStatus = false;
+
+    @GetMapping
+    public ResponseEntity getUsuarios() {
+
+        List<Usuario> usuarioList = repository.findAll();
+
+        if(usuarioList.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(usuarioList);
+        }
+    }
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody Usuario usuario) {
