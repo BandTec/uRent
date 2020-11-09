@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/garagens")
+@CrossOrigin
 public class GaragemController  {
 
     @Autowired

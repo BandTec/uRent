@@ -1,11 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaRegUser, FaKey } from 'react-icons/fa';
 
+import { Link, useHistory } from 'react-router-dom';
+
+import api from '../../service/api';
 
 import logo from '../../assets/logoLogin.svg';
 import * as S from '../Login/style';
 
 function Login() {
+
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
+
+    const history = useHistory();
+
+    function login() {
+        api.post(`/usuarios/login`, {
+            "email": email,
+            "senha": senha
+        })
+        .then(response => {
+            sessionStorage.setItem("id", response.data.id);
+            // sessionStorage.getItem("id");
+            history.push('/feed');
+        })
+        .catch(error => {
+            console.log(error)
+            alert('Erro');
+        })
+    }
+
     return (
         <div>
             <S.Welcome>
@@ -19,13 +44,13 @@ function Login() {
                         <S.FormTitleLabel >E-mail</S.FormTitleLabel>
                         <S.FormData>
                             <FaRegUser style={{position: 'absolute', left: '3%'}} size='25' color='#FFFFFF' />
-                            <S.FormInput placeholder="ex@gmail.com" placeholderTextColor='red'  />
+                            <S.FormInput placeholder="ex@gmail.com" placeholderTextColor='red' onChange={e => setEmail(e.target.value)}  />
                         </S.FormData>
                         
                         <S.FormTitleLabel>Senha</S.FormTitleLabel>
                         <S.FormData>	
                         <FaKey style={{position: 'absolute', left: '3%'}} size='25' color='#FFFFFF' />
-                            <S.FormInput placeholder="*************" />
+                            <S.FormInput placeholder="*************" onChange={e => setSenha(e.target.value)} />
                         </S.FormData>
 
                         <S.FormRecursos>
@@ -36,8 +61,9 @@ function Login() {
                             <S.LabelCheck>Esqueci minha senha</S.LabelCheck>
                         </S.FormRecursos>
                         
-                        <S.ButtonEntrar>ENTRAR</S.ButtonEntrar>
+                        <S.ButtonEntrar onClick={login}>ENTRAR</S.ButtonEntrar>
                         <S.LabelCheck>Criar conta</S.LabelCheck>
+
                     </S.Form>
 
                 </S.FormLogin>
