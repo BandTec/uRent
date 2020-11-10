@@ -24,6 +24,7 @@ function ResetSenha() {
         })
             .then(response => {
                 alert("Senha alterada!")
+
                 history.push('/login');
             })
             .catch(error => {

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import InputMask from 'react-input-mask';
 
-
-
 import api from '../../../service/api';
 
 import HeaderCadastro from '../../../components/HeaderCadastro/index';
