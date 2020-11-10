@@ -22,8 +22,7 @@ function Login() {
         })
         .then(response => {
             sessionStorage.setItem("id", response.data.id);
-            // sessionStorage.getItem("id");
-            history.push('/feed');
+            history.push('/login');
         })
         .catch(error => {
             console.log(error)
