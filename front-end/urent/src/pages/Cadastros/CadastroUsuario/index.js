@@ -21,7 +21,7 @@ function CadastroUsuario() {
 	const [email, setEmail] = useState("");
 	const [senha, setSenha] = useState("");
 
-	const history = useHistory('/login');
+	const history = useHistory();
 
 
 	function cadastroUser() {
