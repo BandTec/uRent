@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { FaRegUser, FaKey } from 'react-icons/fa';
 
 import { Link, useHistory } from 'react-router-dom';
@@ -8,7 +8,7 @@ import api from '../../service/api';
 import logo from '../../assets/logo-reset.svg';
 import * as S from '../Login/style';
 
-function alterarSenha() {
+function ResetSenha() {
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
@@ -16,7 +16,7 @@ function alterarSenha() {
 
     const history = useHistory();
 
-    function resetSenha() {
+    function alterarSenha() {
         api.post(`/usuarios/login`, {
             "email": email,
             "senha": senha,
