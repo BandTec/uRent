@@ -38,13 +38,13 @@ function CadastroGaragem() {
 			"avaliacao": 2,
 			"usuario": usuario
 		})
-		.then(response => {
-			alert('Deu bom');
-			console.log(response);
-		})
-		.catch(error => {
-			console.log(error);
-		})
+			.then(response => {
+				alert('Deu bom');
+				console.log(response);
+			})
+			.catch(error => {
+				console.log(error);
+			})
 	}
 
 	return (

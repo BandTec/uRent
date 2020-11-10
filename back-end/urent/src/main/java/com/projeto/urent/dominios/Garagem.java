@@ -14,8 +14,8 @@ public class Garagem {
     private Integer id;
 
     @NotNull
-    @Length(min = 8, max = 8, message = "Cep inválido")
-    @Column(nullable = false, length = 8)
+    @Length(min = 9, max = 9, message = "Cep inválido")
+    @Column(nullable = false, length = 9)
     private String cep;
 
     @NotNull

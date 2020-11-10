@@ -1,15 +1,15 @@
 INSERT INTO usuario
 (id, nome, cpf, data_nasc, cnh, cep, email, senha, avaliacao)
 VALUES
-(null, 'Matheus Custódio', '56264585212', '2001-05-21', '25645895124', '07175060', 'matheus@gmail.com', '123456789', 5.0),
-(null, 'Iago Luz', '89456245785', '1999-01-30', '84595456324', '26458962', 'iago@gmail.com', '987654321', 5.0),
-(null, 'Vinivius Sobral', '56245953514', '2000-03-05', '54526125', '05626315', 'vinicius@gmail.com', '964523648', 3.0);
+(null, 'Matheus Custódio', '562.645.852-12', '2001-05-21', '256.458.951-24', '07175-060', 'matheus@gmail.com', '123456789', 5.0),
+(null, 'Iago Luz', '894.562.457-85', '1999-01-30', '845.954.563-24', '26458-962', 'iago@gmail.com', '987654321', 5.0),
+(null, 'Vinicius Sobral', '562.459.535-14', '2000-03-05', '545.261.250-89', '05626-315', 'vinicius@gmail.com', '964523648', 3.0);
 
 INSERT INTO usuario
 (id, nome, cpf, data_nasc, cep, email, senha, avaliacao)
 VALUES
-(null, 'Marta Souza', '26459563245', '2001-11-05', '06524856', 'marta@gmail.com', '932645869', 4.0),
-(null, 'Nikolly', '63245264523', '2001-08-20', '04526023', 'nikolly@gmail.com', '962453624', 5.0);
+(null, 'Marta Souza', '264.595.632-45', '2001-11-05', '65248-450', 'marta@gmail.com', '932645869', 4.0),
+(null, 'Nikolly', '632.452.645-23', '2001-08-20', '05260-234', 'nikolly@gmail.com', '962453624', 5.0);
 
 INSERT INTO tipo_veiculo
 (id, tipo)
@@ -28,8 +28,8 @@ VALUES
 INSERT INTO garagem
 (id, cep, numero, latitude, longitude, avaliacao, usuario_id)
 VALUES
-(null, '0231256', '100', '123456', '654321', 5, 4),
-(null, '0231425', '200', '987456', '541230', 3, 5);
+(null, '0231-256', '100', '123456', '654321', 5, 4),
+(null, '0231-425', '200', '987456', '541230', 3, 5);
 
 INSERT INTO aluguel
 (id, garagem_id, veiculo_id, data_inicio, data_final)

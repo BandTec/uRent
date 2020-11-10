@@ -23,8 +23,8 @@ public class Usuario {
     private String nome;
 
     @NotNull(message = "É necessário preencher o CPF")
-    @Length(min = 11, max = 11)
-    @Column(nullable = false, length = 11, unique = true)
+    @Length(min = 14, max = 14)
+    @Column(nullable = false, length = 14, unique = true)
     private String cpf;
 
     @NotNull(message = "É necessário informar a data de nascimento")
@@ -32,13 +32,13 @@ public class Usuario {
     @Column(name = "data_nasc", nullable = false)
     private LocalDate dataNasc;
 
-    @Length(min = 11, max = 11)
-    @Column(length = 11)
+    @Length(min = 14, max = 14)
+    @Column(length = 14)
     private String cnh;
 
     @NotNull(message = "É necessário informar o seu CEP")
-    @Length(min = 8, max = 8)
-    @Column(nullable = false, length = 8)
+    @Length(min = 9, max = 9)
+    @Column(nullable = false, length = 9)
     private String cep;
 
     @NotNull(message = "É necessário informar seu e-mail de contato")
