@@ -9,6 +9,9 @@ export const Header = style.header`
     grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
     margin-bottom: 20px;
+    @media screen and (max-width: 700px){
+        margin-top: 70px;
+        }
 `;
 
 export const HeaderNav = style.nav`
