@@ -58,6 +58,7 @@ function Login() {
                                 <input type="checkbox" type="checkbox" />
                                 <S.LabelCheck>Lembrar-me</S.LabelCheck>
                             </S.FormRecusosCheck>
+                            
                             <Link to="/reset-senha">
                             <S.LabelCheck>Esqueci minha senha</S.LabelCheck>
                             </Link>
