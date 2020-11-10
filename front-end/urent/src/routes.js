@@ -13,6 +13,8 @@ import Institucional from './pages/Institucional/index';
 import Feed from './pages/Feed/index';
 import Alugar from './pages/Alugar/index';
 import Perfil from './pages/Perfil/index';
+import DetalhesAnuncio from './pages/DetalhesAnuncio/index';
+import FinalizarAluguel from './pages/FinalizarAluguel/index';
 
 function Routes() {
     return (
@@ -30,6 +32,8 @@ function Routes() {
                 <Route path="/feed" component={Feed} />
                 <Route path="/alugar" component={Alugar} />
                 <Route path="/perfil" component={Perfil} />
+                <Route path="/detalhesAnuncio" component={DetalhesAnuncio} />
+                <Route path="/finalizarAluguel" component={FinalizarAluguel} />
             </Switch>
         </BrowserRouter>
     )
