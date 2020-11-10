@@ -52,7 +52,7 @@ export const border = style.div`
 `;
 
 export const FormTitleLabel2 = style.label`
-    width: 76%;
+    width: 88%;
     color:#FFFFFF;
     margin-bottom:5px;
     align-text: center;
@@ -96,7 +96,7 @@ export const ButtonEntrar = style.button`
     font-size: 18px;
     font-weight: 700;
     color: #FFFFFF;
-    width: 77%;
+    width: 90%;
     height: 63px;
     margin-bottom:20px;
     border-radius: 8px;
