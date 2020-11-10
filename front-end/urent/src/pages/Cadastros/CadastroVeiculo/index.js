@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import InputMask from 'react-input-mask';
+
+
+
+import api from '../../../service/api';
 
 import HeaderCadastro from '../../../components/HeaderCadastro/index';
 import FooterCadastro from '../../../components/FooterCadastro/index';
@@ -8,9 +12,52 @@ import * as S from '../style.js';
 
 function CadastroVeiculo() {
 
+    const [usuario, setUsuario] = useState({});
+
+    const [placa, setPlaca] = useState("");
+
+
+    // const [tipo, setTipoVeiculo] = useState("");
+
+
+    useEffect(() => {
+
+        const id = sessionStorage.getItem("id");
+
+        api.get(`/usuarios/${id}`)
+            .then(response => {
+                setUsuario(response.data);
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+    }, [])
+
+    function cadastroVeic() {
+
+        api.post('veiculos', {
+            "placa": placa,
+            "usuario": usuario,
+            "tipoVeiculo": {
+                "id": 2,
+                "tipo": "Moto"
+            }
+
+
+        })
+            .then(response => {
+                alert('Veiculo Cadastrado!');
+                console.log(response);
+            }).catch(error => {
+                alert('Não Cadastrou!');
+                console.log(error);
+            })
+
+    }
+
+
     return (
-
-
 
         <S.Cadastro>
 
@@ -25,7 +72,7 @@ function CadastroVeiculo() {
                     <S.CadastroContent>
 
                         <S.CadastroLabel>Placa</S.CadastroLabel>
-                        <InputMask mask='9999999'>
+                        <InputMask mask='9999999' onChange={e => setPlaca(e.target.value)}>
                             {() =>
                                 <S.CadastroInput />
                             }
@@ -57,6 +104,8 @@ function CadastroVeiculo() {
                     <S.CadastroInput type="file" />
 
                 </div>
+
+                <button onClick={cadastroVeic}>Cadastrar</button>
 
 
                 <FooterCadastro />
