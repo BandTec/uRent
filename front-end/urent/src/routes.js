@@ -15,6 +15,7 @@ import Alugar from './pages/Alugar/index';
 import Perfil from './pages/Perfil/index';
 import DetalhesAnuncio from './pages/DetalhesAnuncio/index';
 import FinalizarAluguel from './pages/FinalizarAluguel/index';
+import ResetSenha from './pages/ResetSenha/index';
 
 function Routes() {
     return (
@@ -34,6 +35,7 @@ function Routes() {
                 <Route path="/perfil" component={Perfil} />
                 <Route path="/detalhesAnuncio" component={DetalhesAnuncio} />
                 <Route path="/finalizarAluguel" component={FinalizarAluguel} />
+                <Route path="/reset-senha" component={ResetSenha} />
             </Switch>
         </BrowserRouter>
     )

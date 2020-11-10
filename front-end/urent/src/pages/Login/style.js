@@ -8,6 +8,7 @@ export const Welcome = style.div`
 `;
 
 export const FormLogin = style.div`
+    margin-bottom:-50px;
     width: 80%;
     height: 540px;
     margin: 50px auto;
@@ -24,6 +25,7 @@ export const LogoImage = style.div`
 `;
 
 export const Form= style.div` 
+    
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -34,10 +36,26 @@ export const FormTitleEntrar = style.h1`
     color: #FFFFFF;
 `;
 
+
 export const FormTitleLabel = style.label`
-    align-self:flex-start;
+    width: 100%;
     color:#FFFFFF;
     margin-bottom:5px;
+    align-text: center;
+`;
+
+export const border = style.div`
+    border-radius: 15px;
+    width: 50%;
+    height: 400px;
+    border: 1px solid #82A9EF;
+`;
+
+export const FormTitleLabel2 = style.label`
+    width: 76%;
+    color:#FFFFFF;
+    margin-bottom:5px;
+    align-text: center;
 `;
 
 export const FormData = style.div`
@@ -75,10 +93,10 @@ export const LabelCheck= style.label`
     color:white;
 `;
 export const ButtonEntrar = style.button`
-    font-size: 23px;
+    font-size: 18px;
     font-weight: 700;
     color: #FFFFFF;
-    width: 100%;
+    width: 77%;
     height: 63px;
     margin-bottom:20px;
     border-radius: 8px;
