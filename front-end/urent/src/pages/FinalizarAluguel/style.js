@@ -109,7 +109,7 @@ export const TittleLineInfo = style.div`
     width: 80%;
     font-size: 20px;
     color: #6A6180;
-    margin-left: 10%;
+    // margin-left: 10%;
     margin-top: 20px;
     padding-left: 5px;
 `;
