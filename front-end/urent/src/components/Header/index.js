@@ -20,7 +20,10 @@ function Header() {
 				<Link to="/cadastro">
 					<S.ButtonLight>Cadastre-se</S.ButtonLight>
 				</Link>
-				<S.ButtonBlue>Entrar</S.ButtonBlue>
+				<Link to="/login">
+					<S.ButtonBlue>Entrar</S.ButtonBlue>
+				</Link>
+				
 			</S.HeaderNav>
 
 		</S.Header>
