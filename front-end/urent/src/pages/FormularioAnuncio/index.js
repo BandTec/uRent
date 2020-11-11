@@ -17,7 +17,7 @@ function FormularioAnuncio() {
 	const [valorDiaria, setValorDiaria] = useState("");
 	const [tipoVeiculo, setTipoVeiculo] = useState("");
 	const [garagem, setGaragem] = useState("");
-	const [garagensUsuarios, setGaragensUsuarios] = useState("");
+	const [garagensUsuarios, setGaragensUsuarios] = useState([]);
 
 	const history = useHistory();
 
@@ -88,7 +88,9 @@ function FormularioAnuncio() {
 
 							<option value=""></option>
 							{
-								garagensUsuarios.map
+								garagensUsuarios.map(garagem=>
+									<option value=""></option>
+									)
 							}
 						</S.CadastroSelect>
 
