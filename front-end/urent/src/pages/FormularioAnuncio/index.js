@@ -40,8 +40,8 @@ function FormularioAnuncio() {
 					</S.CadastroContent>
 
 					<S.CadastroContent>
-						<S.CadastroLabel style={{ color: "#0752DE",border: '1px solid',borderRadius:'15px'
-							,textAlign:'center', marginTop:'5vh'}}>+ Adicionar nova garagem</S.CadastroLabel>
+						<S.CadastroLabel2 style={{ color: "#0752DE",border: '1px solid',borderRadius:'15px'
+							,textAlign:'center', marginTop:'5vh'}}>+ Adicionar nova garagem</S.CadastroLabel2>
 						{/* <S.CadastroInputAddGaragem style={{ width: '94%' }} /> */}
 					</S.CadastroContent>
 

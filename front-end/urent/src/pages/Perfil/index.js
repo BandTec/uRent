@@ -21,11 +21,7 @@ function FormularioPerfil() {
 
             <div>
 
-
-
                 <S.Welcome>
-
-
 
                     <S.FormPerfil>
 
@@ -59,8 +55,6 @@ function FormularioPerfil() {
 
                             </S.BoxPerfil>
 
-
-
                             <S.BoxContentDados>
 
                                 <S.BoxImgPerfil>
@@ -81,10 +75,6 @@ function FormularioPerfil() {
                             </S.BoxContentDados>
 
                         </S.ContainerPerfil>
-
-
-
-
 
                         <div>
                             <S.FormTitle>Endereco</S.FormTitle>
