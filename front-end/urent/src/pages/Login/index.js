@@ -22,7 +22,6 @@ function Login() {
         })
             .then(response => {
                 sessionStorage.setItem("id", response.data.id);
-                alert("Logado!")
                 history.push('/feed');
             })
             .catch(error => {
@@ -30,14 +29,7 @@ function Login() {
                 alert('Erro');
             })
 
-            .then(response => {
-                sessionStorage.setItem("id", response.data.id);
-                history.push('/feed');
-            })
-            .catch(error => {
-                console.log(error)
-                alert('Erro');
-            })
+            
 
     }
 

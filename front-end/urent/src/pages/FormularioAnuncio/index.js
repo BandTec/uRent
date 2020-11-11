@@ -18,6 +18,7 @@ function FormularioAnuncio() {
 	const [tipoVeiculo, setTipoVeiculo] = useState("");
 	const [garagem, setGaragem] = useState("");
 	const [garagensUsuarios, setGaragensUsuarios] = useState([]);
+	const [tipoVeiculoUsuarios, setTipoVeiculoUsuarios] = useState([]);
 
 	const history = useHistory();
 
@@ -38,6 +39,16 @@ function FormularioAnuncio() {
 			console.log(error)
 		})
 
+
+		api.get(`/tipo-veiculos/${id}`)
+		.then(response=>{
+			setTipoVeiculoUsuarios(response.data)
+		})
+		.catch(error=>{
+			console.log(error)
+		})
+		
+
     }, [])
 
 	function cadastrarAnuncio() {
@@ -46,8 +57,8 @@ function FormularioAnuncio() {
 
 			"titulo": titulo,
 			"valorDiaria": valorDiaria,
-			"tipoVeiculo": tipoVeiculo,
-			"garagem": garagem
+			"tipoVeiculo": tipoVeiculoUsuarios[tipoVeiculo-1],
+			"garagem": garagensUsuarios[garagem-1]
 
 		})
 			.then(response => {
@@ -89,7 +100,7 @@ function FormularioAnuncio() {
 							<option value=""></option>
 							{
 								garagensUsuarios.map(garagem=>
-									<option value=""></option>
+									<option value={garagem.id}>{garagem.cep}</option>
 									)
 							}
 						</S.CadastroSelect>
@@ -111,14 +122,14 @@ function FormularioAnuncio() {
 						<S.CadastroLabel style={{marginRight:'6px'}}>Tipo de veículo</S.CadastroLabel>
 						<AiOutlineInfoCircle color='#9C98A6' size='20'/>
 						</div>
-					<S.CadastroSelect title="Tipo de veiculo">
+					<S.CadastroSelect title="Tipo de veiculo" onChange={e => setTipoVeiculo(e.target.value)}>
 
 							<option value=""></option>
-							<option value="hatch">Carro Hatch</option>
-							<option value="sedan">Carro Sedan</option>
-							<option value="suv">Carro SUV</option>
-							<option value="moto">Moto</option>
-							<option value="caminhao">Caminhão</option>
+							{
+								tipoVeiculoUsuarios.map(tipoVeiculo=>
+									<option value={tipoVeiculo.id}>{tipoVeiculo.nome}</option>
+									)
+							}
 						</S.CadastroSelect>
 
 					</S.CadastroContent>
