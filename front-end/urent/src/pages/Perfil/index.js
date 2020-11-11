@@ -13,14 +13,11 @@ import * as S from '../Perfil/style';
 function FormularioPerfil() {
     return (
 
-
         <div>
 
             <Header title="Perfil" />
 
-
             <div>
-
                 <S.Welcome>
 
                     <S.FormPerfil>
@@ -100,7 +97,7 @@ function FormularioPerfil() {
 
                             <Link to="/reset-senha">
                                 <S.Button>Alterar Senha</S.Button>
-				            </Link>
+                            </Link>
                         </div>
 
 

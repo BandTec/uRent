@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import InputMask from 'react-input-mask';
+import { useHistory } from 'react-router-dom';
 
 import api from '../../../service/api';
 
@@ -14,13 +15,25 @@ function CadastroVeiculo() {
 
     const [placa, setPlaca] = useState("");
 
+    const [tipoVeiculo, setTipoVeiculo] = useState([]);
 
-    // const [tipo, setTipoVeiculo] = useState("");
+    const [tipoVeiculoSelect, setTipoVeiculoSelect] = useState("");
 
+    const history = useHistory();
 
     useEffect(() => {
 
         const id = sessionStorage.getItem("id");
+
+        if (id == null) {
+
+            history.push('/login')
+        }
+
+        if (id == null) {
+
+            history.push('/login')
+        }
 
         api.get(`/usuarios/${id}`)
             .then(response => {
@@ -30,17 +43,25 @@ function CadastroVeiculo() {
                 console.log(error)
             })
 
+
+        api.get(`/tipo-veiculos`)
+            .then(response => {
+                setTipoVeiculo(response.data);
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
     }, [])
 
+
     function cadastroVeic() {
+
 
         api.post('veiculos', {
             "placa": placa,
             "usuario": usuario,
-            "tipoVeiculo": {
-                "id": 2,
-                "tipo": "Moto"
-            }
+            "tipoVeiculo": tipoVeiculo[tipoVeiculoSelect - 1]
 
 
         })
@@ -82,14 +103,12 @@ function CadastroVeiculo() {
 
                         <S.CadastroLabel>Tipo</S.CadastroLabel>
 
-                        <S.CadastroSelect title="Tipo de veiculo">
+                        <S.CadastroSelect title="Tipo de veiculo" onChange={e => setTipoVeiculoSelect(e.target.value)}>
 
                             <option value=""></option>
-                            <option value="hatch">Carro Hatch</option>
-                            <option value="sedan">Carro Sedan</option>
-                            <option value="suv">Carro SUV</option>
-                            <option value="moto">Moto</option>
-                            <option value="caminhao">Caminhão</option>
+                            {tipoVeiculo.map(tipoVeiculo =>
+                                <option value={tipoVeiculo.id}>{tipoVeiculo.tipo}</option>
+                            )}
 
                         </S.CadastroSelect>
 
