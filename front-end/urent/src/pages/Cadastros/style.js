@@ -43,6 +43,13 @@ export const CadastroContent = style.div`
         margin-right: 4%;
 `;
 
+export const CadastroLabel2 = style.button`
+    color: #9C98A6;
+    line-height: 2;
+    font-size: 16px;
+
+`;
+
 export const CadastroLabel = style.label`
     color: #9C98A6;
     line-height: 2;
