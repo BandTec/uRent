@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import InputMask from 'react-input-mask';
+import { useHistory } from 'react-router-dom';
 
 import api from '../../../service/api';
 
@@ -14,6 +15,8 @@ function CadastroGaragem() {
 
 	const [cep, setCep] = useState("");
 	const [numero, setNumero] = useState("");
+
+	const history = useHistory();
 
 	useEffect(() => {
 

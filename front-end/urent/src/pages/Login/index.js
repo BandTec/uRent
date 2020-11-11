@@ -20,7 +20,6 @@ function Login() {
             "email": email,
             "senha": senha
         })
-<<<<<<< HEAD
             .then(response => {
                 sessionStorage.setItem("id", response.data.id);
                 alert("Logado!")
@@ -30,16 +29,16 @@ function Login() {
                 console.log(error)
                 alert('Erro');
             })
-=======
-        .then(response => {
-            sessionStorage.setItem("id", response.data.id);
-            history.push('/feed');
-        })
-        .catch(error => {
-            console.log(error)
-            alert('Erro');
-        })
->>>>>>> aba964643118478e7fd8266bdbd57ccfe09f977d
+
+            .then(response => {
+                sessionStorage.setItem("id", response.data.id);
+                history.push('/feed');
+            })
+            .catch(error => {
+                console.log(error)
+                alert('Erro');
+            })
+
     }
 
     return (
