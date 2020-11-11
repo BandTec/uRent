@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaRegUser, FaKey } from 'react-icons/fa';
 
 import { Link, useHistory } from 'react-router-dom';
@@ -17,7 +17,6 @@ function ResetSenha() {
 
     function alterarSenha() {
 
-        const id = sessionStorage.getItem("id");
 
         api.put(`/usuarios/alterar-senha`, {
             "email": email,
@@ -25,9 +24,8 @@ function ResetSenha() {
         })
             .then(response => {
                 alert("Senha alterada!")
-                sessionStorage.setItem(id, response.data.id);
-                // sessionStorage.getItem("id");
-                history.push('/feed');
+
+                history.push('/login');
             })
             .catch(error => {
                 console.log(error)
