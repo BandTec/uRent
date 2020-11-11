@@ -5,8 +5,6 @@ import logo from '../../assets/logo.svg';
 
 import * as S from './style';
 
-
-
 function Header() {
 	return (
 

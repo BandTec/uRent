@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link, useHistory } from 'react-router-dom';
+
 import Header from '../../components/HeaderCadastro/index';
 import fotoPerfil from '../../assets/user.png';
 import estrelaApagada from '../../assets/Star 5.png';
@@ -106,8 +108,9 @@ function FormularioPerfil() {
                             </div>
 
 
-
-                            <S.Button>Alterar Senha</S.Button>
+                            <Link to="/reset-senha">
+                                <S.Button>Alterar Senha</S.Button>
+				            </Link>
                         </div>
 
 
