@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {AiOutlineInfoCircle} from 'react-icons/ai'
+
+import { Link, useHistory } from 'react-router-dom';
+
+import api from '../../service/api';
 
 import FooterCadastro from '../../components/FooterCadastro/index';
 import HeaderCadastro from '../../components/HeaderCadastro/index';
@@ -8,6 +12,37 @@ import HeaderCadastro from '../../components/HeaderCadastro/index';
 import * as S from '../Cadastros/style.js';
 
 function FormularioAnuncio() {
+
+	const [titulo, setTitulo] = useState("");
+	const [valorDiaria, setValorDiaria] = useState("");
+	const [tipoVeiculo, setTipoVeiculo] = useState("");
+	const [garagem, setGaragem] = useState("");
+
+	const history = useHistory();
+
+	function cadastrarAnuncio() {
+
+		api.post('anuncios', {
+
+			"titulo": titulo,
+			"valorDiaria": valorDiaria,
+			"tipoVeiculo": tipoVeiculo,
+			"garagem": garagem
+
+		})
+			.then(response => {
+				alert("Anuncio Cadastrado!");
+
+				history.push('/login');
+			})
+			.catch(error => {
+				alert("Não cadastrou!");
+				console.log(error);
+			})
+	}
+
+	
+
 	return (
 
 		<S.Cadastro>
@@ -19,7 +54,7 @@ function FormularioAnuncio() {
 
 				<div style={{ width: '100%' }}>
 					<S.CadastroLabel>Título do anúncio</S.CadastroLabel>
-					<S.CadastroInput />
+					<S.CadastroInput onChange={e => setTitulo(e.target.value)} />
 				</div>
 
 				<S.CadastroContentBox>
@@ -29,19 +64,21 @@ function FormularioAnuncio() {
 						<S.CadastroLabel style={{marginRight:'6px'}}>Seleciona a garagem</S.CadastroLabel>
 						<AiOutlineInfoCircle color='#9C98A6' size='20'/>
 						</div>
-						<S.CadastroSelect title="Selecionar a garagem">
+						<S.CadastroSelect title="Selecionar a garagem" onChange={e => setGaragem(e.target.value)} >
 
 							<option value=""></option>
 							<option value="hatch">República</option>
 							<option value="sedan">Guarulhos</option>
 							<option value="suv">Consolação</option>
+
+
 						</S.CadastroSelect>
 
 					</S.CadastroContent>
 
 					<S.CadastroContent>
-						<S.CadastroLabel2 style={{ color: "#0752DE",border: '1px solid',borderRadius:'15px'
-							,textAlign:'center', marginTop:'5vh'}}>+ Adicionar nova garagem</S.CadastroLabel2>
+						<S.CadastroLabel2 onClick={cadastrarAnuncio} style={{ color: "#0752DE",border: '1px solid',borderRadius:'15px'
+							,textAlign:'center', marginTop:'5vh'}}>+ Adicionar nova garagem </S.CadastroLabel2>
 						{/* <S.CadastroInputAddGaragem style={{ width: '94%' }} /> */}
 					</S.CadastroContent>
 
@@ -63,11 +100,12 @@ function FormularioAnuncio() {
 							<option value="moto">Moto</option>
 							<option value="caminhao">Caminhão</option>
 						</S.CadastroSelect>
+
 					</S.CadastroContent>
 
 					<S.CadastroContent>
 						<S.CadastroLabel>Valor (diária)</S.CadastroLabel>
-						<S.CadastroInput style={{ width: '94%' }} />
+						<S.CadastroInput style={{ width: '94%' }} onChange={e => valorDiaria(e.target.value)} />
 					</S.CadastroContent>
 
 				</S.CadastroContentBox>
