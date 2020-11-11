@@ -87,7 +87,9 @@ function FormularioAnuncio() {
 						<S.CadastroSelect title="Selecionar a garagem" onChange={e => setGaragem(e.target.value)} >
 
 							<option value=""></option>
-							
+							{
+								garagensUsuarios.map
+							}
 						</S.CadastroSelect>
 
 					</S.CadastroContent>
