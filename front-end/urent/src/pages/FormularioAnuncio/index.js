@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {AiOutlineInfoCircle} from 'react-icons/ai'
 
 import { Link, useHistory } from 'react-router-dom';
@@ -17,8 +17,28 @@ function FormularioAnuncio() {
 	const [valorDiaria, setValorDiaria] = useState("");
 	const [tipoVeiculo, setTipoVeiculo] = useState("");
 	const [garagem, setGaragem] = useState("");
+	const [garagensUsuarios, setGaragensUsuarios] = useState("");
 
 	const history = useHistory();
+
+	useEffect(() => {
+
+        const id = sessionStorage.getItem("id");
+
+        if (id == null) {
+
+            history.push('/login')
+        }
+
+		api.get(`/garagens/usuario/${id}`)
+		.then(response=>{
+			setGaragensUsuarios(response.data)
+		})
+		.catch(error=>{
+			console.log(error)
+		})
+
+    }, [])
 
 	function cadastrarAnuncio() {
 
@@ -67,11 +87,7 @@ function FormularioAnuncio() {
 						<S.CadastroSelect title="Selecionar a garagem" onChange={e => setGaragem(e.target.value)} >
 
 							<option value=""></option>
-							<option value="hatch">República</option>
-							<option value="sedan">Guarulhos</option>
-							<option value="suv">Consolação</option>
-
-
+							
 						</S.CadastroSelect>
 
 					</S.CadastroContent>
