@@ -20,14 +20,15 @@ function Login() {
             "email": email,
             "senha": senha
         })
-        .then(response => {
-            sessionStorage.setItem("id", response.data.id);
-            history.push('/login');
-        })
-        .catch(error => {
-            console.log(error)
-            alert('Erro');
-        })
+            .then(response => {
+                sessionStorage.setItem("id", response.data.id);
+                alert("Logado!")
+                history.push('/feed');
+            })
+            .catch(error => {
+                console.log(error)
+                alert('Erro');
+            })
     }
 
     return (
@@ -42,13 +43,13 @@ function Login() {
 
                         <S.FormTitleLabel >E-mail</S.FormTitleLabel>
                         <S.FormData>
-                            <FaRegUser style={{position: 'absolute', left: '3%'}} size='25' color='#FFFFFF' />
-                            <S.FormInput placeholder="ex@gmail.com" placeholderTextColor='red' onChange={e => setEmail(e.target.value)}  />
+                            <FaRegUser style={{ position: 'absolute', left: '3%' }} size='25' color='#FFFFFF' />
+                            <S.FormInput placeholder="ex@gmail.com" placeholderTextColor='red' onChange={e => setEmail(e.target.value)} />
                         </S.FormData>
-                        
+
                         <S.FormTitleLabel>Senha</S.FormTitleLabel>
-                        <S.FormData>	
-                        <FaKey style={{position: 'absolute', left: '3%'}} size='25' color='#FFFFFF' />
+                        <S.FormData>
+                            <FaKey style={{ position: 'absolute', left: '3%' }} size='25' color='#FFFFFF' />
                             <S.FormInput placeholder="*************" onChange={e => setSenha(e.target.value)} />
                         </S.FormData>
 
@@ -57,13 +58,13 @@ function Login() {
                                 <input type="checkbox" type="checkbox" />
                                 <S.LabelCheck>Lembrar-me</S.LabelCheck>
                             </S.FormRecusosCheck>
-                            
+
                             <Link to="/reset-senha">
-                            <S.LabelCheck>Esqueci minha senha</S.LabelCheck>
+                                <S.LabelCheck>Esqueci minha senha</S.LabelCheck>
                             </Link>
-                           
+
                         </S.FormRecursos>
-                        
+
                         <S.ButtonEntrar onClick={login}>ENTRAR</S.ButtonEntrar>
                         <S.LabelCheck>Criar conta</S.LabelCheck>
 

@@ -11,14 +11,11 @@ import * as S from '../Perfil/style';
 function FormularioPerfil() {
     return (
 
-
         <div>
 
             <Header title="Perfil" />
 
-
             <div>
-
 
 
                 <S.Welcome>

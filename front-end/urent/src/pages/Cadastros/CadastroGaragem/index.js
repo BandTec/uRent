@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import InputMask from 'react-input-mask';
 
 import api from '../../../service/api';
 
@@ -17,6 +18,11 @@ function CadastroGaragem() {
 	useEffect(() => {
 
 		const id = sessionStorage.getItem("id");
+
+		if (id == null) {
+
+			history.push('/login')
+		}
 
 		api.get(`/usuarios/${id}`)
 			.then(response => {
@@ -64,7 +70,11 @@ function CadastroGaragem() {
 
 					<S.CadastroContent>
 						<S.CadastroLabel>Cep</S.CadastroLabel>
-						<S.CadastroInput style={{ width: '94%' }} onChange={e => setCep(e.target.value)} />
+						<InputMask mask='99999-999' onChange={e => setCep(e.target.value)}>
+							{() =>
+								<S.CadastroInput />
+							}
+						</InputMask>
 					</S.CadastroContent>
 
 					<S.CadastroContent>
