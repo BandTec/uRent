@@ -93,7 +93,6 @@ export const CadastroSelect = style.select`
     color: #9C98A6;
     font-size: 15px;
     margin-bottom: 24px;
-    display: none";
 `;
 
 
@@ -104,6 +103,7 @@ export const Footer = style.div`
     justify-content: space-between;
     align-items: center;
 `;
+
 export const FooterAlert = style.div`
     /* background-color: pink; */
     width: 30%;

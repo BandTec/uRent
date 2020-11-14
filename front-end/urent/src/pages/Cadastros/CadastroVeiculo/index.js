@@ -41,6 +41,7 @@ function CadastroVeiculo() {
 
         api.get(`/tipo-veiculos`)
             .then(response => {
+                console.log(response.data)
                 setTipoVeiculo(response.data);
             })
             .catch(error => {
@@ -51,13 +52,10 @@ function CadastroVeiculo() {
 
 
     function cadastroVeic() {
-
-
         api.post('veiculos', {
             "placa": placa,
             "usuario": usuario,
             "tipoVeiculo": tipoVeiculo[tipoVeiculoSelect - 1]
-
 
         })
             .then(response => {
@@ -118,12 +116,12 @@ function CadastroVeiculo() {
                 </div>
 
                 <S.Footer>
-                    <S.FooterAlert>
-                        <FiAlertOctagon color="#8257E5" size="35" style={{ alignSelf: 'flex-start' }} />
-                        <S.FooterText>Importante! Preencha todos os dados</S.FooterText>
-                    </S.FooterAlert>
-                    <S.FooterButton onClick={cadastroVeic}>Salvar Cadastro</S.FooterButton>
-                </S.Footer>
+					<S.FooterAlert>
+						<FiAlertOctagon color="#8257E5" size="35" style={{ alignSelf: 'flex-start' }} />
+						<S.FooterText>Importante! Preencha todos os dados</S.FooterText>
+					</S.FooterAlert>
+					<S.FooterButton onClick={cadastroVeic}>Salvar Cadastro</S.FooterButton>
+				</S.Footer>
 
             </S.CadastroContainer>
 
