@@ -16,6 +16,7 @@ import Perfil from './pages/Perfil/index';
 import DetalhesAnuncio from './pages/DetalhesAnuncio/index';
 import FinalizarAluguel from './pages/FinalizarAluguel/index';
 import ResetSenha from './pages/ResetSenha/index';
+import Chat from './pages/Chat/index';
 
 function Routes() {
     return (
@@ -36,6 +37,7 @@ function Routes() {
                 <Route path="/detalhesAnuncio" component={DetalhesAnuncio} />
                 <Route path="/finalizarAluguel" component={FinalizarAluguel} />
                 <Route path="/reset-senha" component={ResetSenha} />
+                <Route path="/chat" component={Chat} />
             </Switch>
         </BrowserRouter>
     )

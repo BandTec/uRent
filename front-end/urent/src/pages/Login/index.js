@@ -29,11 +29,6 @@ function Login() {
                 alert('Erro');
             })
 
-<<<<<<< HEAD
-=======
-            
-
->>>>>>> a26214b6d4f24070169709ee78984013c6fc67c8
     }
 
     return (
