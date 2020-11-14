@@ -28,6 +28,7 @@ export const Nav = styled.nav`
     background-color: #94919D;
     grid-column: 1/2;
     grid-row: 1/4;
+    padding: 0 5%;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -38,6 +39,16 @@ export const Nav = styled.nav`
 
 export const FotoPerfil = styled.img`
     border-radius: 100%;
+`;
+
+export const DataTopic = styled.p`
+    font-size: 15px;
+    font-weight: 700;
+`;
+
+export const Data = styled.span`
+    font-size: 15px;
+    font-weight: normal;
 `;
 
 export const Content = styled.div`
