@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import InputMask from 'react-input-mask';
 import { useHistory } from 'react-router-dom';
+import { FiAlertOctagon } from 'react-icons/fi';
 
 import api from '../../../service/api';
 
-import FooterCadastro from '../../../components/FooterCadastro/index';
 import HeaderCadastro from '../../../components/HeaderCadastro/index';
 
 import * as S from '../style.js';
@@ -52,6 +52,7 @@ function CadastroGaragem() {
 				console.log(response);
 			})
 			.catch(error => {
+				alert('Deu Ruim');
 				console.log(error);
 			})
 	}
@@ -95,10 +96,14 @@ function CadastroGaragem() {
 
 				</div>
 
-				<button onClick={cadastro}>Cadastrar</button>
+				<S.Footer>
+					<S.FooterAlert>
+						<FiAlertOctagon color="#8257E5" size="35" style={{ alignSelf: 'flex-start' }} />
+						<S.FooterText>Importante! Preencha todos os dados</S.FooterText>
+					</S.FooterAlert>
+					<S.FooterButton onClick={cadastro}>Salvar Cadastro</S.FooterButton>
+				</S.Footer>
 
-
-				<FooterCadastro />
 
 			</S.CadastroContainer>
 

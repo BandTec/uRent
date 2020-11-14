@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import InputMask from 'react-input-mask';
+import { FiAlertOctagon } from 'react-icons/fi';
 
 import api from '../../../service/api';
 
 import { Link, useHistory } from 'react-router-dom';
 
-import FooterCadastro from '../../../components/FooterCadastro/index';
 import HeaderCadastro from '../../../components/HeaderCadastro/index';
 // import Input from '../../../components/Input/inputdata';
 
@@ -120,9 +120,14 @@ function CadastroUsuario() {
 					<S.CadastroInput onChange={e => setSenha(e.target.value)} />
 				</div>
 
-				<button onClick={cadastroUser}>Cadastrar</button>
+				<S.Footer>
+					<S.FooterAlert>
+						<FiAlertOctagon color="#8257E5" size="35" style={{ alignSelf: 'flex-start' }} />
+						<S.FooterText>Importante! Preencha todos os dados</S.FooterText>
+					</S.FooterAlert>
+					<S.FooterButton onClick={cadastroUser}>Salvar Cadastro</S.FooterButton>
+				</S.Footer>
 
-				<FooterCadastro />
 			</S.CadastroContainer>
 		</S.Cadastro>
 

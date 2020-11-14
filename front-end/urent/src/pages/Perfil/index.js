@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import InputMask from 'react-input-mask';
+
+import api from '../../service/api';
 
 import { Link, useHistory } from 'react-router-dom';
 
@@ -11,6 +14,33 @@ import estrelaLigada from '../../assets/Star 4.png';
 import * as S from '../Perfil/style';
 
 function FormularioPerfil() {
+
+    const [usuario, setUsuario] = useState({});
+
+    const history = useHistory();
+
+    useEffect(() => {
+
+        const id = sessionStorage.getItem("id");
+
+        if (id == null) {
+
+            history.push('/login')
+        }
+
+        api.get(`/usuarios/${id}`)
+            .then(response => {
+                setUsuario(response.data);
+
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+
+    }, [])
+
+
     return (
 
         <div>
@@ -28,25 +58,38 @@ function FormularioPerfil() {
 
                                 <div>
                                     <S.FormTitle>Nome</S.FormTitle>
-                                    <S.FormInfo>Vinicius</S.FormInfo>
+
+
+                                    <S.FormInfo>{usuario.nome}</S.FormInfo>
+
+
 
                                 </div>
 
                                 <div>
                                     <S.FormTitle>CPF</S.FormTitle>
-                                    <S.FormInfo>123456</S.FormInfo>
+
+
+
+                                    <S.FormInfo>{usuario.cpf}</S.FormInfo>
+
+
 
                                 </div>
 
                                 <div>
                                     <S.FormTitle>Data de Nascimento</S.FormTitle>
-                                    <S.FormInfo>09/08/2000</S.FormInfo>
+
+                                    <S.FormInfo>{usuario.dataNasc}</S.FormInfo>
+
 
                                 </div>
 
                                 <div>
                                     <S.FormTitle>CNH</S.FormTitle>
-                                    <S.FormInfo>9876543</S.FormInfo>
+
+                                    <S.FormInfo>{usuario.cnh}</S.FormInfo>
+
 
                                 </div>
 
@@ -74,14 +117,16 @@ function FormularioPerfil() {
                         </S.ContainerPerfil>
 
                         <div>
-                            <S.FormTitle>Endereco</S.FormTitle>
-                            <S.FormInfo>Rua Águas Claras</S.FormInfo>
+                            <S.FormTitle>CEP</S.FormTitle>
+
+                            <S.FormInfo>{usuario.cep}</S.FormInfo>
 
                         </div>
 
                         <div>
                             <S.FormTitle>E-mail</S.FormTitle>
-                            <S.FormInfo>vinicius@gmail.com</S.FormInfo>
+
+                            <S.FormInfo>{usuario.email}</S.FormInfo>
 
                         </div>
 
@@ -91,7 +136,9 @@ function FormularioPerfil() {
 
                             <div>
                                 <S.FormTitle>Senha</S.FormTitle>
-                                <S.FormInfo>09283</S.FormInfo>
+
+                                <S.FormInfo>{usuario.senha}</S.FormInfo>
+
                             </div>
 
 
@@ -99,7 +146,6 @@ function FormularioPerfil() {
                                 <S.Button>Alterar Senha</S.Button>
                             </Link>
                         </div>
-
 
 
                     </S.FormPerfil>

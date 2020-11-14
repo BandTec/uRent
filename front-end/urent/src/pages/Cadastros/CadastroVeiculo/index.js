@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import InputMask from 'react-input-mask';
 import { useHistory } from 'react-router-dom';
+import { FiAlertOctagon } from 'react-icons/fi';
 
 import api from '../../../service/api';
 
 import HeaderCadastro from '../../../components/HeaderCadastro/index';
-import FooterCadastro from '../../../components/FooterCadastro/index';
 
 import * as S from '../style.js';
 
@@ -24,11 +24,6 @@ function CadastroVeiculo() {
     useEffect(() => {
 
         const id = sessionStorage.getItem("id");
-
-        if (id == null) {
-
-            history.push('/login')
-        }
 
         if (id == null) {
 
@@ -122,10 +117,13 @@ function CadastroVeiculo() {
 
                 </div>
 
-                <button onClick={cadastroVeic}>Cadastrar</button>
-
-
-                <FooterCadastro />
+                <S.Footer>
+                    <S.FooterAlert>
+                        <FiAlertOctagon color="#8257E5" size="35" style={{ alignSelf: 'flex-start' }} />
+                        <S.FooterText>Importante! Preencha todos os dados</S.FooterText>
+                    </S.FooterAlert>
+                    <S.FooterButton onClick={cadastroVeic}>Salvar Cadastro</S.FooterButton>
+                </S.Footer>
 
             </S.CadastroContainer>
 
