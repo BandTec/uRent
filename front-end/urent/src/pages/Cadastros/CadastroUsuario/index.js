@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import InputMask from 'react-input-mask';
 import { FiAlertOctagon } from 'react-icons/fi';
 
 import api from '../../../service/api';
 
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import HeaderCadastro from '../../../components/HeaderCadastro/index';
 // import Input from '../../../components/Input/inputdata';
