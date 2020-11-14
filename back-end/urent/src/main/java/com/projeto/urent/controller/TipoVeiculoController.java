@@ -8,14 +8,28 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/tipo-veiculos")
+@CrossOrigin
 public class TipoVeiculoController {
 
     @Autowired
     TipoVeiculoRepository repository;
+
+    @GetMapping()
+    public ResponseEntity buscarTodos(){
+
+        List<TipoVeiculo> tipoVeiculo = repository.findAll();
+
+        if(tipoVeiculo.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(tipoVeiculo);
+        }
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity buscarTipoVeiculo(@PathVariable Integer id){
