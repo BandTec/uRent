@@ -1,7 +1,6 @@
 package com.projeto.urent.controller;
 
 import com.projeto.urent.ListaObj;
-import com.projeto.urent.dominios.Aluguel;
 import com.projeto.urent.dominios.Usuario;
 import com.projeto.urent.repositorios.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +36,14 @@ public class UsuarioController {
         } else {
             return ResponseEntity.ok(usuarioList);
         }
+    }
+
+    @GetMapping("/status")
+    public ResponseEntity statusLogin() {
+        if (loginStatus) {
+           return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/login")

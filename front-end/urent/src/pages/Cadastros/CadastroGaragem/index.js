@@ -20,12 +20,12 @@ function CadastroGaragem() {
 
 	useEffect(() => {
 
-		const id = sessionStorage.getItem("id");
-
-		if (id == null) {
-
+		api.get(`usuario/status`)
+		.catch(() => {
 			history.push('/login')
-		}
+		})
+
+		const id = sessionStorage.getItem("id");
 
 		api.get(`/usuarios/${id}`)
 			.then(response => {
