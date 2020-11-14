@@ -40,7 +40,7 @@ function FormularioAnuncio() {
 		})
 
 
-		api.get(`/tipo-veiculos/${id}`)
+		api.get(`/tipo-veiculos`)
 		.then(response=>{
 			setTipoVeiculoUsuarios(response.data)
 		})
@@ -63,8 +63,8 @@ function FormularioAnuncio() {
 		})
 			.then(response => {
 				alert("Anuncio Cadastrado!");
-
-				history.push('/login');
+				console.log(titulo,valorDiaria)
+				history.post('/meus-anuncios');
 			})
 			.catch(error => {
 				alert("Não cadastrou!");
@@ -127,7 +127,7 @@ function FormularioAnuncio() {
 							<option value=""></option>
 							{
 								tipoVeiculoUsuarios.map(tipoVeiculo=>
-									<option value={tipoVeiculo.id}>{tipoVeiculo.nome}</option>
+									<option value={tipoVeiculo.id}>{tipoVeiculo.tipo}</option>
 									)
 							}
 						</S.CadastroSelect>
@@ -136,7 +136,7 @@ function FormularioAnuncio() {
 
 					<S.CadastroContent>
 						<S.CadastroLabel>Valor (diária)</S.CadastroLabel>
-						<S.CadastroInput style={{ width: '94%' }} onChange={e => valorDiaria(e.target.value)} />
+						<S.CadastroInput style={{ width: '94%' }} onChange={e => setValorDiaria(e.target.value)} />
 					</S.CadastroContent>
 
 				</S.CadastroContentBox>
