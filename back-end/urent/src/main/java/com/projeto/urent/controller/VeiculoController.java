@@ -10,6 +10,8 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
+import static com.projeto.urent.controller.UsuarioController.isLoginStatus;
+
 @RestController
 @RequestMapping ("/veiculos")
 public class VeiculoController {
@@ -54,19 +56,27 @@ public class VeiculoController {
 
     @GetMapping("/usuario/{id}")
     public ResponseEntity buscarVeiculoUsuario(@PathVariable Integer id){
-        List<Veiculo> veiculoList = repository.findAllByUsuario(id);
+        if(isLoginStatus()) {
+            List<Veiculo> veiculoList = repository.findAllByUsuario(id);
 
-        if(veiculoList.isEmpty()) {
-            return ResponseEntity.noContent().build();
+            if(veiculoList.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            } else {
+                return ResponseEntity.ok(veiculoList);
+            }
         } else {
-            return ResponseEntity.ok(veiculoList);
+            return ResponseEntity.badRequest().build();
         }
     }
 
     @PostMapping
     public ResponseEntity cadastrarVeiculo(@RequestBody @Valid Veiculo veiculo){
-        repository.save(veiculo);
-        return ResponseEntity.created(null).build();
+        if(isLoginStatus()) {
+            repository.save(veiculo);
+            return ResponseEntity.created(null).build();
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 

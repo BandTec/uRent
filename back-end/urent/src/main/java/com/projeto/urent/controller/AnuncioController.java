@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.projeto.urent.controller.UsuarioController.isLoginStatus;
+
 @RestController
 @RequestMapping("/anuncios")
 public class AnuncioController {
@@ -65,37 +67,51 @@ public class AnuncioController {
 
     @GetMapping("/usuario/{id}")
     public ResponseEntity buscarAnunciosUsuario(@PathVariable Integer id) {
-        List<Anuncio> anuncioList = repository.findAllByUsuario(id);
 
-        if(anuncioList.isEmpty()) {
-            return ResponseEntity.noContent().build();
+        if(isLoginStatus()) {
+            List<Anuncio> anuncioList = repository.findAllByUsuario(id);
+
+            if(anuncioList.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            } else {
+                return ResponseEntity.ok(anuncioList);
+            }
         } else {
-            return ResponseEntity.ok(anuncioList);
+            return ResponseEntity.badRequest().build();
         }
     }
 
     @PostMapping
     public ResponseEntity cadastrarAnuncio(@RequestBody Anuncio anuncio) {
-        repository.save(anuncio);
-        return ResponseEntity.created(null).build();
+        if(isLoginStatus()) {
+            repository.save(anuncio);
+            return ResponseEntity.created(null).build();
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PutMapping
     public ResponseEntity alterarAnuncio(@RequestBody Anuncio anuncio) {
 
-        Optional<Anuncio> a = repository.findById(anuncio.getId());
+        if(isLoginStatus()) {
+            Optional<Anuncio> a = repository.findById(anuncio.getId());
 
-        if(a.isPresent()) {
-            Anuncio anuncioNovo = a.get();
-            anuncioNovo.setTitulo(anuncio.getTitulo());
-            anuncioNovo.setValorDiaria(anuncio.getValorDiaria());
-            anuncioNovo.setGaragem(anuncio.getGaragem());
-            anuncioNovo.setTipoVeiculo(anuncio.getTipoVeiculo());
-            repository.save(anuncioNovo);
-            return ResponseEntity.ok().build();
-        } else  {
-            return ResponseEntity.notFound().build();
+            if(a.isPresent()) {
+                Anuncio anuncioNovo = a.get();
+                anuncioNovo.setTitulo(anuncio.getTitulo());
+                anuncioNovo.setValorDiaria(anuncio.getValorDiaria());
+                anuncioNovo.setGaragem(anuncio.getGaragem());
+                anuncioNovo.setTipoVeiculo(anuncio.getTipoVeiculo());
+                repository.save(anuncioNovo);
+                return ResponseEntity.ok().build();
+            } else  {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.badRequest().build();
         }
+
 
     }
 

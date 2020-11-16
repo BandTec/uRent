@@ -24,7 +24,7 @@ public class UsuarioController {
 
     Integer contador = 0;
 
-    private boolean loginStatus = false;
+    private static boolean loginStatus = false;
 
     @GetMapping
     public ResponseEntity getUsuarios() {
@@ -162,6 +162,9 @@ public class UsuarioController {
 
     }
 
+    public static boolean isLoginStatus() {
+        return loginStatus;
+    }
 }
 
 

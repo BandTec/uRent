@@ -10,6 +10,8 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
+import static com.projeto.urent.controller.UsuarioController.isLoginStatus;
+
 @RestController
 @RequestMapping("/garagens")
 @CrossOrigin
@@ -42,19 +44,28 @@ public class GaragemController  {
 
     @GetMapping("/usuario/{id}")
     public ResponseEntity buscarGaragensUsuario(@PathVariable Integer id) {
-        List<Garagem> garagensList = repository.findAllByUsuario(id);
 
-        if(garagensList.isEmpty()) {
-            return ResponseEntity.noContent().build();
+        if(isLoginStatus()) {
+            List<Garagem> garagensList = repository.findAllByUsuario(id);
+
+            if(garagensList.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            } else {
+                return ResponseEntity.ok(garagensList);
+            }
         } else {
-            return ResponseEntity.ok(garagensList);
+            return ResponseEntity.badRequest().build();
         }
     }
 
     @PostMapping
     public ResponseEntity cadastrarGaragem(@RequestBody @Valid Garagem garagem) {
-        repository.save(garagem);
-        return ResponseEntity.created(null).build();
+        if(isLoginStatus()) {
+            repository.save(garagem);
+            return ResponseEntity.created(null).build();
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @DeleteMapping("{id}")

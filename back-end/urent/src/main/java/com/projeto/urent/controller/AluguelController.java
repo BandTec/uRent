@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.projeto.urent.controller.UsuarioController.isLoginStatus;
+
 @RestController
 @RequestMapping("/alugueis")
 public class AluguelController {
@@ -41,23 +43,31 @@ public class AluguelController {
 
     @GetMapping("/locador/{id}")
     public ResponseEntity buscarAlugueisLocador(@PathVariable Integer id) {
-        List<AluguelSimples> aluguelSimplesList = repository.findAllSimplesLocador(id);
+        if(isLoginStatus()) {
+            List<AluguelSimples> aluguelSimplesList = repository.findAllSimplesLocador(id);
 
-        if (aluguelSimplesList.isEmpty()) {
-            return ResponseEntity.noContent().build();
+            if (aluguelSimplesList.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            } else {
+                return ResponseEntity.ok(aluguelSimplesList);
+            }
         } else {
-            return ResponseEntity.ok(aluguelSimplesList);
+            return ResponseEntity.badRequest().build();
         }
     }
 
     @GetMapping("/locatario/{id}")
     public ResponseEntity buscarAlugueisLocatario(@PathVariable Integer id) {
-        List<AluguelSimples> aluguelSimplesList = repository.findAllSimplesLocatario(id);
+        if(isLoginStatus()) {
+            List<AluguelSimples> aluguelSimplesList = repository.findAllSimplesLocatario(id);
 
-        if (aluguelSimplesList.isEmpty()) {
-            return ResponseEntity.noContent().build();
+            if (aluguelSimplesList.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            } else {
+                return ResponseEntity.ok(aluguelSimplesList);
+            }
         } else {
-            return ResponseEntity.ok(aluguelSimplesList);
+            return ResponseEntity.badRequest().build();
         }
     }
 
