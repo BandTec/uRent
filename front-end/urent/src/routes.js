@@ -34,8 +34,8 @@ function Routes() {
                 <Route path="/feed" component={Feed} />
                 <Route path="/alugar" component={Alugar} />
                 <Route path="/perfil" component={Perfil} />
-                <Route path="/detalhesAnuncio" component={DetalhesAnuncio} />
-                <Route path="/finalizarAluguel" component={FinalizarAluguel} />
+                <Route path="/detalhes-anuncio" component={DetalhesAnuncio} />
+                <Route path="/finalizar-aluguel" component={FinalizarAluguel} />
                 <Route path="/reset-senha" component={ResetSenha} />
                 <Route path="/chat" component={Chat} />
             </Switch>
