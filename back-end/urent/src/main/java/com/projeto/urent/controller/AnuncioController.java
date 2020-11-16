@@ -16,7 +16,6 @@ import java.util.Optional;
 @RestController
 @CrossOrigin
 @RequestMapping("/anuncios")
-@CrossOrigin
 public class AnuncioController {
 
     @Autowired

@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import {AiOutlineInfoCircle} from 'react-icons/ai'
+import { FiAlertOctagon } from 'react-icons/fi';
 
 import { Link, useHistory } from 'react-router-dom';
 
@@ -11,7 +12,7 @@ import HeaderCadastro from '../../components/HeaderCadastro/index';
 
 import * as S from '../Cadastros/style.js';
 
-function FormularioAnuncio() {
+function CadastroAnuncio() {
 
 	const [titulo, setTitulo] = useState("");
 	const [valorDiaria, setValorDiaria] = useState("");
@@ -108,7 +109,7 @@ function FormularioAnuncio() {
 					</S.CadastroContent>
 
 					<S.CadastroContent>
-						<S.CadastroLabel2 onClick={cadastrarAnuncio} style={{ color: "#0752DE",border: '1px solid',borderRadius:'15px'
+						<S.CadastroLabel2 style={{ color: "#0752DE",border: '1px solid',borderRadius:'15px'
 							,textAlign:'center', marginTop:'5vh'}}>+ Adicionar nova garagem </S.CadastroLabel2>
 						{/* <S.CadastroInputAddGaragem style={{ width: '94%' }} /> */}
 					</S.CadastroContent>
@@ -141,8 +142,15 @@ function FormularioAnuncio() {
 
 				</S.CadastroContentBox>
 
-
-				<FooterCadastro />
+				
+				<S.Footer>
+					<S.FooterAlert>
+						<FiAlertOctagon color="#8257E5" size="35" style={{ alignSelf: 'flex-start' }} />
+						<S.FooterText>Importante! Preencha todos os dados</S.FooterText>
+					</S.FooterAlert>
+					<S.FooterButton onClick={cadastrarAnuncio}>Salvar Cadastro</S.FooterButton>
+				</S.Footer>
+				
 			</S.CadastroContainer>
 		</S.Cadastro>
 
@@ -150,7 +158,7 @@ function FormularioAnuncio() {
 	)
 }
 
-export default FormularioAnuncio;
+export default CadastroAnuncio;
 
 
 
