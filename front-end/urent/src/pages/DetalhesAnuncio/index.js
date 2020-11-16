@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Map, TileLayer } from 'react-leaflet';
 
+import api from '../../service/api';
+
 import HeaderAnuncio from '../../components/HeaderAnuncio/index';
 import Footer from '../../components/Footer';
 import estrelaApagada from '../../assets/Star 5.png';
@@ -16,6 +18,11 @@ function DetalhesAnuncio() {
 
     const [initialPosition, setInitialPosition] = useState([0, 0]);
 
+    const [anuncio, setAnuncio] = useState({});
+    const [garagem, setGaragem] = useState({});
+    const [endereco, setEndereco] = useState({});
+    const [tipoVeiculo, setTipoVeiculo] = useState({});
+
     useEffect(() => {
         navigator.geolocation.getCurrentPosition((position) => {
             const { latitude, longitude } = position.coords;
@@ -23,12 +30,48 @@ function DetalhesAnuncio() {
         });
     }, [])
 
+    useEffect(() => {
+
+        api.get(`/anuncios/${1}`)
+            .then(response => {
+                setAnuncio(response.data);
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+        api.get(`/garagens/${1}`)
+            .then(response => {
+                setGaragem(response.data);
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+        api.get(`/tipo-veiculos/${3}`)
+            .then(response => {
+                setTipoVeiculo(response.data);
+                console.log("Chegou aqui")
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+        api.get(`https://viacep.com.br/ws/01001000/json/`)
+            .then(response => {
+                setEndereco(response.data);
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }, [])
+
     return (
         <div>
             <HeaderAnuncio />
 
             <S.ContentAvaliacoesAnuncio>
-                <S.MediaAnuncio>6.0</S.MediaAnuncio>
+                <S.MediaAnuncio>{garagem.avaliacao}.0</S.MediaAnuncio>
                 <S.StarsAvaliacao>
                     <S.ContentStars><S.Stars src={estrelaLigada}></S.Stars></S.ContentStars>
                     <S.ContentStars><S.Stars src={estrelaLigada}></S.Stars></S.ContentStars>
@@ -40,18 +83,16 @@ function DetalhesAnuncio() {
             </S.ContentAvaliacoesAnuncio>
 
             <S.AnuncioContainer>
-                <S.TittleAnuncio>Garagem disponível para aluguel diário</S.TittleAnuncio>
+                <S.TittleAnuncio>{anuncio.titulo}</S.TittleAnuncio>
                 <S.ContentInfoAnuncio>
                     <S.DivisionInfo>
                         <S.SectionInfo style={{ display: "flex" }}>
                             <S.ContentImageAnuncio src={foto} />
                         </S.SectionInfo>
                         <S.SectionInfo style={{ display: "block" }}>
-                            <S.TittleLineInfo>Descrição</S.TittleLineInfo>
+                            <S.TittleLineInfo>Complemento</S.TittleLineInfo>
                             <S.ContentLineInfo>
-                                <S.ParagrafoInfo>Garagem coberta;</S.ParagrafoInfo>
-                                <S.ParagrafoInfo>Sobrado;</S.ParagrafoInfo>
-                                <S.ParagrafoInfo>Casa com a parede verde;</S.ParagrafoInfo>
+                                <S.ParagrafoInfo>{endereco.complemento};</S.ParagrafoInfo>
                             </S.ContentLineInfo>
                         </S.SectionInfo>
                     </S.DivisionInfo>
@@ -60,12 +101,13 @@ function DetalhesAnuncio() {
                         <S.SectionInfo style={{ display: "block" }}>
                             <S.TittleLineInfo>Informações</S.TittleLineInfo>
                             <S.ContentLineInfo>
-                                <S.ParagrafoBInfo>Rua:</S.ParagrafoBInfo> Joâo Miguel
-                            <S.ParagrafoBInfo>Número:</S.ParagrafoBInfo> 239
-                            <S.ParagrafoBInfo>CEP:</S.ParagrafoBInfo> 39032-432
-                            <S.ParagrafoBInfo>Bairro:</S.ParagrafoBInfo> Santana.
-                            <S.ParagrafoBInfo>Cidade:</S.ParagrafoBInfo> São Paulo
-                            <S.ParagrafoBInfo style={{ marginTop: "10px" }}>Tipo de garagem:</S.ParagrafoBInfo> Carros
+                                <S.ParagrafoBInfo>Rua:</S.ParagrafoBInfo> {endereco.logradouro}
+                                <S.ParagrafoBInfo>Número:</S.ParagrafoBInfo> {garagem.numero}
+                                <S.ParagrafoBInfo>CEP:</S.ParagrafoBInfo> {garagem.cep}
+                                <S.ParagrafoBInfo>Bairro:</S.ParagrafoBInfo> {endereco.bairro}
+                                <S.ParagrafoBInfo>Cidade:</S.ParagrafoBInfo> {endereco.localidade} - {endereco.uf}
+                                <S.ParagrafoBInfo style={{ marginTop: "10px" }}>
+                                    Tipo de garagem:</S.ParagrafoBInfo>{tipoVeiculo.tipo}
                             </S.ContentLineInfo>
                         </S.SectionInfo>
                         <S.SectionInfo style={{ display: "block" }}>
@@ -75,7 +117,7 @@ function DetalhesAnuncio() {
                                         Preço Diário:
                                 </S.AvaliacaoAnuncio>
                                     <S.AvaliacaoAnuncio style={{ fontSize: "30px", color: "#0752DE" }}>
-                                        R$ 15,00
+                                        R$ {anuncio.valorDiaria},00
                                 </S.AvaliacaoAnuncio>
                                 </div>
                                 <S.TittleBuy style={{ width: "100%", marginLeft: "0" }}>Contate o anunciante:</S.TittleBuy>
@@ -95,7 +137,7 @@ function DetalhesAnuncio() {
             </S.AnuncioContainer>
 
             <S.Section>
-                <S.SectionTitle>Localização</S.SectionTitle>
+                <S.SectionTitle>Localização aproximada da vaga</S.SectionTitle>
 
                 <div className="leaflet-container">
                     <Map center={initialPosition} zoom={25} >
@@ -137,7 +179,7 @@ function DetalhesAnuncio() {
                     Messagem do comentario..
                 </S.ContainerCommentUser>
             </S.ContentComment>
-
+            {/* <button onClick={}>aaa</button> */}
             <Footer />
         </div>
     )

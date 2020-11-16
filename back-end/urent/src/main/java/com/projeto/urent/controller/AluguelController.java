@@ -18,6 +18,7 @@ import java.util.List;
 import static com.projeto.urent.controller.UsuarioController.isLoginStatus;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/alugueis")
 public class AluguelController {
 

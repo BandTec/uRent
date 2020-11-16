@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/tipo-veiculos")
 @CrossOrigin
 public class TipoVeiculoController {

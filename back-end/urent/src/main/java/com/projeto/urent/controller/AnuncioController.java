@@ -5,7 +5,6 @@ import com.projeto.urent.Iterator;
 import com.projeto.urent.ListAnuncio;
 import com.projeto.urent.dominios.Anuncio;
 import com.projeto.urent.repositorios.AnuncioRepository;
-import org.springframework.aop.config.AopNamespaceUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,9 @@ import java.util.Optional;
 import static com.projeto.urent.controller.UsuarioController.isLoginStatus;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/anuncios")
+@CrossOrigin
 public class AnuncioController {
 
     @Autowired
