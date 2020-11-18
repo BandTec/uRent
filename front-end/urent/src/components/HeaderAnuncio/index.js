@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import api from '../../service/api';
 import { HiOutlineUser } from 'react-icons/hi';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
@@ -8,6 +9,20 @@ import * as S from './style';
 import logo from '../../assets/logo.svg';
 
 function HeaderAnuncio() {
+    const history = useHistory();
+    function logoff(){
+        api.post(`/usuarios/logoff`, {
+			
+		})
+			.then(response => {
+				sessionStorage.setItem("id", response.data.id);
+				history.push('/');
+			})
+			.catch(error => {
+				console.log(error)
+				alert('Erro');
+			})
+    }
     return (
         <S.Header>
 
@@ -19,7 +34,7 @@ function HeaderAnuncio() {
                 <Link to="/cadastro">
                     <S.ButtonLight>Anuncie</S.ButtonLight>
                 </Link>
-                <S.ButtonBlue>Sair</S.ButtonBlue>
+                <S.ButtonBlue onClick={logoff}>Sair</S.ButtonBlue>
                 <S.ButtonMenu>
                     <HiOutlineUser size="25" color="#0752DE" />
                     <GiHamburgerMenu size="25" color="#0752DE" />
