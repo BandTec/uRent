@@ -18,7 +18,6 @@ import static com.projeto.urent.controller.UsuarioController.isLoginStatus;
 @RestController
 @CrossOrigin
 @RequestMapping("/anuncios")
-@CrossOrigin
 public class AnuncioController {
 
     @Autowired
@@ -80,6 +79,18 @@ public class AnuncioController {
         } else {
             return ResponseEntity.badRequest().build();
         }
+    }
+
+    @GetMapping("/feed")
+    public ResponseEntity buscarFeed() {
+        return ResponseEntity.ok(repository.findFeed());
+    }
+
+    @GetMapping("/latitude-longitude")
+    public ResponseEntity buscarLatitudeLongitude() {
+
+        return ResponseEntity.ok(repository.findLatLong());
+
     }
 
     @PostMapping
