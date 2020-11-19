@@ -13,17 +13,24 @@ function FiltroBusca() {
 			<S.Fitlro>
 				<S.FiltroSection style={{ borderRight: '2px solid #CCCCCC' }}>
 					<S.FiltroSectionTitle>Localização</S.FiltroSectionTitle>
-					<S.FiltroSectionText>Perto de você <TiArrowSortedDown onClick={() => { open ? setOpen(false) : setOpen(true) }} /></S.FiltroSectionText>
+					<div style={{ cursor: 'pointer' }} onClick={() => { open ? setOpen(false) : setOpen(true) }}>
+						<S.FiltroSectionText>Perto de você <TiArrowSortedDown /></S.FiltroSectionText>
+					</div>
 				</S.FiltroSection>
 
 				<S.FiltroSection style={{ borderRight: '2px solid #CCCCCC' }}>
 					<S.FiltroSectionTitle>Garagem</S.FiltroSectionTitle>
-					<S.FiltroSectionText>Selecione o tipo <TiArrowSortedDown onClick={() => { open ? setOpen(false) : setOpen(true) }} /></S.FiltroSectionText>
+					<div style={{ cursor: 'pointer' }} onClick={() => { open ? setOpen(false) : setOpen(true) }}>
+						<S.FiltroSectionText>Selecione o tipo <TiArrowSortedDown onClick={() => { open ? setOpen(false) : setOpen(true) }} /></S.FiltroSectionText>
+					</div>
+
 				</S.FiltroSection>
 
 				<S.FiltroSection>
 					<S.FiltroSectionTitle>Dias</S.FiltroSectionTitle>
-					<S.FiltroSectionText>Selecione os dias <TiArrowSortedDown onClick={() => { open ? setOpen(false) : setOpen(true) }} /></S.FiltroSectionText>
+					<div style={{ cursor: 'pointer' }} onClick={() => { open ? setOpen(false) : setOpen(true) }}>
+						<S.FiltroSectionText>Selecione os dias <TiArrowSortedDown onClick={() => { open ? setOpen(false) : setOpen(true) }} /></S.FiltroSectionText>
+					</div>
 				</S.FiltroSection>
 
 
@@ -45,14 +52,14 @@ function Teste() {
 
 				<div>
 					<S.FiltroLabelOpen>Estado</S.FiltroLabelOpen>
-					<S.FilterInputOpen />
+					<S.FilterInputOpen style={{ cursor: 'pointer' }} />
 				</div>
 
 				<div>
 					<S.FiltroLabelOpen>Cidade</S.FiltroLabelOpen>
 					<S.FilterInputOpen />
 				</div>
-				
+
 				<div>
 					<S.FiltroLabelOpen>Bairro</S.FiltroLabelOpen>
 					<S.FilterInputOpen />
@@ -62,10 +69,10 @@ function Teste() {
 
 			<S.FiltroSection>
 
-					<S.FilterTipoVeiculo style={{ backgroundColor: '#F1F1F1' }}>Moto (Pequena)</S.FilterTipoVeiculo>
-					<S.FilterTipoVeiculo>Carro (Média)</S.FilterTipoVeiculo>
-					<S.FilterTipoVeiculo style={{ backgroundColor: '#F1F1F1' }}>Carro (Grande)</S.FilterTipoVeiculo>
-					<S.FilterTipoVeiculo>Caminhão (Extra Grande)</S.FilterTipoVeiculo>
+				<S.FilterTipoVeiculo style={{ backgroundColor: '#F1F1F1' }}>Moto (Pequena)</S.FilterTipoVeiculo>
+				<S.FilterTipoVeiculo>Carro (Média)</S.FilterTipoVeiculo>
+				<S.FilterTipoVeiculo style={{ backgroundColor: '#F1F1F1' }}>Carro (Grande)</S.FilterTipoVeiculo>
+				<S.FilterTipoVeiculo>Caminhão (Extra Grande)</S.FilterTipoVeiculo>
 
 			</S.FiltroSection>
 
