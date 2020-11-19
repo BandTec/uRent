@@ -1,17 +1,17 @@
-import React, { useState,useEffect } from 'react';
-import {AiOutlineInfoCircle} from 'react-icons/ai'
+import React, { useState, useEffect } from 'react';
+import { AiOutlineInfoCircle } from 'react-icons/ai'
+import { FiAlertOctagon } from 'react-icons/fi';
 
 import { Link, useHistory } from 'react-router-dom';
 
 import api from '../../service/api';
 
-import FooterCadastro from '../../components/FooterCadastro/index';
 import HeaderCadastro from '../../components/HeaderCadastro/index';
 
 
 import * as S from '../Cadastros/style.js';
 
-function FormularioAnuncio() {
+function CadastroAnuncio() {
 
 	const [titulo, setTitulo] = useState("");
 	const [valorDiaria, setValorDiaria] = useState("");
@@ -24,32 +24,32 @@ function FormularioAnuncio() {
 
 	useEffect(() => {
 
-        const id = sessionStorage.getItem("id");
+		const id = sessionStorage.getItem("id");
 
-        if (id == null) {
+		if (id == null) {
 
-            history.push('/login')
-        }
+			history.push('/login')
+		}
 
 		api.get(`/garagens/usuario/${id}`)
-		.then(response=>{
-			setGaragensUsuarios(response.data)
-		})
-		.catch(error=>{
-			console.log(error)
-		})
+			.then(response => {
+				setGaragensUsuarios(response.data)
+			})
+			.catch(error => {
+				console.log(error)
+			})
 
 
 		api.get(`/tipo-veiculos`)
-		.then(response=>{
-			setTipoVeiculoUsuarios(response.data)
-		})
-		.catch(error=>{
-			console.log(error)
-		})
-		
+			.then(response => {
+				setTipoVeiculoUsuarios(response.data)
+			})
+			.catch(error => {
+				console.log(error)
+			})
 
-    }, [])
+
+	}, [])
 
 	function cadastrarAnuncio() {
 
@@ -57,14 +57,14 @@ function FormularioAnuncio() {
 
 			"titulo": titulo,
 			"valorDiaria": valorDiaria,
-			"tipoVeiculo": tipoVeiculoUsuarios[tipoVeiculo-1],
-			"garagem": garagensUsuarios[garagem-1]
+			"tipoVeiculo": tipoVeiculoUsuarios[tipoVeiculo - 1].id,
+			"garagem": garagensUsuarios[garagem - 1]
 
 		})
 			.then(response => {
 				alert("Anuncio Cadastrado!");
-				console.log(titulo,valorDiaria)
-				history.post('/meus-anuncios');
+				console.log(titulo, valorDiaria)
+				history.push('/meus-anuncios');
 			})
 			.catch(error => {
 				alert("Não cadastrou!");
@@ -72,7 +72,7 @@ function FormularioAnuncio() {
 			})
 	}
 
-	
+
 
 	return (
 
@@ -92,24 +92,26 @@ function FormularioAnuncio() {
 
 					<S.CadastroContent>
 						<div>
-						<S.CadastroLabel style={{marginRight:'6px'}}>Seleciona a garagem</S.CadastroLabel>
-						<AiOutlineInfoCircle color='#9C98A6' size='20'/>
+							<S.CadastroLabel style={{ marginRight: '6px' }}>Seleciona a garagem</S.CadastroLabel>
+							<AiOutlineInfoCircle color='#9C98A6' size='20' />
 						</div>
 						<S.CadastroSelect title="Selecionar a garagem" onChange={e => setGaragem(e.target.value)} >
 
 							<option value=""></option>
 							{
-								garagensUsuarios.map(garagem=>
+								garagensUsuarios.map(garagem =>
 									<option value={garagem.id}>{garagem.cep}</option>
-									)
+								)
 							}
 						</S.CadastroSelect>
 
 					</S.CadastroContent>
 
 					<S.CadastroContent>
-						<S.CadastroLabel2 onClick={cadastrarAnuncio} style={{ color: "#0752DE",border: '1px solid',borderRadius:'15px'
-							,textAlign:'center', marginTop:'5vh'}}>+ Adicionar nova garagem </S.CadastroLabel2>
+						<S.CadastroLabel2 style={{
+							color: "#0752DE", border: '1px solid', borderRadius: '15px'
+							, textAlign: 'center', marginTop: '5vh'
+						}}>+ Adicionar nova garagem </S.CadastroLabel2>
 						{/* <S.CadastroInputAddGaragem style={{ width: '94%' }} /> */}
 					</S.CadastroContent>
 
@@ -119,16 +121,16 @@ function FormularioAnuncio() {
 
 					<S.CadastroContent>
 						<div>
-						<S.CadastroLabel style={{marginRight:'6px'}}>Tipo de veículo</S.CadastroLabel>
-						<AiOutlineInfoCircle color='#9C98A6' size='20'/>
+							<S.CadastroLabel style={{ marginRight: '6px' }}>Tipo de veículo</S.CadastroLabel>
+							<AiOutlineInfoCircle color='#9C98A6' size='20' />
 						</div>
-					<S.CadastroSelect title="Tipo de veiculo" onChange={e => setTipoVeiculo(e.target.value)}>
+						<S.CadastroSelect title="Tipo de veiculo" onChange={e => setTipoVeiculo(e.target.value)}>
 
 							<option value=""></option>
 							{
-								tipoVeiculoUsuarios.map(tipoVeiculo=>
+								tipoVeiculoUsuarios.map(tipoVeiculo =>
 									<option value={tipoVeiculo.id}>{tipoVeiculo.tipo}</option>
-									)
+								)
 							}
 						</S.CadastroSelect>
 
@@ -142,7 +144,14 @@ function FormularioAnuncio() {
 				</S.CadastroContentBox>
 
 
-				<FooterCadastro />
+				<S.Footer>
+					<S.FooterAlert>
+						<FiAlertOctagon color="#8257E5" size="35" style={{ alignSelf: 'flex-start' }} />
+						<S.FooterText>Importante! Preencha todos os dados</S.FooterText>
+					</S.FooterAlert>
+					<S.FooterButton onClick={cadastrarAnuncio}>Salvar Cadastro</S.FooterButton>
+				</S.Footer>
+
 			</S.CadastroContainer>
 		</S.Cadastro>
 
@@ -150,7 +159,7 @@ function FormularioAnuncio() {
 	)
 }
 
-export default FormularioAnuncio;
+export default CadastroAnuncio;
 
 
 

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 
+import api from '../../service/api';
+
 import HeaderAnuncio from '../../components/HeaderAnuncio/index';
 import Footer from '../../components/Footer';
 import foto from '../../assets/garagemExemplo.png';
@@ -9,6 +11,41 @@ import foto from '../../assets/garagemExemplo.png';
 import * as S from './style';
 
 function FinalizarAluguel() {
+
+    const [anuncio, setAnuncio] = useState({});
+    const [garagem, setGaragem] = useState({});
+    const [endereco, setEndereco] = useState({});
+    const [tipoVeiculo, setTipoVeiculo] = useState({});
+
+    useEffect(() => {
+
+        api.get(`/anuncios/${6}`)
+            .then(response => {
+                setAnuncio(response.data);
+                setGaragem(response.data.garagem)
+
+                api.get(`/tipo-veiculos/${response.data.tipoVeiculo}`)
+                    .then(response => {
+                        setTipoVeiculo(response.data);
+                        console.log("Chegou aqui")
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+                // ${response.data.garagem.cep}
+                api.get(`https://viacep.com.br/ws/06401160/json/`)
+                    .then(response => {
+                        setEndereco(response.data);
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+    }, [])
 
     return (
         <div>
@@ -23,7 +60,7 @@ function FinalizarAluguel() {
             </S.Header>
 
             <S.AnuncioContainer>
-                <S.TittleAnuncio>Garagem disponível para aluguel diário</S.TittleAnuncio>
+                <S.TittleAnuncio>{anuncio.titulo}</S.TittleAnuncio>
                 <S.ContentInfoAnuncio>
                     <S.DivisionInfo>
                         <S.SectionInfo style={{ display: "flex" }}>
@@ -35,33 +72,31 @@ function FinalizarAluguel() {
                         <S.SectionInfo style={{ display: "block" }}>
                             <S.TittleLineInfo>Endereço</S.TittleLineInfo>
                             <S.ContentLineInfo>
-                                <S.ParagrafoBInfo>Rua:</S.ParagrafoBInfo> Joâo Miguel
-                            <S.ParagrafoBInfo>Número:</S.ParagrafoBInfo> 239
-                            <S.ParagrafoBInfo>CEP:</S.ParagrafoBInfo> 39032-432
-                            <S.ParagrafoBInfo>Bairro:</S.ParagrafoBInfo> Santana.
-                            <S.ParagrafoBInfo>Cidade:</S.ParagrafoBInfo> São Paulo
+                                <S.ParagrafoBInfo>Rua:</S.ParagrafoBInfo> {endereco.logradouro}
+                                <S.ParagrafoBInfo>Número:</S.ParagrafoBInfo> {garagem.numero}
+                                <S.ParagrafoBInfo>CEP:</S.ParagrafoBInfo> {garagem.cep}
+                                <S.ParagrafoBInfo>Bairro:</S.ParagrafoBInfo> {endereco.bairro}
+                                <S.ParagrafoBInfo>Cidade:</S.ParagrafoBInfo> {endereco.localidade} - {endereco.uf}
                             </S.ContentLineInfo>
                         </S.SectionInfo>
                         <S.SectionInfo style={{ display: "block" }}>
                             <S.TittleLineInfo>Tipo de garagem</S.TittleLineInfo>
                             <S.ContentLineInfo>
-                                <S.ParagrafoBInfo style={{ marginTop: "10px" }}>Tamanho:</S.ParagrafoBInfo> médio
-                            <S.ParagrafoBInfo style={{ marginTop: "10px" }}>Veiculo:</S.ParagrafoBInfo> carro
+                                <S.ParagrafoBInfo style={{ marginTop: "10px" }}>Tamanho:</S.ParagrafoBInfo>médio
+                            <S.ParagrafoBInfo style={{ marginTop: "10px" }}>Veiculo:</S.ParagrafoBInfo> {tipoVeiculo.tipo}
                             </S.ContentLineInfo>
                         </S.SectionInfo>
                     </S.DivisionInfo>
                 </S.ContentInfoAnuncio>
                 <S.SectionInfo style={{ display: "block" }}>
-                    <S.TittleLineInfo>Descrição</S.TittleLineInfo>
+                    <S.TittleLineInfo>Complemento</S.TittleLineInfo>
                     <S.ContentLineInfo>
-                        <S.ParagrafoInfo>Garagem coberta;</S.ParagrafoInfo>
-                        <S.ParagrafoInfo>Sobrado;</S.ParagrafoInfo>
-                        <S.ParagrafoInfo>Casa com a parede verde;</S.ParagrafoInfo>
+                        <S.ParagrafoInfo>{endereco.complemento};</S.ParagrafoInfo>
                     </S.ContentLineInfo>
                 </S.SectionInfo>
 
                 <S.AnuncioContainerFooter>
-                    <S.TittleLineInfo>Descrição</S.TittleLineInfo>
+                    <S.TittleLineInfo>Concluir</S.TittleLineInfo>
                     <S.ContentItensFooter>
 
                         <S.ContentFooter>
@@ -86,7 +121,6 @@ function FinalizarAluguel() {
                     </S.ContentItensFooter>
                 </S.AnuncioContainerFooter>
             </S.AnuncioContainer>
-
 
             <Footer />
         </div>
