@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Map, TileLayer } from 'react-leaflet';
+import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+
+import api from '../../service/api';
 
 import HeaderAnuncio from '../../components/HeaderAnuncio/index';
 import FiltroBusca from '../../components/FiltroBusca/index';
@@ -9,16 +11,22 @@ import './style.css';
 
 import * as S from './style';
 
-
 function Alugar() {
 
   const [initialPosition, setInitialPosition] = useState([0, 0]);
+  const [enderecos, setEnderecos] = useState([]);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
       setInitialPosition([latitude, longitude])
     });
+
+    api.get('/anuncios/latitude-longitude')
+      .then(response => {
+        setEnderecos(response.data)
+      })
+
   }, [])
 
 
@@ -36,6 +44,15 @@ function Alugar() {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
+
+            {
+              enderecos.map(endereco =>
+                <Marker position={[-23.4012162,-46.4080751]}>
+                  <Popup>
+                    {endereco.valorDiaria}
+                  </Popup>
+                </Marker>
+              )}
           </Map>
         </div>
       </S.Section>
