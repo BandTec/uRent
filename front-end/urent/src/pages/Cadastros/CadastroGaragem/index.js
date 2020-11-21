@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import InputMask from 'react-input-mask';
+import CepCoords from 'coordenadas-do-cep';
 import { useHistory } from 'react-router-dom';
 import { FiAlertOctagon } from 'react-icons/fi';
 
@@ -20,10 +21,10 @@ function CadastroGaragem() {
 
 	useEffect(() => {
 
-		api.get(`usuario/status`)
-		.catch(() => {
-			history.push('/login')
-		})
+		api.get(`usuarios/status`)
+			.catch(() => {
+				history.push('/login')
+			})
 
 		const id = sessionStorage.getItem("id");
 
@@ -39,22 +40,27 @@ function CadastroGaragem() {
 
 	function cadastro() {
 
-		api.post('garagens', {
-			"cep": cep,
-			"numero": numero,
-			"latitude": "123456789",
-			"longitude": "987456321",
-			"avaliacao": 2,
-			"usuario": usuario
-		})
+		CepCoords.getByCep(cep)
 			.then(response => {
-				alert('Deu bom');
-				console.log(response);
+				api.post('garagens', {
+					"cep": cep,
+					"numero": numero,
+					"latitude": response.lat,
+					"longitude": response.lon,
+					"avaliacao": '',
+					"usuario": usuario
+				})
+					.then(response => {
+						alert('Cadastro realizado com sucesso');
+						history.push('/feed')
+					})
+					.catch(error => {
+						alert('Erro ao realizar cadastro');
+						console.log(error);
+					})
+
 			})
-			.catch(error => {
-				alert('Deu Ruim');
-				console.log(error);
-			})
+			.catch(error => console.log(error))
 	}
 
 	return (
