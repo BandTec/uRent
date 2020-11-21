@@ -14,6 +14,7 @@ import static com.projeto.urent.controller.UsuarioController.isLoginStatus;
 
 @RestController
 @RequestMapping ("/veiculos")
+@CrossOrigin
 public class VeiculoController {
 
     @Autowired
