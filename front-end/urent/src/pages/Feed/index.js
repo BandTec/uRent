@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { IoIosStar } from 'react-icons/io';
 
 import HeaderAnuncio from '../../components/HeaderAnuncio/index';
@@ -16,6 +17,8 @@ function Feed() {
   const [anuncios, setAnuncios] = useState([]);
   const [endereco, setEndereco] = useState(['rua']);
   let logradouros = [];
+
+  const history = useHistory();
 
   // logradouros.push('Rua Zeze')
 
@@ -45,17 +48,17 @@ function Feed() {
     // )
   }, [anuncios])
 
-  console.log(endereco);
+  // console.log(endereco);
 
   return (
     <div>
-      <HeaderAnuncio />
+      <HeaderAnuncio cadastro="/cadastro-anuncio" />
       <FiltroBusca />
 
       <div>
         {
           anuncios.map(anuncio =>
-            <S.FeedContainer key={anuncio.id}>
+            <S.FeedContainer key={anuncio.id} onClick={() => {history.push('/detalhes-anuncio'); sessionStorage.setItem('anuncio', anuncio.id)}}>
               <S.FeedTitle>{anuncio.titulo}</S.FeedTitle>
               <S.FeedSection>
 
