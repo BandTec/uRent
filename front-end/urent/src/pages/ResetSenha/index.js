@@ -49,11 +49,11 @@ function ResetSenha() {
                         </S.FormData>
                         <S.FormData>
                             <FaKey style={{ position: 'absolute', left: '3%' }} size='25' color='#FFFFFF' />
-                            <S.FormInput placeholder="Nova senha" placeholderTextColor='red' onChange={e => setSenha(e.target.value)} />
+                            <S.FormInput type="password" placeholder="Nova senha" placeholderTextColor='red' onChange={e => setSenha(e.target.value)} />
                         </S.FormData>
                         <S.FormData>
                             <FaKey style={{ position: 'absolute', left: '3%' }} size='25' color='#FFFFFF' />
-                            <S.FormInput placeholder="Confirme nova senha" placeholderTextColor='red' />
+                            <S.FormInput type="password" placeholder="Confirme nova senha" placeholderTextColor='red' />
                         </S.FormData>
 
                         <S.ButtonEntrar onClick={alterarSenha}>Atualizar senha</S.ButtonEntrar>

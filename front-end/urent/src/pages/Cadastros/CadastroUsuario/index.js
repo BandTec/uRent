@@ -34,9 +34,7 @@ function CadastroUsuario() {
 			"cnh": cnh,
 			"cep": cep,
 			"email": email,
-			"senha": senha,
-			"avaliacao": 5.0
-
+			"senha": senha
 		})
 			.then(response => {
 				alert("Usuario Cadastrado!");
@@ -117,7 +115,7 @@ function CadastroUsuario() {
 
 				<div style={{ width: '48%' }}>
 					<S.CadastroLabel>Senha</S.CadastroLabel>
-					<S.CadastroInput onChange={e => setSenha(e.target.value)} />
+					<S.CadastroInput type="password" onChange={e => setSenha(e.target.value)} />
 				</div>
 
 				<S.Footer>
