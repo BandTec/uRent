@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import { Link } from 'react-router-dom';
 import { TiArrowSortedDown } from 'react-icons/ti';
 
 import * as S from './style';
@@ -14,7 +15,7 @@ function FiltroBusca() {
 				<S.FiltroSection style={{ borderRight: '2px solid #CCCCCC' }}>
 					<S.FiltroSectionTitle>Localização</S.FiltroSectionTitle>
 					<div style={{ cursor: 'pointer' }} onClick={() => { open ? setOpen(false) : setOpen(true) }}>
-						<S.FiltroSectionText>Perto de você <TiArrowSortedDown /></S.FiltroSectionText>
+						<S.FiltroSectionText>Escolha <TiArrowSortedDown /></S.FiltroSectionText>
 					</div>
 				</S.FiltroSection>
 
@@ -32,9 +33,17 @@ function FiltroBusca() {
 						<S.FiltroSectionText>Selecione os dias <TiArrowSortedDown onClick={() => { open ? setOpen(false) : setOpen(true) }} /></S.FiltroSectionText>
 					</div>
 				</S.FiltroSection>
-
-
 			</S.Fitlro>
+
+			<S.Switch>
+				<S.Escolha style={{ borderRight: '2px solid #CCCCCC' }}>
+					<Link to="/alugar" style={{ textDecoration: 'none', color: '#000', width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}><span>Perto de você</span></Link>
+				</S.Escolha>
+
+				<S.Escolha>
+					<Link to="/feed" style={{ textDecoration: 'none', color: '#000', width: '100%', height: '100%',display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Veja todas</Link>
+				</S.Escolha>
+			</S.Switch>
 
 			{
 				open && <Teste></Teste>

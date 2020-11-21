@@ -63,3 +63,22 @@ export const FilterTipoVeiculo = style.label`
     display: flex;
     align-items: center;
 `;
+
+export const Switch = style.div`
+    // background-color: red;
+    border: 1px solid #C4C4C4;
+    border-radius: 15px;
+    width: 30%;
+    height: 5vh;
+    margin: 30px auto 0 auto;
+    display: flex;
+`;
+
+export const Escolha = style.div`
+    // background-color: green;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
