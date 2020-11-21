@@ -103,3 +103,14 @@ export const Button = style.button`
     
 
 `;
+
+export const ButtonCadastro = style.button`
+
+    width: 150px;
+    height: 25px;
+    color: #0752DE;
+    background-color: #ffffff;
+    border: 1px solid #0752DE;
+    border-radius: 15px;
+
+`;

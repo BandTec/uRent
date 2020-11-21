@@ -112,6 +112,16 @@ function FormularioPerfil() {
                                     <img src={estrelaApagada} alt="Estrela apagada" ></img>
                                 </S.BoxPerfilStars>
 
+                                <div style={{ width: '150px', height: '60px', margin: '20px auto', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                                    <Link to="/cadastro-garagem">
+                                        <S.ButtonCadastro>Cadastrar Garagem</S.ButtonCadastro>
+                                    </Link>
+
+                                    <Link to="/cadastro-veiculo">
+                                        <S.ButtonCadastro>Cadastrar Veículo</S.ButtonCadastro>
+                                    </Link>
+                                </div>
+
                             </S.BoxContentDados>
 
                         </S.ContainerPerfil>
