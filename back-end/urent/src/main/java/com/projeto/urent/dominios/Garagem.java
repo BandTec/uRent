@@ -24,11 +24,11 @@ public class Garagem {
     private String numero;
 
     @NotNull
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false, length = 20)
     private String latitude;
 
     @NotNull
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false, length = 20)
     private String longitude;
 
     private Double avaliacao;
