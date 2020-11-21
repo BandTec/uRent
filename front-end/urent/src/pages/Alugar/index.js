@@ -47,7 +47,7 @@ function Alugar() {
 
             {
               enderecos.map(endereco =>
-                <Marker position={[-23.4012162,-46.4080751]}>
+                <Marker position={[endereco.latitude, endereco.longitude]}>
                   <Popup>
                     {endereco.valorDiaria}
                   </Popup>
