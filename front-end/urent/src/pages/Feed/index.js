@@ -23,9 +23,15 @@ function Feed() {
   // logradouros.push('Rua Zeze')
 
   useEffect(() => {
+
+    api.get(`usuarios/status`)
+			.catch(() => {
+				history.push('/login')
+			})
+
     api.get('/anuncios/feed')
       .then((response) => {
-        // console.log(response.data)
+        console.log(response.data)
         setAnuncios(response.data);
       })
       .catch((error) => {
@@ -65,7 +71,7 @@ function Feed() {
                 <div>
                   <img src={foto} height="250px" alt="Foto do anúncio" />
                   <S.FeedSection>
-                    <label style={{ fontWeight: '500' }}>6.0</label>
+                    <label style={{ fontWeight: '500' }}>{anuncio.avaliacao}</label>
                     <div>
                       <IoIosStar size="20" color="#FDF53B" />
                       <IoIosStar size="20" color="#FDF53B" />
@@ -83,10 +89,7 @@ function Feed() {
 
                     <S.SectionTitle>Endereço:
 											<S.SectionData>
-                        {
-                          endereco.logradouros.map(logradouro =>
-                          console.log(logradouro + " teste")
-                          )}
+                        {}
                       </S.SectionData>
                     </S.SectionTitle>
                     <S.SectionTitle>Nº: <S.SectionData>{anuncio.numero}</S.SectionData></S.SectionTitle> <S.SectionTitle>CEP: <S.SectionData>{anuncio.cep}</S.SectionData></S.SectionTitle>
@@ -94,7 +97,7 @@ function Feed() {
 
                   </S.FeedContentSection>
                   <S.SectionTitle>Tipo de Garagem: <S.SectionData>{anuncio.tipo}</S.SectionData></S.SectionTitle>
-                  <S.SectionPreco style={{ alignSelf: 'center' }}>Preço diário: <S.SectionData>{anuncio.valorDiaria}</S.SectionData></S.SectionPreco>
+                  <S.SectionPreco style={{ alignSelf: 'center' }}>Preço diário: <S.SectionData>R${anuncio.valorDiaria}</S.SectionData></S.SectionPreco>
 
                 </S.FeedContent>
 

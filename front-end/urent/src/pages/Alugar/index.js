@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import {useHistory} from 'react-router-dom';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 
 import api from '../../service/api';
@@ -16,7 +17,15 @@ function Alugar() {
   const [initialPosition, setInitialPosition] = useState([0, 0]);
   const [enderecos, setEnderecos] = useState([]);
 
+  const history = useHistory();
+
   useEffect(() => {
+
+    api.get(`usuarios/status`)
+			.catch(() => {
+				history.push('/login')
+			})
+
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
       setInitialPosition([latitude, longitude])
@@ -48,9 +57,7 @@ function Alugar() {
             {
               enderecos.map(endereco =>
                 <Marker position={[endereco.latitude, endereco.longitude]}>
-                  <Popup>
-                    {endereco.valorDiaria}
-                  </Popup>
+                  <Popup>R${endereco.valorDiaria}</Popup>
                 </Marker>
               )}
           </Map>

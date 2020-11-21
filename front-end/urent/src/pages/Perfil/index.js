@@ -21,6 +21,11 @@ function FormularioPerfil() {
 
     useEffect(() => {
 
+        api.get(`usuarios/status`)
+			.catch(() => {
+				history.push('/login')
+			})
+
         const id = sessionStorage.getItem("id");
 
         if (id == null) {
