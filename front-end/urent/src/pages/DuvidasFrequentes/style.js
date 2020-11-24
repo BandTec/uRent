@@ -42,13 +42,12 @@ export const FormPerguntas = style.div`
 `;
 
 export const FormTitle = style.p`
-    height: 30px;
-    margin-bottom: 25px;
+    height: 35px;
     background-color: white;
     margin: 10px;
-    padding-top: 5px;
+    padding: 5px;
     border: 1px solid #6A6363;
     border-radius: 4px;
     text-align: center;
-
+    cursor: pointer;
 `;
