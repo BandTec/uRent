@@ -73,6 +73,29 @@ export const BoxPaiInfo = style.div`
     backgroud-color: pink;
     
 `;
+
+
+export const ButtonHeader = style.button`
+    float: left;
+    background-color: #2466E2;
+    color: #68BEEF;
+    font-size: 25px;
+    float: left;
+    width: 206px;
+    height: 96px;
+    border: 1px solid #68BEEF;
+    border-radius: 15px;
+    margin-right: 10%;
+    display: block;
+    justify-content: center;
+    &:hover {
+        background-color: #0752DE;
+        border: 1px solid #0752DE;
+        color: #ffffff;
+        margin-bottom: 3px;
+    }
+`;
+
 export const BoxInfo = style.div`
     float: left;
     width: 206px;
@@ -210,7 +233,7 @@ export const Box2NotaGaragem = style.div`
     font-weight: bold;
     // background-color: orange;
     display: inline;
-    margin-left: 2px;
+    margin-left: 6px;
 `;
 
 export const Box2GaragemStars = style.div`
@@ -224,6 +247,7 @@ export const Box2GaragemStars = style.div`
 export const Box2NmrAvaliacoes = style.div`
     font-size: 25px;
     color: #2466E2;
+    margin-left: 63px;
 `;
 
 export const BoxInfoContentBox2EditEnvio = style.div`
