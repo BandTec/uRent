@@ -130,7 +130,9 @@ function MeusAnuncios() {
                                     </S.BoxInfo>
 
                                     <S.ButtonHeader>
-                    Criar novo anúncio
+                                        <Link to="/cadastro-anuncio" style={{ textDecoration: 'none', color: '#68BEEF'}}>
+                                        Criar novo anúncio
+                                        </Link>
                                     </S.ButtonHeader>
 
 
