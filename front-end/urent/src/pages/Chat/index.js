@@ -1,20 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import io from 'socket.io-client';
 
-import { FiArrowLeft } from 'react-icons/fi'
+import { FiArrowLeft } from 'react-icons/fi';
+import { MdSend } from 'react-icons/md';
+
 import * as S from './style';
+import './style.css';
 
 import HeaderAnuncio from '../../components/HeaderAnuncio/index';
 import api from '../../service/api';
 
 // import usuario from '../../assets/usuario.png';
 
+const socket = io.connect('http://localhost:5000');
+
 function Index() {
+
+	const [message, setMessage] = useState('');
+	const [chat, setChat] = useState([]);
 
 	const [usuario, setUsuario] = useState('');
 	const [endereco, setEndereco] = useState('');
 
 	const history = useHistory();
+
+	function enviar(e) {
+		e.preventDefault();
+		socket.emit('message', message)
+		setMessage('');
+	}
 
 	useEffect(() => {
 
@@ -39,7 +54,12 @@ function Index() {
 				console.log(error)
 			})
 
-
+		socket.on('message', message => {
+			let list = document.getElementById('lista');
+			let item = document.createElement('li');
+			item.innerHTML = message;
+			list.appendChild(item);
+		})
 	}, []);
 
 	return (
@@ -74,12 +94,18 @@ function Index() {
 				</S.Nav>
 
 				<S.Content>
-					<S.InputMessege placeholder="Digite uma mensagem" />
+					<S.Messeges>
+						<ul id="lista" className="lista"></ul>
+					</S.Messeges>
+					<form onSubmit={enviar} style={{ display: 'flex' }}>
+						<S.InputMessege placeholder="Digite uma mensagem" value={message} onChange={e => setMessage(e.target.value)} />
+						<S.ButtonSend>
+							<MdSend color={'0752DE'} size={25} />
+						</S.ButtonSend>
+					</form>
 				</S.Content>
 
 			</S.Section>
-
-
 		</>
 	)
 }

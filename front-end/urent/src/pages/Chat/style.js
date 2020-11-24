@@ -59,12 +59,26 @@ export const Content = styled.div`
     padding: 2%;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+export const Messeges = styled.div`
+    min-height: 35vh;
+    max-height: 35vh;
+    width: 75vw;
+    overflow-y: scroll;
+    /* background-color: red; */
 `;
 
 export const InputMessege = styled.input`
     border-radius: 10px;
     border: 1px solid #9B9393;
     padding-left: 2%;
-    height: 35px;
+    height: 5vh;
+    width: 70vw;
+`;
+
+export const ButtonSend = styled.button`
+    border: 0px;
 `;
