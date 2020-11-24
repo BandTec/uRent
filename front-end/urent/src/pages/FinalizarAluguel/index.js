@@ -17,12 +17,14 @@ function FinalizarAluguel() {
     const [endereco, setEndereco] = useState({});
     const [tipoVeiculo, setTipoVeiculo] = useState({});
 
+    const anuncioId = sessionStorage.getItem('anuncio');
+
     useEffect(() => {
 
-        api.get(`/anuncios/${6}`)
+        api.get(`/anuncios/${anuncioId}`)
             .then(response => {
                 setAnuncio(response.data);
-                setGaragem(response.data.garagem)
+                setGaragem(response.data.garagem);
 
                 api.get(`/tipo-veiculos/${response.data.tipoVeiculo}`)
                     .then(response => {
@@ -32,8 +34,8 @@ function FinalizarAluguel() {
                     .catch(error => {
                         console.log(error)
                     })
-                // ${response.data.garagem.cep}
-                api.get(`https://viacep.com.br/ws/06401160/json/`)
+
+                api.get(`https://viacep.com.br/ws/${response.data.garagem.cep}/json/`)
                     .then(response => {
                         setEndereco(response.data);
                     })
@@ -44,7 +46,6 @@ function FinalizarAluguel() {
             .catch(error => {
                 console.log(error)
             })
-
     }, [])
 
     return (
@@ -104,8 +105,8 @@ function FinalizarAluguel() {
                                 Preço Diário:
                                 </S.AvaliacaoAnuncio>
                             <S.AvaliacaoAnuncio style={{ fontSize: "30px", color: "#0752DE", fontWeight: "bold" }}>
-                                R$ 15,00
-                                </S.AvaliacaoAnuncio>
+                                R$ {anuncio.valorDiaria}
+                            </S.AvaliacaoAnuncio>
                         </S.ContentFooter>
 
                         <S.ContentFooter>

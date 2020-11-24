@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Map, TileLayer } from 'react-leaflet';
+import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import { Link } from 'react-router-dom';
 
 import api from '../../service/api';
 
@@ -23,6 +24,8 @@ function DetalhesAnuncio() {
     const [endereco, setEndereco] = useState({});
     const [tipoVeiculo, setTipoVeiculo] = useState({});
 
+    const anuncioId = sessionStorage.getItem('anuncio');
+
     useEffect(() => {
         navigator.geolocation.getCurrentPosition((position) => {
             const { latitude, longitude } = position.coords;
@@ -32,34 +35,27 @@ function DetalhesAnuncio() {
 
     useEffect(() => {
 
-        api.get(`/anuncios/${1}`)
+        api.get(`/anuncios/${anuncioId}`)
             .then(response => {
                 setAnuncio(response.data);
-            })
-            .catch(error => {
-                console.log(error)
-            })
+                setGaragem(response.data.garagem);
 
-        api.get(`/garagens/${1}`)
-            .then(response => {
-                setGaragem(response.data);
-            })
-            .catch(error => {
-                console.log(error)
-            })
+                api.get(`/tipo-veiculos/${response.data.tipoVeiculo}`)
+                    .then(response => {
+                        setTipoVeiculo(response.data);
+                        console.log("Chegou aqui")
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
 
-        api.get(`/tipo-veiculos/${3}`)
-            .then(response => {
-                setTipoVeiculo(response.data);
-                console.log("Chegou aqui")
-            })
-            .catch(error => {
-                console.log(error)
-            })
-
-        api.get(`https://viacep.com.br/ws/01001000/json/`)
-            .then(response => {
-                setEndereco(response.data);
+                api.get(`https://viacep.com.br/ws/${response.data.garagem.cep}/json/`)
+                    .then(response => {
+                        setEndereco(response.data);
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
             })
             .catch(error => {
                 console.log(error)
@@ -124,10 +120,14 @@ function DetalhesAnuncio() {
                                 <S.ContentPreco>
                                     <S.ContentButton>
                                         <S.Button>Chat</S.Button>
-                                        <S.Button>Alugar</S.Button>
+                                        <Link to="/finalizar-aluguel">
+                                            <S.Button>Alugar</S.Button>
+                                        </Link>
                                     </S.ContentButton>
                                     <S.ContentButton>
-                                        <S.Button>Voltar</S.Button>
+                                        <Link to="/feed">
+                                            <S.Button>Voltar</S.Button>
+                                        </Link>
                                     </S.ContentButton>
                                 </S.ContentPreco>
                             </S.ContentInfoBuy>
@@ -145,6 +145,9 @@ function DetalhesAnuncio() {
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         />
+                        {/* <Marker position={[garagem.latitude, garagem.longitude]}>
+                            <Popup>R${endereco.valorDiaria}</Popup>
+                        </Marker> */}
                     </Map>
                 </div>
             </S.Section>
