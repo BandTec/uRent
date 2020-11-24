@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {useHistory} from 'react-router-dom';
+import {useHistory, Link} from 'react-router-dom';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 
 import api from '../../service/api';
@@ -35,7 +35,6 @@ function Alugar() {
       .then(response => {
         setEnderecos(response.data)
       })
-
   }, [])
 
 
@@ -57,7 +56,12 @@ function Alugar() {
             {
               enderecos.map(endereco =>
                 <Marker position={[endereco.latitude, endereco.longitude]}>
-                  <Popup>R${endereco.valorDiaria}</Popup>
+                  <Popup>
+                    R${endereco.valorDiaria}
+                    <Link onClick={() => {sessionStorage.setItem('anuncio', endereco.id); history.push('/detalhes-anuncio');}}>
+                      <p>Ver</p>
+                    </Link>
+                  </Popup>
                 </Marker>
               )}
           </Map>
