@@ -31,8 +31,8 @@ function DetalhesAnuncio() {
     }, [])
 
     useEffect(() => {
-
-        api.get(`/anuncios/${1}`)
+        
+        api.get(`/anuncios/${11}`)
             .then(response => {
                 setAnuncio(response.data);
             })
@@ -40,7 +40,7 @@ function DetalhesAnuncio() {
                 console.log(error)
             })
 
-        api.get(`/garagens/${1}`)
+        api.get(`/garagens/${7}`)
             .then(response => {
                 setGaragem(response.data);
             })
@@ -64,20 +64,73 @@ function DetalhesAnuncio() {
             .catch(error => {
                 console.log(error)
             })
+
+            // const avaliacaoAnuncio = garagem.avaliacao;
+            // CarregarEstrelas(avaliacaoAnuncio);
+            
     }, [])
+
+
+    
+function CarregarEstrelas(nota){
+
+    console.log("AAA" + nota);
+    nota = nota/2; 
+
+if (nota >= 4.7){ 
+    document.getElementById("i1").src = estrelaLigada;
+    document.getElementById("i2").src = estrelaLigada;
+    document.getElementById("i3").src = estrelaLigada;
+    document.getElementById("i4").src = estrelaLigada;
+    document.getElementById("i5").src = estrelaLigada;
+ 
+   }else if (nota >= 3.7){ 
+    document.getElementById("i1").src = estrelaLigada;
+    document.getElementById("i2").src = estrelaLigada;
+    document.getElementById("i3").src = estrelaLigada;
+    document.getElementById("i4").src = estrelaLigada;
+    document.getElementById("i5").src = estrelaApagada;
+
+   }else if (nota >= 2.7){ 
+    document.getElementById("i1").src = estrelaLigada;
+    document.getElementById("i2").src = estrelaLigada;
+    document.getElementById("i3").src = estrelaLigada;
+    document.getElementById("i4").src = estrelaApagada;
+    document.getElementById("i5").src = estrelaApagada;
+
+    } else if (nota >= 1.7){ 
+    document.getElementById("i1").src = estrelaLigada;
+    document.getElementById("i2").src = estrelaLigada;
+    document.getElementById("i3").src = estrelaApagada;
+    document.getElementById("i4").src = estrelaApagada;
+    document.getElementById("i5").src = estrelaApagada;
+
+} else if (nota >= 0.7){
+    document.getElementById("i1").src = estrelaLigada;
+    document.getElementById("i2").src = estrelaApagada;
+    document.getElementById("i3").src = estrelaApagada;
+    document.getElementById("i4").src = estrelaApagada;
+    document.getElementById("i5").src = estrelaApagada;
+   }else{
+    document.getElementById("i1").src = estrelaApagada;
+    document.getElementById("i2").src = estrelaApagada;
+    document.getElementById("i3").src = estrelaApagada;
+    document.getElementById("i4").src = estrelaApagada;
+    document.getElementById("i5").src = estrelaApagada;
+   }
+}
 
     return (
         <div>
             <HeaderAnuncio />
-
             <S.ContentAvaliacoesAnuncio>
                 <S.MediaAnuncio>{garagem.avaliacao}.0</S.MediaAnuncio>
                 <S.StarsAvaliacao>
-                    <S.ContentStars><S.Stars src={estrelaLigada}></S.Stars></S.ContentStars>
-                    <S.ContentStars><S.Stars src={estrelaLigada}></S.Stars></S.ContentStars>
-                    <S.ContentStars><S.Stars src={estrelaLigada}></S.Stars></S.ContentStars>
-                    <S.ContentStars><S.Stars src={estrelaApagada}></S.Stars></S.ContentStars>
-                    <S.ContentStars><S.Stars src={estrelaApagada}></S.Stars></S.ContentStars>
+                    <S.ContentStars><S.Stars id="i1" src={estrelaLigada}></S.Stars></S.ContentStars>
+                    <S.ContentStars><S.Stars id="i2" src={estrelaApagada}></S.Stars></S.ContentStars>
+                    <S.ContentStars><S.Stars id="i3" src={estrelaApagada}></S.Stars></S.ContentStars>
+                    <S.ContentStars><S.Stars id="i4" src={estrelaApagada}></S.Stars></S.ContentStars>
+                    <S.ContentStars><S.Stars id="i5" src={estrelaLigada}></S.Stars></S.ContentStars>
                 </S.StarsAvaliacao>
                 <S.AvaliacaoAnuncio>6 avaliacoes</S.AvaliacaoAnuncio>
             </S.ContentAvaliacoesAnuncio>
