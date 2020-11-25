@@ -27,7 +27,7 @@ function Index() {
 
 	function enviar(e) {
 		e.preventDefault();
-		socket.emit('message', message)
+		socket.emit('message', {'message': message, 'nome': usuario.nome})
 		setMessage('');
 	}
 
@@ -53,14 +53,28 @@ function Index() {
 			.catch(error => {
 				console.log(error)
 			})
+	}, []);
 
+	useEffect(() => {
 		socket.on('message', message => {
 			let list = document.getElementById('lista');
 			let item = document.createElement('li');
-			item.innerHTML = message;
+			let nome = document.createElement('span');
+			let mensagem = document.createElement('span');
+			
+			
+			nome.innerHTML = message.nome + ": "; 
+			mensagem.innerHTML = message.message;
+			
+			nome.style.color = "#fff";
+			nome.style.fontWeight = "500";
+			mensagem.style.color = "#fff";
+			
+			item.appendChild(nome);
+			item.appendChild(mensagem);
 			list.appendChild(item);
 		})
-	}, []);
+	}, [])
 
 	return (
 		<>
