@@ -31,7 +31,7 @@ function Feed() {
 
     api.get('/anuncios/feed')
       .then((response) => {
-        console.log(response.data)
+        // console.log(response.data)
         setAnuncios(response.data);
       })
       .catch((error) => {
@@ -40,21 +40,24 @@ function Feed() {
   }, [])
 
   useEffect(() => {
-    for(let i = 0; i < anuncios.length; i++) {
-      api.get(`https://viacep.com.br/ws/${anuncios[i].cep}/json`)
+    // for(let i = 0; i < anuncios.length; i++) {
+    //   api.get(`https://viacep.com.br/ws/${anuncios[i].cep}/json`)
+    //   .then(response => {
+    //     logradouros.push({
+    //       "rua": response.data.logradouro
+    //     })
+    //   })
+    // }
+    // setEndereco({logradouros: logradouros});
+    anuncios.map(logradouro =>
+      api.get(`https://viacep.com.br/ws/${logradouro.cep}/json`)
       .then(response => {
-        logradouros.push({
-          "rua": response.data.logradouro
-        })
-      })
-    }
-    setEndereco({logradouros: logradouros});
-    // endereco.logradouros.map(logradouro =>
-    //   console.log(logradouro + " teste")
-    // )
+        logradouros.push(response.data)
+      })      
+    )
   }, [anuncios])
 
-  // console.log(endereco);
+  console.log(logradouros[0]); 
 
   return (
     <div>
