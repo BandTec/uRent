@@ -30,6 +30,24 @@ export const FeedSection = style.div`
     align-items: center;
 `;
 
+export const StarsAvaliacao = style.div`
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+export const ContentStars = style.div`
+    margin-right: 10px;
+`;
+
+export const Stars = style.img`
+    height: 25px;
+    @media screen and (max-width: 700px){
+        height: 20px;
+    }
+`;
+
 export const FeedContent = style.div`
     // background-color: green;
     width: 55%;

@@ -7,6 +7,7 @@ import FiltroBusca from '../../components/FiltroBusca/index';
 import Footer from '../../components/Footer';
 
 import api from '../../service/api';
+import carregarEstrelas from '../Functions';
 
 import foto from '../../assets/garagemExemplo.png';
 
@@ -25,14 +26,16 @@ function Feed() {
   useEffect(() => {
 
     api.get(`usuarios/status`)
-			.catch(() => {
-				history.push('/login')
-			})
+      .catch(() => {
+        history.push('/login')
+      })
 
     api.get('/anuncios/feed')
       .then((response) => {
         // console.log(response.data)
         setAnuncios(response.data);
+        const avaliacaoAnuncio = response.data.avaliacao;
+        carregarEstrelas(avaliacaoAnuncio);
       })
       .catch((error) => {
         console.log(error)
@@ -40,24 +43,15 @@ function Feed() {
   }, [])
 
   useEffect(() => {
-    // for(let i = 0; i < anuncios.length; i++) {
-    //   api.get(`https://viacep.com.br/ws/${anuncios[i].cep}/json`)
-    //   .then(response => {
-    //     logradouros.push({
-    //       "rua": response.data.logradouro
-    //     })
-    //   })
-    // }
-    // setEndereco({logradouros: logradouros});
     anuncios.map(logradouro =>
       api.get(`https://viacep.com.br/ws/${logradouro.cep}/json`)
-      .then(response => {
-        logradouros.push(response.data)
-      })      
+        .then(response => {
+          logradouros.push(response.data)
+        })
     )
   }, [anuncios])
 
-  console.log(logradouros[0]); 
+  console.log(logradouros);
 
   return (
     <div>
@@ -67,7 +61,7 @@ function Feed() {
       <div>
         {
           anuncios.map(anuncio =>
-            <S.FeedContainer key={anuncio.id} onClick={() => {history.push('/detalhes-anuncio'); sessionStorage.setItem('anuncio', anuncio.id)}}>
+            <S.FeedContainer key={anuncio.id} onClick={() => { history.push('/detalhes-anuncio'); sessionStorage.setItem('anuncio', anuncio.id) }}>
               <S.FeedTitle>{anuncio.titulo}</S.FeedTitle>
               <S.FeedSection>
 
@@ -92,7 +86,7 @@ function Feed() {
 
                     <S.SectionTitle>Endereço:
 											<S.SectionData>
-                        {}
+                        { }
                       </S.SectionData>
                     </S.SectionTitle>
                     <S.SectionTitle>Nº: <S.SectionData>{anuncio.numero}</S.SectionData></S.SectionTitle> <S.SectionTitle>CEP: <S.SectionData>{anuncio.cep}</S.SectionData></S.SectionTitle>

@@ -62,7 +62,6 @@ function Index() {
 			let nome = document.createElement('span');
 			let mensagem = document.createElement('span');
 			
-			
 			nome.innerHTML = message.nome + ": "; 
 			mensagem.innerHTML = message.message;
 			

@@ -3,6 +3,7 @@ import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import { Link } from 'react-router-dom';
 
 import api from '../../service/api';
+import carregarEstrelas from '../Functions';
 
 import HeaderAnuncio from '../../components/HeaderAnuncio/index';
 import Footer from '../../components/Footer';
@@ -17,7 +18,7 @@ import * as S from './style';
 
 function DetalhesAnuncio() {
 
-    const [initialPosition, setInitialPosition] = useState([0, 0]);
+    const [position, setPosition] = useState([0, 0]);
 
     const [anuncio, setAnuncio] = useState({});
     const [garagem, setGaragem] = useState({});
@@ -26,12 +27,6 @@ function DetalhesAnuncio() {
 
     const anuncioId = sessionStorage.getItem('anuncio');
 
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition((position) => {
-            const { latitude, longitude } = position.coords;
-            setInitialPosition([latitude, longitude])
-        });
-    }, [])
 
     useEffect(() => {
 
@@ -39,6 +34,10 @@ function DetalhesAnuncio() {
             .then(response => {
                 setAnuncio(response.data);
                 setGaragem(response.data.garagem);
+                setPosition([response.data.garagem.latitude, response.data.garagem.longitude])
+
+                const avaliacaoAnuncio = response.data.garagem.avaliacao;
+                carregarEstrelas(avaliacaoAnuncio);
 
                 api.get(`/tipo-veiculos/${response.data.tipoVeiculo}`)
                     .then(response => {
@@ -61,60 +60,9 @@ function DetalhesAnuncio() {
                 console.log(error)
             })
 
-            // const avaliacaoAnuncio = garagem.avaliacao;
-            // CarregarEstrelas(avaliacaoAnuncio);
-            
     }, [])
 
-
     
-function CarregarEstrelas(nota){
-
-    console.log("AAA" + nota);
-    nota = nota/2; 
-
-if (nota >= 4.7){ 
-    document.getElementById("i1").src = estrelaLigada;
-    document.getElementById("i2").src = estrelaLigada;
-    document.getElementById("i3").src = estrelaLigada;
-    document.getElementById("i4").src = estrelaLigada;
-    document.getElementById("i5").src = estrelaLigada;
- 
-   }else if (nota >= 3.7){ 
-    document.getElementById("i1").src = estrelaLigada;
-    document.getElementById("i2").src = estrelaLigada;
-    document.getElementById("i3").src = estrelaLigada;
-    document.getElementById("i4").src = estrelaLigada;
-    document.getElementById("i5").src = estrelaApagada;
-
-   }else if (nota >= 2.7){ 
-    document.getElementById("i1").src = estrelaLigada;
-    document.getElementById("i2").src = estrelaLigada;
-    document.getElementById("i3").src = estrelaLigada;
-    document.getElementById("i4").src = estrelaApagada;
-    document.getElementById("i5").src = estrelaApagada;
-
-    } else if (nota >= 1.7){ 
-    document.getElementById("i1").src = estrelaLigada;
-    document.getElementById("i2").src = estrelaLigada;
-    document.getElementById("i3").src = estrelaApagada;
-    document.getElementById("i4").src = estrelaApagada;
-    document.getElementById("i5").src = estrelaApagada;
-
-} else if (nota >= 0.7){
-    document.getElementById("i1").src = estrelaLigada;
-    document.getElementById("i2").src = estrelaApagada;
-    document.getElementById("i3").src = estrelaApagada;
-    document.getElementById("i4").src = estrelaApagada;
-    document.getElementById("i5").src = estrelaApagada;
-   }else{
-    document.getElementById("i1").src = estrelaApagada;
-    document.getElementById("i2").src = estrelaApagada;
-    document.getElementById("i3").src = estrelaApagada;
-    document.getElementById("i4").src = estrelaApagada;
-    document.getElementById("i5").src = estrelaApagada;
-   }
-}
 
     return (
         <div>
@@ -122,11 +70,11 @@ if (nota >= 4.7){
             <S.ContentAvaliacoesAnuncio>
                 <S.MediaAnuncio>{garagem.avaliacao}.0</S.MediaAnuncio>
                 <S.StarsAvaliacao>
-                    <S.ContentStars><S.Stars id="i1" src={estrelaLigada}></S.Stars></S.ContentStars>
-                    <S.ContentStars><S.Stars id="i2" src={estrelaApagada}></S.Stars></S.ContentStars>
-                    <S.ContentStars><S.Stars id="i3" src={estrelaApagada}></S.Stars></S.ContentStars>
-                    <S.ContentStars><S.Stars id="i4" src={estrelaApagada}></S.Stars></S.ContentStars>
-                    <S.ContentStars><S.Stars id="i5" src={estrelaLigada}></S.Stars></S.ContentStars>
+                    <S.ContentStars><S.Stars id="i1"></S.Stars></S.ContentStars>
+                    <S.ContentStars><S.Stars id="i2"></S.Stars></S.ContentStars>
+                    <S.ContentStars><S.Stars id="i3"></S.Stars></S.ContentStars>
+                    <S.ContentStars><S.Stars id="i4"></S.Stars></S.ContentStars>
+                    <S.ContentStars><S.Stars id="i5"></S.Stars></S.ContentStars>
                 </S.StarsAvaliacao>
                 <S.AvaliacaoAnuncio>6 avaliacoes</S.AvaliacaoAnuncio>
             </S.ContentAvaliacoesAnuncio>
@@ -193,14 +141,14 @@ if (nota >= 4.7){
                 <S.SectionTitle>Localização aproximada da vaga</S.SectionTitle>
 
                 <div className="leaflet-container">
-                    <Map center={initialPosition} zoom={25} >
+                    <Map center={position} zoom={25} >
                         <TileLayer
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         />
-                        {/* <Marker position={[garagem.latitude, garagem.longitude]}>
+                        <Marker position={position}>
                             <Popup>R${endereco.valorDiaria}</Popup>
-                        </Marker> */}
+                        </Marker>
                     </Map>
                 </div>
             </S.Section>

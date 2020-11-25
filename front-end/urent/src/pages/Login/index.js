@@ -66,7 +66,9 @@ function Login() {
 						</S.FormRecursos>
 
 						<S.ButtonEntrar onClick={login}>ENTRAR</S.ButtonEntrar>
-						<S.LabelCheck>Criar conta</S.LabelCheck>
+						<Link to="/cadastro">
+							<S.LabelCheck>Criar conta</S.LabelCheck>
+						</Link>
 
 					</S.Form>
 

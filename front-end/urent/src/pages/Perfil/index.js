@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import InputMask from 'react-input-mask';
 
 import api from '../../service/api';
+import carregarEstrelas from '../Functions';
 
 import { Link, useHistory } from 'react-router-dom';
 
@@ -15,167 +16,171 @@ import * as S from '../Perfil/style';
 
 function FormularioPerfil() {
 
-    const [usuario, setUsuario] = useState({});
+	const [usuario, setUsuario] = useState({});
 
-    const history = useHistory();
+	const history = useHistory();
 
-    useEffect(() => {
+	useEffect(() => {
 
-        api.get(`usuarios/status`)
+		api.get(`usuarios/status`)
 			.catch(() => {
 				history.push('/login')
 			})
 
-        const id = sessionStorage.getItem("id");
+		const id = sessionStorage.getItem("id");
 
-        if (id == null) {
+		if (id == null) {
 
-            history.push('/login')
-        }
+			history.push('/login')
+		}
 
-        api.get(`/usuarios/${id}`)
-            .then(response => {
-                setUsuario(response.data);
+		api.get(`/usuarios/${id}`)
+			.then(response => {
+				setUsuario(response.data);
+				const avaliacaoAnuncio = response.data.avaliacao;
+				carregarEstrelas(avaliacaoAnuncio);
 
-            })
-            .catch(error => {
-                console.log(error)
-            })
+			})
+			.catch(error => {
+				console.log(error)
+			})
 
 
-    }, [])
+	}, [])
 
 
-    return (
+	return (
 
-        <div>
+		<div>
 
-            <Header title="Perfil" />
+			<Header title="Perfil" />
 
-            <div>
-                <S.Welcome>
+			<div>
+				<S.Welcome>
 
-                    <S.FormPerfil>
+					<S.FormPerfil>
 
-                        <S.ContainerPerfil>
+						<S.ContainerPerfil>
 
-                            <S.BoxPerfil>
+							<S.BoxPerfil>
 
-                                <div>
-                                    <S.FormTitle>Nome</S.FormTitle>
+								<div>
+									<S.FormTitle>Nome</S.FormTitle>
 
 
-                                    <S.FormInfo>{usuario.nome}</S.FormInfo>
+									<S.FormInfo>{usuario.nome}</S.FormInfo>
 
 
 
-                                </div>
+								</div>
 
-                                <div>
-                                    <S.FormTitle>CPF</S.FormTitle>
+								<div>
+									<S.FormTitle>CPF</S.FormTitle>
 
 
 
-                                    <S.FormInfo>{usuario.cpf}</S.FormInfo>
+									<S.FormInfo>{usuario.cpf}</S.FormInfo>
 
 
 
-                                </div>
+								</div>
 
-                                <div>
-                                    <S.FormTitle>Data de Nascimento</S.FormTitle>
+								<div>
+									<S.FormTitle>Data de Nascimento</S.FormTitle>
 
-                                    <S.FormInfo>{usuario.dataNasc}</S.FormInfo>
+									<S.FormInfo>{usuario.dataNasc}</S.FormInfo>
 
 
-                                </div>
+								</div>
 
-                                <div>
-                                    <S.FormTitle>CNH</S.FormTitle>
+								<div>
+									<S.FormTitle>CNH</S.FormTitle>
 
-                                    <S.FormInfo>{usuario.cnh}</S.FormInfo>
+									<S.FormInfo>{usuario.cnh}</S.FormInfo>
 
 
-                                </div>
+								</div>
 
-                            </S.BoxPerfil>
+							</S.BoxPerfil>
 
-                            <S.BoxContentDados>
+							<S.BoxContentDados>
 
-                                <S.BoxImgPerfil>
+								<S.BoxImgPerfil>
 
-                                    <S.Image src={fotoPerfil} />
+									<S.Image src={fotoPerfil} />
 
-                                </S.BoxImgPerfil>
+								</S.BoxImgPerfil>
 
 
-                                <S.BoxPerfilStars>
-                                    <img src={estrelaLigada} alt="Estrela Ligada" ></img>
-                                    <img src={estrelaLigada} alt="Estrela Ligada" ></img>
-                                    <img src={estrelaLigada} alt="Estrela Ligada" ></img>
-                                    <img src={estrelaLigada} alt="Estrela Ligada" ></img>
-                                    <img src={estrelaApagada} alt="Estrela apagada" ></img>
-                                </S.BoxPerfilStars>
+								<S.BoxPerfilStars>
+									<S.StarsAvaliacao>
+										<S.ContentStars><S.Stars id="i1"></S.Stars></S.ContentStars>
+										<S.ContentStars><S.Stars id="i2"></S.Stars></S.ContentStars>
+										<S.ContentStars><S.Stars id="i3"></S.Stars></S.ContentStars>
+										<S.ContentStars><S.Stars id="i4"></S.Stars></S.ContentStars>
+										<S.ContentStars><S.Stars id="i5"></S.Stars></S.ContentStars>
+									</S.StarsAvaliacao>
+								</S.BoxPerfilStars>
 
-                                <div style={{ width: '150px', height: '60px', margin: '20px auto', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                                    <Link to="/cadastro-garagem">
-                                        <S.ButtonCadastro>Cadastrar Garagem</S.ButtonCadastro>
-                                    </Link>
+								<div style={{ width: '150px', height: '60px', margin: '20px auto', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+									<Link to="/cadastro-garagem">
+										<S.ButtonCadastro>Cadastrar Garagem</S.ButtonCadastro>
+									</Link>
 
-                                    <Link to="/cadastro-veiculo">
-                                        <S.ButtonCadastro>Cadastrar Veículo</S.ButtonCadastro>
-                                    </Link>
-                                </div>
+									<Link to="/cadastro-veiculo">
+										<S.ButtonCadastro>Cadastrar Veículo</S.ButtonCadastro>
+									</Link>
+								</div>
 
-                            </S.BoxContentDados>
+							</S.BoxContentDados>
 
-                        </S.ContainerPerfil>
+						</S.ContainerPerfil>
 
-                        <div>
-                            <S.FormTitle>CEP</S.FormTitle>
+						<div>
+							<S.FormTitle>CEP</S.FormTitle>
 
-                            <S.FormInfo>{usuario.cep}</S.FormInfo>
+							<S.FormInfo>{usuario.cep}</S.FormInfo>
 
-                        </div>
+						</div>
 
-                        <div>
-                            <S.FormTitle>E-mail</S.FormTitle>
+						<div>
+							<S.FormTitle>E-mail</S.FormTitle>
 
-                            <S.FormInfo>{usuario.email}</S.FormInfo>
+							<S.FormInfo>{usuario.email}</S.FormInfo>
 
-                        </div>
+						</div>
 
 
 
-                        <div style={{ display: 'flex', marginTop: '-10px' }}>
+						<div style={{ display: 'flex', marginTop: '-10px' }}>
 
-                            <div>
-                                <S.FormTitle>Senha</S.FormTitle>
+							<div>
+								<S.FormTitle>Senha</S.FormTitle>
 
-                                <S.FormInfo>{usuario.senha}</S.FormInfo>
+								<S.FormInfo>**********</S.FormInfo>
 
-                            </div>
+							</div>
 
 
-                            <Link to="/reset-senha">
-                                <S.Button>Alterar Senha</S.Button>
-                            </Link>
-                        </div>
+							<Link to="/reset-senha">
+								<S.Button>Alterar Senha</S.Button>
+							</Link>
+						</div>
 
 
-                    </S.FormPerfil>
+					</S.FormPerfil>
 
 
-                </S.Welcome>
+				</S.Welcome>
 
-            </div>
+			</div>
 
 
-        </div >
+		</div >
 
 
 
-    )
+	)
 }
 
 export default FormularioPerfil;
