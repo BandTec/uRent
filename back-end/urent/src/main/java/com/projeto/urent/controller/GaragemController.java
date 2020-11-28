@@ -1,5 +1,6 @@
 package com.projeto.urent.controller;
 
+import com.projeto.urent.PilhaObj;
 import com.projeto.urent.dominios.Garagem;
 import com.projeto.urent.repositorios.GaragemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ public class GaragemController  {
 
     @Autowired
     GaragemRepository repository;
+
+    PilhaObj<Garagem> pilhaGaragem = new PilhaObj<>(10);
 
     @GetMapping
     public ResponseEntity getGaragens() {
@@ -62,11 +65,23 @@ public class GaragemController  {
     public ResponseEntity cadastrarGaragem(@RequestBody @Valid Garagem garagem) {
         if(isLoginStatus()) {
             repository.save(garagem);
+            pilhaGaragem.push(garagem);
             return ResponseEntity.created(null).build();
         } else {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @GetMapping("/desfazer")
+    public ResponseEntity desfazerCadastro() {
+        Garagem garagem = pilhaGaragem.pop();
+
+        repository.deleteById(garagem.getId());
+
+        return ResponseEntity.ok().build();
+    }
+
+
 
     @DeleteMapping("{id}")
     public ResponseEntity deleteGaragem(@PathVariable int id){
