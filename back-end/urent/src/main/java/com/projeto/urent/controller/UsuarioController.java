@@ -8,9 +8,19 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -145,6 +155,39 @@ public class UsuarioController {
         } else {
             return ResponseEntity.noContent().build();
         }
+    }
+
+    @PostMapping("/upload")
+    public ResponseEntity upload(@RequestParam("arquivo") MultipartFile arquivo) throws IOException, URISyntaxException {
+        char[] vetor;
+        if(arquivo.isEmpty()) {
+            return ResponseEntity.badRequest().body("Arquivo não encontrado");
+        }
+
+        String conteudoString = new String(arquivo.getBytes(), "UTF-8");
+
+        String[] dados = conteudoString.split("\n");
+
+        for(int i = 0; i < dados.length; i++) {
+            if(i != 0 && i != dados.length - 1) {
+                Usuario usuario = new Usuario();
+
+                usuario.setId(Integer.parseInt(dados[i].substring(2, 4)));
+                usuario.setNome(dados[i].substring(4, 25));
+                usuario.setCpf(dados[i].substring(25, 39));
+                usuario.setDataNasc(LocalDate.parse(dados[i].substring(39, 49)));
+                usuario.setCnh(dados[i].substring(49, 63));
+                usuario.setCep(dados[i].substring(63, 72));
+                usuario.setEmail(dados[i].substring(72, 123));
+                usuario.setSenha(dados[i].substring(123, 148));
+                usuario.setAvaliacao(Double.parseDouble(dados[i].substring(148, 155)));
+
+                repository.save(usuario);
+                System.out.println("Cadastrado com sucesso: " + i);
+            }
+        }
+
+        return ResponseEntity.created(null).build();
     }
 
 
