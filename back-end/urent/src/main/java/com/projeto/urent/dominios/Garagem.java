@@ -36,10 +36,12 @@ public class Garagem {
     @ManyToOne
     private Usuario usuario;
 
+
     public Garagem() {
     }
 
-    public Garagem(Integer id, @NotNull @Length(min = 8, max = 8, message = "Cep inválido") String cep, @NotNull @Length(min = 1, max = 5, message = "Número inválido") String numero, @NotNull String latitude, @NotNull String longitude, @NotNull @Length(min = 0, max = 5) Double avaliacao, Usuario usuario) {
+
+    public Garagem(Integer id, @NotNull @Length(min = 9, max = 9, message = "Cep inválido") String cep, @NotNull @Length(min = 1, max = 5, message = "Número inválido") String numero, @NotNull String latitude, @NotNull String longitude, Double avaliacao, Usuario usuario) {
         this.id = id;
         this.cep = cep;
         this.numero = numero;
@@ -104,4 +106,5 @@ public class Garagem {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
 }
