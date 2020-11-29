@@ -271,18 +271,28 @@ public class ListaObj<T> {
             if(i == 0) {
                 corpo += "02";
                 corpo += String.format("%-2d", u.getId());
-                corpo += String.format("%-45s", u.getNome());
-                corpo += String.format("%-11s", u.getCpf());
-                corpo += String.format("%-100s", u.getEmail());
+                corpo += String.format("%-25s", u.getNome());
+                corpo += String.format("%-14s", u.getCpf());
+                corpo += String.format("%-10s", u.getDataNasc());
+                corpo += String.format("%-14s", u.getCnh());
+                corpo += String.format("%-9s", u.getCep());
+                corpo += String.format("%-50s", u.getEmail());
+                corpo += String.format("%-25s", u.getSenha());
+                corpo += String.format("%-8s", u.getAvaliacao());
 
                 contRegDados++;
                 gravaRegistroText(nomeArquivo, corpo);
             } else {
                 corpo = "02";
                 corpo += String.format("%-2d", u.getId());
-                corpo += String.format("%-45s", u.getNome());
-                corpo += String.format("%-11s", u.getCpf());
-                corpo += String.format("%-100s", u.getEmail());
+                corpo += String.format("%-25s", u.getNome());
+                corpo += String.format("%-14s", u.getCpf());
+                corpo += String.format("%-10s", u.getDataNasc());
+                corpo += String.format("%-14s", u.getCnh());
+                corpo += String.format("%-9s", u.getCep());
+                corpo += String.format("%-50s", u.getEmail());
+                corpo += String.format("%-25s", u.getSenha());
+                corpo += String.format("%-8s", u.getAvaliacao());
 
                 contRegDados++;
                 gravaRegistroText(nomeArquivo, corpo);
