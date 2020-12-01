@@ -9,6 +9,7 @@ import DuvidasFrequentes from './pages/DuvidasFrequentes';
 import Login from './pages/Login';
 import CadastroAnuncio from './pages/CadastroAnuncio/index';
 import MeusAnuncios from './pages/MeusAnuncios/index';
+import EditarAnuncios from './pages/EditarAnuncio/index';
 import Institucional from './pages/Institucional/index';
 import Feed from './pages/Feed/index';
 import Alugar from './pages/Alugar/index';
@@ -30,6 +31,7 @@ function Routes() {
                 <Route path="/login" component={Login} />
                 <Route path="/cadastro-anuncio" component={CadastroAnuncio} />
                 <Route path="/meus-anuncios" component={MeusAnuncios} />
+                <Route path="/editar-anuncios" component={EditarAnuncios} />
                 <Route path="/institucional" component={Institucional} />
                 <Route path="/feed" component={Feed} />
                 <Route path="/alugar" component={Alugar} />

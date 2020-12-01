@@ -103,11 +103,11 @@ public class AnuncioController {
         }
     }
 
-    @PutMapping
-    public ResponseEntity alterarAnuncio(@RequestBody Anuncio anuncio) {
+    @PutMapping("/{id}")
+    public ResponseEntity alterarAnuncio(@PathVariable Integer id,@RequestBody Anuncio anuncio) {
 
         if(isLoginStatus()) {
-            Optional<Anuncio> a = repository.findById(anuncio.getId());
+            Optional<Anuncio> a = repository.findById(id);
 
             if(a.isPresent()) {
                 Anuncio anuncioNovo = a.get();
@@ -127,7 +127,7 @@ public class AnuncioController {
 
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity deleteAnuncio(@PathVariable int id){
 
         if (repository.existsById(id)){
