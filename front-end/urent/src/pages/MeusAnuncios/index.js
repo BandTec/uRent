@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 
 import api from '../../service/api';
@@ -14,6 +13,33 @@ import FooterAnuncio from '../../components/Footer/index';
 import * as S from '../MeusAnuncios/style';
 
 function GerarAnuncio(anuncios) {
+
+	const history = useHistory();
+
+	function editar() {
+		 		sessionStorage.setItem("anuncio-edit",11);
+				history.push('/editar-anuncios');		
+				// console.log("Esse é o id: " + id)
+	}
+	
+	function deletarAnuncio(){
+		console.log("chamou")
+		// useEffect(() => {
+			api.delete(`/${11}`)
+			.then(response =>{
+				alert(`Deletado com sucesso`);
+				history.push('/editar-anuncios');	
+			})
+			.catch(error => {
+			  console.log(error)
+			})
+		
+		// },[])
+		
+		
+	
+	}
+
 	var rows = [];
 
 	anuncios.map(indexAnuncio =>
@@ -46,7 +72,7 @@ function GerarAnuncio(anuncios) {
 
 						<S.BoxInfoContentBox2EditEnvio>
 							<S.BoxInfoContentBox2>
-								<S.BoxInfoContentBox2EditAnuncio> Editar anuncio</S.BoxInfoContentBox2EditAnuncio>
+								<S.BoxInfoContentBox2EditAnuncio onClick = {editar} > Editar anuncio</S.BoxInfoContentBox2EditAnuncio>
 							</S.BoxInfoContentBox2>
 						</S.BoxInfoContentBox2EditEnvio>
 					</S.ContentBox2>
@@ -61,7 +87,7 @@ function GerarAnuncio(anuncios) {
 
 						<S.ExcluirAnuncio>
 							<S.ExcluirAnuncioBox>
-								<S.ExcluirAnuncioText> Excluir anuncio</S.ExcluirAnuncioText>
+								<S.ExcluirAnuncioText onClick = {deletarAnuncio}> Excluir anuncio</S.ExcluirAnuncioText>
 							</S.ExcluirAnuncioBox>
 						</S.ExcluirAnuncio>
 					</S.ContentBox2>
@@ -97,9 +123,6 @@ function MeusAnuncios() {
 
 
 	}, [])
-
-
-
 
 	return (
 		<div>
