@@ -2,8 +2,11 @@ package com.projeto.urent.dominios;
 
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Optional;
 
 @Entity(name = "file_db")
 @Table(name = "files")
@@ -21,13 +24,26 @@ public class FileDB {
     @Lob
     private byte[] data;
 
+    @NotNull
+    @Column(name = "fk_garagem")
+    private Integer garagem;
+
     public FileDB() {
     }
 
-    public FileDB(String name, String type, byte[] data) {
+    public FileDB(String id, String name, String type, byte[] data, @NotNull Integer garagem) {
+        this.id = id;
         this.name = name;
         this.type = type;
         this.data = data;
+        this.garagem = garagem;
+    }
+
+    public FileDB(String name, String type, byte[] data, @NotNull Integer garagem) {
+        this.name = name;
+        this.type = type;
+        this.data = data;
+        this.garagem = garagem;
     }
 
     public String getId() {
@@ -60,5 +76,13 @@ public class FileDB {
 
     public void setData(byte[] data) {
         this.data = data;
+    }
+
+    public Integer getGaragem() {
+        return garagem;
+    }
+
+    public void setGaragem(Integer garagem) {
+        this.garagem = garagem;
     }
 }
