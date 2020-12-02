@@ -16,6 +16,7 @@ function CadastroGaragem() {
 
 	const [cep, setCep] = useState("");
 	const [numero, setNumero] = useState("");
+	const [file, setFile] = useState("");
 
 	const history = useHistory();
 
@@ -38,7 +39,26 @@ function CadastroGaragem() {
 
 	}, [])
 
+	// const data = new FormData();
+	// const config = {
+	//   headers: {
+	//     'content-type': 'multipart/form-data'
+	//   }
+	// }
+	// console.log(cardFile);
+	// data.append('csv', cardFile);
+	// api.post('',data)
+
 	function cadastro() {
+
+		const data = new FormData();
+		const config = {
+			headers: {
+				'content-type': 'multipart/form-data'
+			}
+		}
+
+		data.append('file', file);
 
 		CepCoords.getByCep(cep)
 			.then(response => {
@@ -52,7 +72,16 @@ function CadastroGaragem() {
 				})
 					.then(response => {
 						alert('Cadastro realizado com sucesso');
-						history.push('/feed')
+						data.append('idGaragem', response.data);
+						api.post('/imagens/upload', data, config)
+							.then(() => {
+								alert('Imagem cadastrada com sucesso');
+								history.push('/feed');
+							})
+							.catch(error => {
+								alert('Erro ao cadastrar imagem');
+								console.log(error);
+							})
 					})
 					.catch(error => {
 						alert('Erro ao realizar cadastro');
@@ -98,7 +127,7 @@ function CadastroGaragem() {
 
 				<div style={{ width: '100%' }}>
 					<S.CadastroLabel>Fotos</S.CadastroLabel>
-					<S.CadastroInput type="file" />
+					<S.CadastroInput type="file" onChange={e => setFile(e.target.files[0])} />
 
 				</div>
 
