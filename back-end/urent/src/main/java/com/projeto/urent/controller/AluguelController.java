@@ -5,6 +5,7 @@ import com.projeto.urent.Alertar;
 import com.projeto.urent.ListaObj;
 import com.projeto.urent.dominios.Aluguel;
 import com.projeto.urent.repositorios.AluguelRepository;
+import com.projeto.urent.servicos.PagamentoService;
 import com.projeto.urent.visoes.AluguelSimples;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 import static com.projeto.urent.controller.UsuarioController.isLoginStatus;
 
@@ -25,6 +27,9 @@ public class AluguelController {
     @Autowired
     AluguelRepository repository;
 
+    @Autowired
+    PagamentoService servico;
+
     Integer contador = 0;
 
     private Acordo acordo = new Acordo();
@@ -35,7 +40,7 @@ public class AluguelController {
 
         List<Aluguel> aluguelList = repository.findAll();
 
-        if(aluguelList.isEmpty()) {
+        if (aluguelList.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.ok(aluguelList);
@@ -44,7 +49,7 @@ public class AluguelController {
 
     @GetMapping("/locador/{id}")
     public ResponseEntity buscarAlugueisLocador(@PathVariable Integer id) {
-        if(isLoginStatus()) {
+        if (isLoginStatus()) {
             List<AluguelSimples> aluguelSimplesList = repository.findAllSimplesLocador(id);
 
             if (aluguelSimplesList.isEmpty()) {
@@ -59,7 +64,7 @@ public class AluguelController {
 
     @GetMapping("/locatario/{id}")
     public ResponseEntity buscarAlugueisLocatario(@PathVariable Integer id) {
-        if(isLoginStatus()) {
+        if (isLoginStatus()) {
             List<AluguelSimples> aluguelSimplesList = repository.findAllSimplesLocatario(id);
 
             if (aluguelSimplesList.isEmpty()) {
@@ -74,14 +79,42 @@ public class AluguelController {
 
     @PostMapping
     public ResponseEntity cadastrarAluguel(@RequestBody Aluguel aluguel) {
-        this.aluguel = aluguel;
-        repository.save(this.aluguel);
-        Alertar alertar = new Alertar();
+            Boolean autorizacao = true;
+            this.aluguel = aluguel;
 
-        acordo.adicionaObserver(alertar);
-        return ResponseEntity.created(null).build();
+            UUID identificador = servico.verificarStatusCompra(autorizacao);
+
+            return ResponseEntity.accepted()
+                    .header("identificador", identificador.toString())
+                    .header("tempo-segundos", "30")
+                    .build();
     }
-    
+
+    @GetMapping("/permissoes/resultado/{identificador}")
+    public ResponseEntity resultado(@PathVariable UUID identificador) {
+
+        Integer resultado = servico.buscarResultadoCompra(identificador);
+
+        if (resultado != null) {
+            // caso o identificador exista
+            if (resultado == 0) {
+                return ResponseEntity.noContent().build();
+            } else {
+                if (resultado == 1) {
+                    repository.save(this.aluguel);
+                    Alertar alertar = new Alertar();
+                    acordo.adicionaObserver(alertar);
+                    return ResponseEntity.ok("Resultado da solicitção: COMPRA EFETIVADA COM SUCESSO!");
+                } else {
+                    return ResponseEntity.ok("Resultado da solicitção: COMPRA NEGADA.");
+                }
+            }
+        } else {
+            // caso o identificador sequer exista!
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @GetMapping("/acordo")
     public ResponseEntity buscarAcordo() {
         return ResponseEntity.ok(acordo.adicionarAluguel(this.aluguel));
@@ -93,13 +126,13 @@ public class AluguelController {
 
         List<AluguelSimples> aluguelSimplesList = repository.findAllSimplesLocatario(id);
 
-        if(!aluguelSimplesList.isEmpty()) {
+        if (!aluguelSimplesList.isEmpty()) {
             ListaObj listaObj = new ListaObj(aluguelSimplesList.size());
 
             HttpHeaders headers = new HttpHeaders();
             headers.add("Content-Disposition", "attachment; file=aluguelLocatario.csv");
 
-            for(int i = 0; i < aluguelSimplesList.size(); i++) {
+            for (int i = 0; i < aluguelSimplesList.size(); i++) {
                 listaObj.adiciona(aluguelSimplesList.get(i));
             }
 
@@ -117,13 +150,13 @@ public class AluguelController {
 
         List<AluguelSimples> aluguelSimplesList = repository.findAllSimplesLocador(id);
 
-        if(!aluguelSimplesList.isEmpty()) {
+        if (!aluguelSimplesList.isEmpty()) {
             ListaObj listaObj = new ListaObj(aluguelSimplesList.size());
 
             HttpHeaders headers = new HttpHeaders();
             headers.add("Content-Disposition", "attachment; file=aluguelLocador.csv");
 
-            for(int i = 0; i < aluguelSimplesList.size(); i++) {
+            for (int i = 0; i < aluguelSimplesList.size(); i++) {
                 listaObj.adiciona(aluguelSimplesList.get(i));
             }
 
@@ -140,22 +173,22 @@ public class AluguelController {
     public ResponseEntity baixarTxtLocatario(@PathVariable Integer id) {
 
         contador++;
-        String arquivoNome = "locatario"+contador+".txt";
+        String arquivoNome = "locatario" + contador + ".txt";
 
         List<AluguelSimples> aluguelSimplesList = repository.findAllSimplesLocatario(id);
 
-        if(!aluguelSimplesList.isEmpty()) {
+        if (!aluguelSimplesList.isEmpty()) {
             ListaObj listaObj = new ListaObj(aluguelSimplesList.size());
 
             HttpHeaders headers = new HttpHeaders();
             headers.add("Content-Disposition", "attachment; file=" + arquivoNome);
 
-            for(int i = 0; i < aluguelSimplesList.size(); i++) {
+            for (int i = 0; i < aluguelSimplesList.size(); i++) {
                 listaObj.adiciona(aluguelSimplesList.get(i));
             }
 
             listaObj.arquivoDeLayoutAluguel(arquivoNome, listaObj);
-            return new ResponseEntity(new FileSystemResource("src/main/resources/static/"+arquivoNome), headers, HttpStatus.OK);
+            return new ResponseEntity(new FileSystemResource("src/main/resources/static/" + arquivoNome), headers, HttpStatus.OK);
         } else {
             return ResponseEntity.noContent().build();
         }
@@ -166,22 +199,22 @@ public class AluguelController {
     public ResponseEntity baixarTxtLocador(@PathVariable Integer id) {
 
         contador++;
-        String arquivoNome = "locador"+contador+".txt";
+        String arquivoNome = "locador" + contador + ".txt";
 
         List<AluguelSimples> aluguelSimplesList = repository.findAllSimplesLocador(id);
 
-        if(!aluguelSimplesList.isEmpty()) {
+        if (!aluguelSimplesList.isEmpty()) {
             ListaObj listaObj = new ListaObj(aluguelSimplesList.size());
 
             HttpHeaders headers = new HttpHeaders();
             headers.add("Content-Disposition", "attachment; file=" + arquivoNome);
 
-            for(int i = 0; i < aluguelSimplesList.size(); i++) {
+            for (int i = 0; i < aluguelSimplesList.size(); i++) {
                 listaObj.adiciona(aluguelSimplesList.get(i));
             }
 
             listaObj.arquivoDeLayoutAluguel(arquivoNome, listaObj);
-            return new ResponseEntity(new FileSystemResource("src/main/resources/static/"+arquivoNome), headers, HttpStatus.OK);
+            return new ResponseEntity(new FileSystemResource("src/main/resources/static/" + arquivoNome), headers, HttpStatus.OK);
         } else {
             return ResponseEntity.noContent().build();
         }
