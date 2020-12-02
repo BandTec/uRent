@@ -66,7 +66,8 @@ public class GaragemController  {
         if(isLoginStatus()) {
             repository.save(garagem);
             pilhaGaragem.push(garagem);
-            return ResponseEntity.created(null).build();
+            return ResponseEntity.created(null).body(garagem.getId());
+//            return ResponseEntity.created(null).build();
         } else {
             return ResponseEntity.badRequest().build();
         }
