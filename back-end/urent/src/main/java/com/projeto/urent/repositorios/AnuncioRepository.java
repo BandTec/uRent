@@ -16,6 +16,6 @@ public interface AnuncioRepository extends JpaRepository<Anuncio, Integer> {
     @Query("select new com.projeto.urent.visoes.AnuncioSimplesAluguel(a.id, a.valorDiaria, g.latitude, g.longitude) from Anuncio a join Garagem g on a.garagem = g.id")
     List<AnuncioSimplesAluguel> findLatLong();
 
-    @Query("select new com.projeto.urent.visoes.AnuncioSimplesFeed(a.id, a.titulo, a.valorDiaria, t.tipo, g.cep, g.numero, g.avaliacao) from Anuncio a join Garagem g on a.garagem = g.id join TipoVeiculo t on a.tipoVeiculo = t.id")
+    @Query("select new com.projeto.urent.visoes.AnuncioSimplesFeed(a.id, a.titulo, a.valorDiaria, t.tipo, g.id, g.cep, g.numero, g.avaliacao) from Anuncio a join Garagem g on a.garagem = g.id join TipoVeiculo t on a.tipoVeiculo = t.id")
     List<AnuncioSimplesFeed> findFeed();
 }

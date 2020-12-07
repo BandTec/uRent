@@ -6,15 +6,17 @@ public class AnuncioSimplesFeed {
     private String titulo;
     private Double valorDiaria;
     private String tipo;
+    private Integer idGaragem;
     private String cep;
     private String numero;
     private Double avaliacao;
 
-    public AnuncioSimplesFeed(Integer id, String titulo, Double valorDiaria, String tipo, String cep, String numero, Double avaliacao) {
+    public AnuncioSimplesFeed(Integer id, String titulo, Double valorDiaria, String tipo, Integer idGaragem, String cep, String numero, Double avaliacao) {
         this.id = id;
         this.titulo = titulo;
         this.valorDiaria = valorDiaria;
         this.tipo = tipo;
+        this.idGaragem = idGaragem;
         this.cep = cep;
         this.numero = numero;
         this.avaliacao = avaliacao;
@@ -50,6 +52,14 @@ public class AnuncioSimplesFeed {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public Integer getIdGaragem() {
+        return idGaragem;
+    }
+
+    public void setIdGaragem(Integer idGaragem) {
+        this.idGaragem = idGaragem;
     }
 
     public String getCep() {

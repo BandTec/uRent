@@ -24,6 +24,7 @@ function DetalhesAnuncio() {
     const [garagem, setGaragem] = useState({});
     const [endereco, setEndereco] = useState({});
     const [tipoVeiculo, setTipoVeiculo] = useState({});
+    const [imagem, setImagem] = useState('');
 
     const anuncioId = sessionStorage.getItem('anuncio');
 
@@ -38,6 +39,15 @@ function DetalhesAnuncio() {
 
                 const avaliacaoAnuncio = response.data.garagem.avaliacao;
                 carregarEstrelas(avaliacaoAnuncio);
+
+                api.get(`/imagens/files/garagem/${response.data.garagem.id}`)
+                .then(response => {
+                    console.log(response.data.url)
+                    setImagem(response.data.url);
+                })
+                .catch(error => {
+                    console.log(error);
+                })
 
                 api.get(`/tipo-veiculos/${response.data.tipoVeiculo}`)
                     .then(response => {
@@ -68,7 +78,7 @@ function DetalhesAnuncio() {
         <div>
             <HeaderAnuncio />
             <S.ContentAvaliacoesAnuncio>
-                <S.MediaAnuncio>{garagem.avaliacao}.0</S.MediaAnuncio>
+                <S.MediaAnuncio>{garagem.avaliacao}</S.MediaAnuncio>
                 <S.StarsAvaliacao>
                     <S.ContentStars><S.Stars id="i1"></S.Stars></S.ContentStars>
                     <S.ContentStars><S.Stars id="i2"></S.Stars></S.ContentStars>
@@ -76,7 +86,7 @@ function DetalhesAnuncio() {
                     <S.ContentStars><S.Stars id="i4"></S.Stars></S.ContentStars>
                     <S.ContentStars><S.Stars id="i5"></S.Stars></S.ContentStars>
                 </S.StarsAvaliacao>
-                <S.AvaliacaoAnuncio>6 avaliacoes</S.AvaliacaoAnuncio>
+                {/* <S.AvaliacaoAnuncio>6 avaliacoes</S.AvaliacaoAnuncio> */}
             </S.ContentAvaliacoesAnuncio>
 
             <S.AnuncioContainer>
@@ -84,7 +94,7 @@ function DetalhesAnuncio() {
                 <S.ContentInfoAnuncio>
                     <S.DivisionInfo>
                         <S.SectionInfo style={{ display: "flex" }}>
-                            <S.ContentImageAnuncio src={foto} />
+                            <S.ContentImageAnuncio src={imagem} />
                         </S.SectionInfo>
                         <S.SectionInfo style={{ display: "block" }}>
                             <S.TittleLineInfo>Complemento</S.TittleLineInfo>

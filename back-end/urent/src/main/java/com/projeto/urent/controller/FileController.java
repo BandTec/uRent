@@ -5,6 +5,7 @@ import com.projeto.urent.message.ResponseFile;
 import com.projeto.urent.message.ResponseMessage;
 import com.projeto.urent.repositorios.FileDBRepository;
 import com.projeto.urent.servicos.FileStorageService;
+import com.projeto.urent.visoes.FileSimples;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -47,12 +48,10 @@ public class FileController {
     }
 
     @GetMapping("/files")
-    public ResponseEntity<List<ResponseFile>> getListFiles() {
+    public ResponseEntity getListFiles() {
 
         List<FileDB> files = repository.findAll();
-        List<ResponseFile> filesReturn = new ArrayList<>();
-
-        System.out.println(files);
+        List<FileSimples> filesReturn = new ArrayList<>();
 
         for(int i = 0; i < files.size(); i++) {
             System.out.println("id: "+ files.get(i).getId());
@@ -62,14 +61,8 @@ public class FileController {
                     .path(files.get(i).getId())
                     .toUriString();
 
-            ResponseFile responseFile = new ResponseFile(
-                    files.get(i).getName(),
-                    fileDownloadUri,
-                    files.get(i).getType(),
-                    files.get(i).getData().length);
-
-            filesReturn.add(responseFile);
-
+            FileSimples fileSimples = new FileSimples(fileDownloadUri, files.get(i).getGaragem());
+            filesReturn.add(fileSimples);
         }
         return ResponseEntity.ok(filesReturn);
     }

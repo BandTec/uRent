@@ -12,16 +12,14 @@ import carregarEstrelas from '../Functions';
 import foto from '../../assets/garagemExemplo.png';
 
 import * as S from './style';
+import { GiConsoleController } from 'react-icons/gi';
 
 function Feed() {
 
   const [anuncios, setAnuncios] = useState([]);
-  const [endereco, setEndereco] = useState(['rua']);
-  let logradouros = [];
+  const [imagens, setImagens] = useState([]);
 
   const history = useHistory();
-
-  // logradouros.push('Rua Zeze')
 
   useEffect(() => {
 
@@ -32,7 +30,6 @@ function Feed() {
 
     api.get('/anuncios/feed')
       .then((response) => {
-        // console.log(response.data)
         setAnuncios(response.data);
         const avaliacaoAnuncio = response.data.avaliacao;
         carregarEstrelas(avaliacaoAnuncio);
@@ -40,18 +37,33 @@ function Feed() {
       .catch((error) => {
         console.log(error)
       })
+
+    api.get('/imagens/files/')
+      .then(response => {
+        setImagens(response.data);
+      })
+      .catch(error => {
+        alert('Erro ao buscar imagens');
+        console.log(error);
+      })
   }, [])
 
-  useEffect(() => {
-    anuncios.map(logradouro =>
-      api.get(`https://viacep.com.br/ws/${logradouro.cep}/json`)
-        .then(response => {
-          logradouros.push(response.data)
-        })
-    )
-  }, [anuncios])
+  function acharImagem(idGaragem) {
+    for(let i = 0; i < imagens.length; i++) {
+      if(idGaragem === imagens[i].idGaragem) {
+        return imagens[i].fileUri;
+      }
+    }
+  }
 
-  console.log(logradouros);
+  // useEffect(() => {
+  //   anuncios.map(logradouro =>
+  //     api.get(`https://viacep.com.br/ws/${logradouro.cep}/json`)
+  //       .then(response => {
+  //         logradouros.push(response.data)
+  //       })
+  //   )
+  // }, [anuncios])
 
   return (
     <div>
@@ -66,16 +78,11 @@ function Feed() {
               <S.FeedSection>
 
                 <div>
-                  <img src={foto} height="250px" alt="Foto do anúncio" />
+                  {
+                    <img src={acharImagem(anuncio.idGaragem)} height="250px" width="300px" alt="Foto do anúncio" />
+                  }
                   <S.FeedSection>
-                    <label style={{ fontWeight: '500' }}>{anuncio.avaliacao}</label>
-                    <div>
-                      <IoIosStar size="20" color="#FDF53B" />
-                      <IoIosStar size="20" color="#FDF53B" />
-                      <IoIosStar size="20" color="#FDF53B" />
-                      <IoIosStar size="20" color="#C4C4C4" />
-                      <IoIosStar size="20" color="#C4C4C4" />
-                    </div>
+                    <label style={{ fontWeight: '500' }}>{anuncio.avaliacao != null ? anuncio.avaliacao : "Não avaliado"}</label>
                   </S.FeedSection>
                 </div>
                 <S.FeedContent>
