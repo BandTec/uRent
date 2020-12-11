@@ -178,41 +178,40 @@ function MeusAnuncios() {
 							</S.SectionCotent>
 						</S.Section>
 
-						{
-							anuncios.map(anuncio =>
-								<S.CadastroContainer>
+						<S.Container>
+							{
+								anuncios.map(anuncio =>
+									<S.CadastroContainer>
 
-									<S.ContainerTitleAnuncio>
-										{anuncio.titulo}
-									</S.ContainerTitleAnuncio>
+										<S.ContainerTitleAnuncio>
+											{anuncio.titulo}
+										</S.ContainerTitleAnuncio>
 
-									<S.ContainerContent>
-										<S.ContentBox1>
-											<img src={garagem01} alt="imagem da garagem do Anuncio" ></img>
-										</S.ContentBox1>
+										<S.ContainerContent>
+											<S.ContentBox1>
+												<img src={garagem01} alt="imagem da garagem do Anuncio" height={'100%'} width={'100%'} />
+											</S.ContentBox1>
 
-										<S.ContentBox2>
-											<S.Box2Avaliacao>
-												<S.Box2NotaGaragem>{anuncio.garagem.avaliacao}
-													<S.Box2GaragemStars>
+											<S.ContentBox2>
+												<div>
+													<S.Box2NotaGaragem>{anuncio.garagem.avaliacao}
 														<img src={estrelaLigada} alt="Estrela Ligada" ></img>
 														<img src={estrelaLigada} alt="Estrela Ligada" ></img>
 														<img src={estrelaLigada} alt="Estrela Ligada" ></img>
 														<img src={estrelaLigada} alt="Estrela Ligada" ></img>
 														<img src={estrelaApagada} alt="Estrela apagada" ></img>
-													</S.Box2GaragemStars>
-												</S.Box2NotaGaragem>
-												<S.Box2NmrAvaliacoes>4 avaliações</S.Box2NmrAvaliacoes>
-											</S.Box2Avaliacao>
+													</S.Box2NotaGaragem>
+													<S.Box2NmrAvaliacoes>4 avaliações</S.Box2NmrAvaliacoes>
+												</div>
 
-											<S.BoxInfoContentBox2EditEnvio>
-												<S.BoxInfoContentBox2>
-													<S.BoxInfoContentBox2EditAnuncio onClick={() => editar(anuncio.id)} > Editar anuncio</S.BoxInfoContentBox2EditAnuncio>
+												<S.BoxInfoContentBox2EditEnvio>
+													<S.BoxInfoContentBox2 onClick={() => editar(anuncio.id)}>
+														Editar anuncio
 												</S.BoxInfoContentBox2>
-											</S.BoxInfoContentBox2EditEnvio>
-										</S.ContentBox2>
+												</S.BoxInfoContentBox2EditEnvio>
+											</S.ContentBox2>
 
-										<S.ContentBox2>
+											<S.ContentBox2>
 											<S.Preco>
 												<S.PrecoDiarioText>
 													Preço Diário:
@@ -221,20 +220,23 @@ function MeusAnuncios() {
 											</S.Preco>
 
 											<S.ExcluirAnuncio>
-												<S.ExcluirAnuncioBox>
-													<S.ExcluirAnuncioText onClick={() => deletarAnuncio(anuncio.id)}> Excluir anuncio</S.ExcluirAnuncioText>
+												<S.ExcluirAnuncioBox onClick={() => deletarAnuncio(anuncio.id)}>
+												Excluir anuncio
+													{/* <S.ExcluirAnuncioText onClick={() => deletarAnuncio(anuncio.id)}> Excluir anuncio</S.ExcluirAnuncioText> */}
 												</S.ExcluirAnuncioBox>
 											</S.ExcluirAnuncio>
 										</S.ContentBox2>
 
-									</S.ContainerContent>
-								</S.CadastroContainer>
-							)
-						}
+										</S.ContainerContent>
+									</S.CadastroContainer>
+								)
+							}
+						</S.Container>
 
-						<S.CadastroContainer style={{ background: '#E4EEFC' }}></S.CadastroContainer>
 
-						<S.CadastroContainer style={{ background: '#E4EEFC' }}></S.CadastroContainer>
+						{/* <S.CadastroContainer style={{ background: '#E4EEFC' }}></S.CadastroContainer>
+
+						<S.CadastroContainer style={{ background: '#E4EEFC' }}></S.CadastroContainer> */}
 
 
 					</div>

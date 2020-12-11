@@ -142,152 +142,111 @@ margin-top: 0;
 // CORPO
 export const Background = style.div`
     background-color: #E4EEFC;
-    // height: auto;
-    // width: 100vw;
+`;
+
+export const Container = style.div`
+    width: 80%;
+    margin: 0 auto;
+    // background-color: red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -10vh;
 `;
 
 export const CadastroContainer = style.div`
-    background-color: #ffff;
-    padding: 20px;
+    width: 90%;
+    height: 50vh;
+    background-color: #fff;
+    padding: 20px 20px 0 20px;
     border-radius: 15px;
-    width: 60%;
-    height: auto;
-    margin: 0 auto;
-    margin-top: -90px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    top: 0;
-    margin-bottom: 100px;
+    margin-bottom: 5vh;
+
+    // &:not(:last-child) {
+    //     margin-bottom: 5vh;
+    // }
 `;
 
 export const ContainerTitleAnuncio = style.h1 `
     font-size: 28px;
     font-weight:normal;
     color: #6A6180; 
-    margin-top: 0;
+    margin: 0;
 `;
 
 export const ContainerContent = style.h1 `
     width: 100%;
-    height: auto;
+    height: 100%;
     // background: pink;
-    margin-top: 0px;
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    flex-direction: row;
-    justify-content: center;
-    @media(max-width: 1800px){
-    backgroud: red;
-}
+    justify-content: space-evenly;
 `;
 
-export const ContentBox1 = style.h1 `
-    float: left;
-    width: 300px;
-    height: 400px;
-    // background-image: url(../../assets/garage01.png);
-    display: flex;
-    align-items: center;
-    // flex-direction: row;
-    justify-content: center;
-    margin-top: 21px;
-    // margin-left: 2.5%;
+export const ContentBox1 = style.div `
+    width: 30%;
+    height: 100%;
+    // background-color: red;
     img{border-radius: 15px}
-    // background:grey;
-    margin-left:15px;
-    margin-right:15px;
 `;
 
-export const ContentBox2 = style.h1 `
-    float: left;
-    width: 300px;
-    height: 400px;
-    // background: url(../../assets/garage01.png);
-    // margin-top: 13px;
-    // margin-left: 2.5%;
-    // background:grey;
-    margin-left:15px;
-    margin-right:15px;
-    font-size: 28px;
+export const ContentBox2 = style.div `
+    // background-color: green;
+    width: 28%;
+    height: 100%;
     font-weight:normal;
-    color: #2466E2; 
-    margin-top: 0;
-    display: inline;
-`;
-
-export const Box2Avaliacao = style.div`
-    width: 85%;
-    height: 40%;
-    // background: purple;
-    margin-left: 10px;
-    padding-right: 20px;
-    margin-top: 82px;
+    color: #2466E2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
 `;
 
 export const Box2NotaGaragem = style.div`
-    width: 50px;
-    height: 35px;
     font-size: 30px;
     font-weight: bold;
     // background-color: orange;
-    display: inline;
-    margin-left: 6px;
 `;
 
-export const Box2GaragemStars = style.div`
-    float: Right;
-    width: 200px;
-    height: 35px;
-    display: inline;
-    // background-color: orange;
-`;
-
-export const Box2NmrAvaliacoes = style.div`
+export const Box2NmrAvaliacoes = style.span`
     font-size: 25px;
     color: #2466E2;
-    margin-left: 63px;
+    text-align: center;
+    // background-color: red;
 `;
 
 export const BoxInfoContentBox2EditEnvio = style.div`
-    width: 85%;
+    width: 100%;
     height: 30%;
     // background: purple;
-    margin-left: 10px;
-    padding-right: 20px;
-    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 export const BoxInfoContentBox2 = style.button`
-    float: left;
     width: 170px;
     height: 50px;
     border: 1px solid #68BEEF;
     border-radius: 15px;
-    margin-right: 10%;
-    display: block;
-    // align-items: center;
-    // flex-direction: row;
     justify-content: center;
-    margin-left: 48px;
-    margin-top: 16px;
     background-color: white;
-`;
-
-export const BoxInfoContentBox2EditAnuncio = style.div`
     font-size: 18px;
     color: #0752DE;
-    text-align: center;
+
+    &:hover {
+        color: #fff;
+        background-color: #0752DE;
+        border: #0752DE;
+    }
 `;
 
 export const Preco = style.div`
     width: 85%;
     height: 30%;
     // background: purple;
-    margin-left: 50px;
-    padding-right: 20px;
-    margin-top: 82px;
 `;
 
 export const PrecoDiarioText = style.div`
@@ -305,31 +264,25 @@ export const ExcluirAnuncio = style.div`
     width: 85%;
     height: 30%;
     // background: purple;
-    margin-left: 10px;
-    padding-right: 20px;
-    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 `;
 
 export const ExcluirAnuncioBox = style.button`
-    float: left;
     width: 170px;
     height: 50px;
     border-radius: 15px;
-    border: 1px solid grey;
-    margin-right: 10%;
-    display: block;
-    // align-items: center;
-    // flex-direction: row;
-    justify-content: center;
-    margin-left: 48px;
-    margin-top: 16px;
+    border: 1px solid #DE2E07;
     background-color: #DE2E07;
-`;
-
-export const ExcluirAnuncioText = style.div`
     font-size: 18px;
     color: white;
-    text-align: center;
+
+    &:hover {
+        background-color: #9B2004;
+        border: #9B2004;
+    }
+
 `;
 
 export const FooterEdit = style.div`

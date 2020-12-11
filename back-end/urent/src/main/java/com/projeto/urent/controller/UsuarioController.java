@@ -2,7 +2,7 @@ package com.projeto.urent.controller;
 
 import com.projeto.urent.ListaObj;
 import com.projeto.urent.dominios.Usuario;
-import com.projeto.urent.repositorios.UsuarioRepository;
+import com.projeto.urent.repositorios.UsuarioRepository;    
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
@@ -171,6 +171,12 @@ public class UsuarioController {
         for(int i = 0; i < dados.length; i++) {
             if(i != 0 && i != dados.length - 1) {
                 Usuario usuario = new Usuario();
+
+
+
+//                String teste = "25/02/2001";
+//
+//                LocalDate.parse(teste);
 
                 usuario.setId(Integer.parseInt(dados[i].substring(2, 4)));
                 usuario.setNome(dados[i].substring(4, 25));
