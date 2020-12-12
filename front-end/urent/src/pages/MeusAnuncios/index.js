@@ -12,107 +12,42 @@ import FooterAnuncio from '../../components/Footer/index';
 
 import * as S from '../MeusAnuncios/style';
 
-// function GerarAnuncio(anuncios) {
-
-// 	const history = useHistory();
-
-// 	function editar(id) {
-// 		sessionStorage.setItem("anuncio-edit", id);
-// 		history.push('/editar-anuncios');
-// 	}
-
-// 	function deletarAnuncio(id) {
-// 		console.log("chamou")
-// 		api.delete(`/anuncios/${id}`)
-// 			.then(() => {
-// 				alert(`Deletado com sucesso`);
-// 				history.push('/meus-anuncios');
-// 			})
-// 			.catch(error => {
-// 				alert('Erro ao deletar anúncio');
-// 				console.log(error)
-// 			})
-// 	}
-
-// 	var rows = [];
-
-// 	anuncios.map(indexAnuncio =>
-
-// 		rows.push(
-// 			<S.CadastroContainer>
-
-// 				<S.ContainerTitleAnuncio>
-// 					{indexAnuncio.titulo}
-// 				</S.ContainerTitleAnuncio>
-
-// 				<S.ContainerContent>
-// 					<S.ContentBox1>
-// 						<img src={garagem01} alt="imagem da garagem do Anuncio" ></img>
-// 					</S.ContentBox1>
-
-// 					<S.ContentBox2>
-// 						<S.Box2Avaliacao>
-// 							<S.Box2NotaGaragem>{indexAnuncio.garagem.avaliacao}
-// 								<S.Box2GaragemStars>
-// 									<img src={estrelaLigada} alt="Estrela Ligada" ></img>
-// 									<img src={estrelaLigada} alt="Estrela Ligada" ></img>
-// 									<img src={estrelaLigada} alt="Estrela Ligada" ></img>
-// 									<img src={estrelaLigada} alt="Estrela Ligada" ></img>
-// 									<img src={estrelaApagada} alt="Estrela apagada" ></img>
-// 								</S.Box2GaragemStars>
-// 							</S.Box2NotaGaragem>
-// 							<S.Box2NmrAvaliacoes>4 avaliações</S.Box2NmrAvaliacoes>
-// 						</S.Box2Avaliacao>
-
-// 						<S.BoxInfoContentBox2EditEnvio>
-// 							<S.BoxInfoContentBox2>
-// 								<S.BoxInfoContentBox2EditAnuncio onClick={() => editar(indexAnuncio.id)} > Editar anuncio</S.BoxInfoContentBox2EditAnuncio>
-// 							</S.BoxInfoContentBox2>
-// 						</S.BoxInfoContentBox2EditEnvio>
-// 					</S.ContentBox2>
-
-// 					<S.ContentBox2>
-// 						<S.Preco>
-// 							<S.PrecoDiarioText>
-// 								Preço Diário:
-//                             <S.PrecoDiarioValue>R${indexAnuncio.valorDiaria}</S.PrecoDiarioValue>
-// 							</S.PrecoDiarioText>
-// 						</S.Preco>
-
-// 						<S.ExcluirAnuncio>
-// 							<S.ExcluirAnuncioBox>
-// 								<S.ExcluirAnuncioText onClick={() => deletarAnuncio(indexAnuncio.id)}> Excluir anuncio</S.ExcluirAnuncioText>
-// 							</S.ExcluirAnuncioBox>
-// 						</S.ExcluirAnuncio>
-// 					</S.ContentBox2>
-
-// 				</S.ContainerContent>
-// 			</S.CadastroContainer>
-// 		))
-
-// 	return (rows);
-// }
-
 function MeusAnuncios() {
 
 	const history = useHistory();
 	const [anuncios, setAnuncios] = useState([]);
+	const [imagens, setImagens] = useState([]);
 
-	useEffect(() => {
-		const id = sessionStorage.getItem("id");
+	const id = sessionStorage.getItem("id");
 
-		if (id == null) {
-			history.push('/login')
-		}
-
+	function carregar() {
 		api.get(`/anuncios/usuario/${id}`)
 			.then(response => {
 				setAnuncios(response.data);
-				const avaliacaoAnuncio = response.data.avaliacao;
-				carregarEstrelas(avaliacaoAnuncio);
+				// const avaliacaoAnuncio = response.data.avaliacao;
+				// carregarEstrelas(avaliacaoAnuncio);
 			})
 			.catch(error => {
 				console.log(error)
+			})
+	}
+
+	useEffect(() => {
+
+		api.get(`usuarios/status`)
+			.catch(() => {
+				history.push('/login')
+			})
+
+		carregar(id);
+
+		api.get('/imagens/files/')
+			.then(response => {
+				setImagens(response.data);
+			})
+			.catch(error => {
+				alert('Erro ao buscar imagens, recarregue a página');
+				console.log(error);
 			})
 	}, [])
 
@@ -122,16 +57,23 @@ function MeusAnuncios() {
 	}
 
 	function deletarAnuncio(id) {
-		console.log("chamou")
 		api.delete(`/anuncios/${id}`)
 			.then(() => {
 				alert(`Deletado com sucesso`);
-				history.push('/meus-anuncios');
+				carregar();
 			})
 			.catch(error => {
-				alert('Erro ao deletar anúncio');
+				alert('Erro ao deletar anúncio, tente novamente');
 				console.log(error)
 			})
+	}
+
+	function acharImagem(idGaragem) {
+		for (let i = 0; i < imagens.length; i++) {
+			if (idGaragem === imagens[i].idGaragem) {
+				return imagens[i].fileUri;
+			}
+		}
 	}
 
 	return (
@@ -181,7 +123,7 @@ function MeusAnuncios() {
 						<S.Container>
 							{
 								anuncios.map(anuncio =>
-									<S.CadastroContainer>
+									<S.CadastroContainer key={anuncio.id}>
 
 										<S.ContainerTitleAnuncio>
 											{anuncio.titulo}
@@ -189,7 +131,7 @@ function MeusAnuncios() {
 
 										<S.ContainerContent>
 											<S.ContentBox1>
-												<img src={garagem01} alt="imagem da garagem do Anuncio" height={'100%'} width={'100%'} />
+												<img src={acharImagem(anuncio.garagem.id)} alt="imagem da garagem do Anuncio" height={'100%'} width={'100%'} />
 											</S.ContentBox1>
 
 											<S.ContentBox2>
@@ -212,20 +154,20 @@ function MeusAnuncios() {
 											</S.ContentBox2>
 
 											<S.ContentBox2>
-											<S.Preco>
-												<S.PrecoDiarioText>
-													Preço Diário:
+												<S.Preco>
+													<S.PrecoDiarioText>
+														Preço Diário:
                             <S.PrecoDiarioValue>R${anuncio.valorDiaria}</S.PrecoDiarioValue>
-												</S.PrecoDiarioText>
-											</S.Preco>
+													</S.PrecoDiarioText>
+												</S.Preco>
 
-											<S.ExcluirAnuncio>
-												<S.ExcluirAnuncioBox onClick={() => deletarAnuncio(anuncio.id)}>
-												Excluir anuncio
+												<S.ExcluirAnuncio>
+													<S.ExcluirAnuncioBox onClick={() => deletarAnuncio(anuncio.id)}>
+														Excluir anuncio
 													{/* <S.ExcluirAnuncioText onClick={() => deletarAnuncio(anuncio.id)}> Excluir anuncio</S.ExcluirAnuncioText> */}
-												</S.ExcluirAnuncioBox>
-											</S.ExcluirAnuncio>
-										</S.ContentBox2>
+													</S.ExcluirAnuncioBox>
+												</S.ExcluirAnuncio>
+											</S.ContentBox2>
 
 										</S.ContainerContent>
 									</S.CadastroContainer>
@@ -248,9 +190,11 @@ function MeusAnuncios() {
 									<S.SectionTextTitle>Nenhum anúncio ainda...</S.SectionTextTitle>
 									<S.SectionTextSubtitle>Anuncie conosco e tenha uma renda extra.</S.SectionTextSubtitle>
 									<S.AnunciarGarage>
-										<S.AnunciarGarageText>
-											Anunciar garagem
+										<Link to="/cadastro-anuncio">
+											<S.AnunciarGarageText>
+												Anunciar garagem
                     </S.AnunciarGarageText>
+										</Link>
 									</S.AnunciarGarage>
 								</div>
 							</S.SectionCotent>

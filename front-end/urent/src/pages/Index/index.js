@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -18,7 +19,7 @@ function Index() {
 
 			<S.Carroussel>
 				<Carousel autoPlay={true} infiniteLoop={true} showStatus={false} showThumbs={false} interval="3000" transitionTime="150">
-					
+
 					<div>
 						<S.SlideContent>
 							<S.SlideContentTitle>
@@ -35,7 +36,7 @@ function Index() {
 						<img src={slide2} alt="Slide 2" />
 						<S.SlideContent>
 							<S.SlideContentTitle>
-							Estacione na sua viagem.
+								Estacione na sua viagem.
 							</S.SlideContentTitle>
 							<S.SlideContentText>
 								Agende onde irá estacionar durante sua viagem de carro, de maneira simples.
@@ -47,7 +48,7 @@ function Index() {
 						<img src={slide3} alt="Slide 3" />
 						<S.SlideContent>
 							<S.SlideContentTitle>
-							Estacione durante o trabalho.
+								Estacione durante o trabalho.
 							</S.SlideContentTitle>
 							<S.SlideContentText>
 								Adquira rapidez e comodidade, agendando onde estacionará seu carro durante o expediente.
@@ -66,8 +67,8 @@ function Index() {
 				</S.WelcomeContentText>
 
 				<S.WelcomeContentButton>
-					<S.WelcomeButton>Alugar garagem</S.WelcomeButton>
-					<S.WelcomeButton>Anunciar garagem</S.WelcomeButton>	
+					<Link to="/cadastro"><S.WelcomeButton>Alugar garagem</S.WelcomeButton></Link>
+					<Link to="/cadastro"><S.WelcomeButton>Anunciar garagem</S.WelcomeButton></Link>
 				</S.WelcomeContentButton>
 
 			</S.Welcome>

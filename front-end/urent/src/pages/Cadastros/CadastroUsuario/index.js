@@ -36,13 +36,12 @@ function CadastroUsuario() {
 			"email": email,
 			"senha": senha
 		})
-			.then(response => {
-				alert("Usuario Cadastrado!");
-
+			.then(() => {
+				alert("Usuario Cadastrado com sucesso!");
 				history.push('/login');
 			})
 			.catch(error => {
-				alert("Não cadastrou!");
+				alert("Erro ao realizar cadastro, tente novamente!");
 				console.log(error);
 			})
 	}

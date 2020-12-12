@@ -50,6 +50,7 @@ function CadastroVeiculo() {
         setTipoVeiculo(response.data);
       })
       .catch(error => {
+        alert("Erro ao buscar tipo de veículo");
         console.log(error)
       })
 
@@ -65,10 +66,10 @@ function CadastroVeiculo() {
 
     })
         .then(response => {
-            alert('Veiculo Cadastrado!');
+            alert('Veiculo Cadastrado com sucesso!');
             console.log(response);
         }).catch(error => {
-            alert('Não Cadastrou!');
+            alert('Erro ao realizar cadastro, tente novamente!');
             console.log(error);
         })
 

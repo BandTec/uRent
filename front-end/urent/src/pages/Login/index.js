@@ -16,19 +16,25 @@ function Login() {
 	const history = useHistory();
 
 	function login() {
-		api.post(`/usuarios/login`, {
-			"email": email,
-			"senha": senha
-		})
-			.then(response => {
-				sessionStorage.setItem("id", response.data.id);
-				history.push('/feed');
+		if (email === "" || senha === "") {
+			alert('Informe e-mail e senha')
+		} else {
+			api.post(`/usuarios/login`, {
+				"email": email,
+				"senha": senha
 			})
-			.catch(error => {
-				console.log(error)
-				alert('Erro');
-			})
-
+				.then(response => {
+					sessionStorage.setItem("id", response.data.id);
+					history.push('/feed');
+				})
+				.catch(error => {
+					if(error.response.status === 400) {
+						alert(error.response.data)
+					} else {
+						alert('Erro, tente novamente em instantes')
+					}
+				})
+		}
 	}
 
 	return (

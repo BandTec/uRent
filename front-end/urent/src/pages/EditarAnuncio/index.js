@@ -15,58 +15,28 @@ function CadastroAnuncio() {
   const [titulo, setTitulo] = useState("");
   const [valorDiaria, setValorDiaria] = useState("");
   const [tipoVeiculo, setTipoVeiculo] = useState("");
-  const [garagem, setGaragem] = useState("");
+  const [garagem, setGaragem] = useState(0);
 
   const [garagensUsuarios, setGaragensUsuarios] = useState([]);
   const [tipoVeiculoUsuarios, setTipoVeiculoUsuarios] = useState([]);
-
-  const [anuncioEdit, setAnuncioEdit] = useState({});
-  const [tipoVeiculoEdit, setTipoVeiculoEdit] = useState({});
 
   const history = useHistory();
 
   useEffect(() => {
 
-    const id = sessionStorage.getItem("anuncio-edit");
-
-    api.get(`/anuncios/${id}`)
-      .then(response => {
-        setAnuncioEdit(response.data)
-        document.getElementById('txtTitulo').value = response.data.titulo;
-        document.getElementById('txtGaragem').value = response.data.titulo;
-        document.getElementById('txtDiaria').value = response.data.valorDiaria;
-
-        api.get(`/tipoVeiculos/${response.data.tipoVeiculo}`)
-        .then(response =>{
-          setTipoVeiculoEdit(response.data)
-          // document.getElementById('txtTipoVeiculo').selected = response.data.tipo;
-        })
-        .catch(error => {
-          console.log(error)
-        })
-
-      })
-      .catch(error => {
-        console.log(error)
-      })
-
-  }, [])
-
-
-  useEffect(() => {
+    const idUsuario = sessionStorage.getItem("id");
 
     api.get(`usuarios/status`)
       .catch(() => {
         history.push('/login')
       })
 
-    const id = sessionStorage.getItem("id");
-
-    api.get(`/garagens/usuario/${id}`)
+    api.get(`/garagens/usuario/${idUsuario}`)
       .then(response => {
         setGaragensUsuarios(response.data)
       })
       .catch(error => {
+        alert('Erro ao buscar garagens do usuário, recarregue a página')
         console.log(error)
       })
 
@@ -75,6 +45,7 @@ function CadastroAnuncio() {
         setTipoVeiculoUsuarios(response.data)
       })
       .catch(error => {
+        alert('Erro ao buscar tipos de veículos, recarregue a página')
         console.log(error)
       })
 
@@ -82,6 +53,8 @@ function CadastroAnuncio() {
   }, [])
 
   function editarAnuncio() {
+
+    const id = sessionStorage.getItem("anuncio-edit");
 
 
     let garagemCadastro;
@@ -92,18 +65,18 @@ function CadastroAnuncio() {
       }
     }
 
-    api.put('/anuncios/11', {
+    api.put(`/anuncios/${id}`, {
       "titulo": titulo,
       "valorDiaria": valorDiaria,
       "tipoVeiculo": tipoVeiculoUsuarios[tipoVeiculo - 1].id,
       "garagem": garagemCadastro
     })
-      .then(response => {
-        alert("Anuncio Cadastrado!");
+      .then(() => {
+        alert("Anuncio atualizado com sucesso!");
         history.push('/meus-anuncios');
       })
       .catch(error => {
-        alert("Não cadastrou!");
+        alert("Erro ao atualizar anúncio, tente novamente!");
         console.log(error);
       })
   }
@@ -115,8 +88,8 @@ function CadastroAnuncio() {
 
       <S.CadastroContainer>
 
-      
-  <S.CadastroTitle>Anúncio{tipoVeiculoEdit.tipo}</S.CadastroTitle>
+
+        <S.CadastroTitle>Anúncio</S.CadastroTitle>
 
         <div style={{ width: '100%' }}>
           <S.CadastroLabel>Título do anúncio</S.CadastroLabel>
@@ -130,7 +103,7 @@ function CadastroAnuncio() {
               <S.CadastroLabel style={{ marginRight: '6px' }}>Seleciona a garagem</S.CadastroLabel>
               <AiOutlineInfoCircle color='#9C98A6' size='20' />
             </div>
-            <S.CadastroSelect id={"txtGaragem"}title="Selecionar a garagem" onChange={e => setGaragem(e.target.value)} >
+            <S.CadastroSelect id={"txtGaragem"} title="Selecionar a garagem" onChange={e => setGaragem(e.target.value)} >
 
               <option selected disabled>Selecione</option>
               {
@@ -160,7 +133,7 @@ function CadastroAnuncio() {
               <S.CadastroLabel style={{ marginRight: '6px' }}>Tipo de veículo</S.CadastroLabel>
               <AiOutlineInfoCircle color='#9C98A6' size='20' />
             </div>
-            <S.CadastroSelect  title="Tipo de veiculo" onChange={e => setTipoVeiculo(e.target.value)}>
+            <S.CadastroSelect title="Tipo de veiculo" onChange={e => setTipoVeiculo(e.target.value)}>
 
               <option id={"txtTipoVeiculo"} selected disabled>Selecione</option>
               {
@@ -174,7 +147,7 @@ function CadastroAnuncio() {
 
           <S.CadastroContent>
             <S.CadastroLabel>Valor (diária)</S.CadastroLabel>
-            <S.CadastroInput id={"txtDiaria"}style={{ width: '94%' }} onChange={e => setValorDiaria(e.target.value)} />
+            <S.CadastroInput id={"txtDiaria"} style={{ width: '94%' }} onChange={e => setValorDiaria(e.target.value)} />
           </S.CadastroContent>
 
         </S.CadastroContentBox>

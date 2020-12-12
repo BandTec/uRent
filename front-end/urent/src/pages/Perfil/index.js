@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import InputMask from 'react-input-mask';
 
 import api from '../../service/api';
 import carregarEstrelas from '../Functions';
@@ -8,8 +7,6 @@ import { Link, useHistory } from 'react-router-dom';
 
 import Header from '../../components/HeaderCadastro/index';
 import fotoPerfil from '../../assets/user.png';
-import estrelaApagada from '../../assets/Star 5.png';
-import estrelaLigada from '../../assets/Star 4.png';
 
 
 import * as S from '../Perfil/style';
@@ -39,13 +36,11 @@ function FormularioPerfil() {
 				setUsuario(response.data);
 				const avaliacaoAnuncio = response.data.avaliacao;
 				carregarEstrelas(avaliacaoAnuncio);
-
 			})
 			.catch(error => {
+				alert('Erro ao buscar dados do usuário, recarregue a página')
 				console.log(error)
 			})
-
-
 	}, [])
 
 

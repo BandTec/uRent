@@ -91,6 +91,7 @@ export const FormRecusosCheck = style.div`
 
 export const LabelCheck= style.label`
     color:white;
+    cursor: pointer;
 `;
 export const ButtonEntrar = style.button`
     font-size: 18px;

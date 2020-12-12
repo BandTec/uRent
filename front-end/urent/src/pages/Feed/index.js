@@ -6,7 +6,6 @@ import FiltroBusca from '../../components/FiltroBusca/index';
 import Footer from '../../components/Footer';
 
 import api from '../../service/api';
-import carregarEstrelas from '../Functions';
 
 import * as S from './style';
 
@@ -28,10 +27,9 @@ function Feed() {
     api.get('/anuncios/feed')
       .then((response) => {
         setAnuncios(response.data);
-        const avaliacaoAnuncio = response.data.avaliacao;
-        carregarEstrelas(avaliacaoAnuncio);
       })
       .catch((error) => {
+        alert('Erro ao buscar anúncios, recarregue a página');
         console.log(error)
       })
 
@@ -40,7 +38,7 @@ function Feed() {
         setImagens(response.data);
       })
       .catch(error => {
-        alert('Erro ao buscar imagens');
+        alert('Erro ao buscar imagens, recarregue a página');
         console.log(error);
       })
   }, [])

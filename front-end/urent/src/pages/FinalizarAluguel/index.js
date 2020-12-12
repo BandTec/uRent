@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 
 import api from '../../service/api';
@@ -19,7 +19,14 @@ function FinalizarAluguel() {
 
     const anuncioId = sessionStorage.getItem('anuncio');
 
+    const history = useHistory();
+
     useEffect(() => {
+
+        api.get(`usuarios/status`)
+			.catch(() => {
+				history.push('/login')
+			})
 
         api.get(`/anuncios/${anuncioId}`)
             .then(response => {
@@ -32,6 +39,7 @@ function FinalizarAluguel() {
                         console.log("Chegou aqui")
                     })
                     .catch(error => {
+                        alert('Erro ao buscar tipo do veículo, recarregue a página')
                         console.log(error)
                     })
 
@@ -40,10 +48,12 @@ function FinalizarAluguel() {
                         setEndereco(response.data);
                     })
                     .catch(error => {
+                        alert('Erro ao buscar dados do endereço, recarregue a página')
                         console.log(error)
                     })
             })
             .catch(error => {
+                alert('Erro ao buscar anúncio, recarregue a página')
                 console.log(error)
             })
     }, [])
@@ -53,7 +63,7 @@ function FinalizarAluguel() {
             <HeaderAnuncio />
             <S.Header>
                 <S.HeaderNav>
-                    <Link to="/"><FiArrowLeft color="#fff" size="30" /></Link>
+                    <Link to="/detalhes-anuncio"><FiArrowLeft color="#fff" size="30" /></Link>
                 </S.HeaderNav>
                 <S.HeaderTitle>
                     <h1 style={{ fontSize: '16px', color: '#fff', fontWeight: '400' }}>Finalizar aluguel</h1>
@@ -83,7 +93,7 @@ function FinalizarAluguel() {
                         <S.SectionInfo style={{ display: "block" }}>
                             <S.TittleLineInfo>Tipo de garagem</S.TittleLineInfo>
                             <S.ContentLineInfo>
-                                <S.ParagrafoBInfo style={{ marginTop: "10px" }}>Tamanho:</S.ParagrafoBInfo>médio
+                                <S.ParagrafoBInfo style={{ marginTop: "10px" }}>Tamanho:</S.ParagrafoBInfo>{tipoVeiculo.tipo === 'Caminhão' ? 'Grande' : tipoVeiculo.tipo === 'Carro' ? 'Médio' : tipoVeiculo.tipo === 'Moto' ? 'Pequeno' : ''}
                             <S.ParagrafoBInfo style={{ marginTop: "10px" }}>Veiculo:</S.ParagrafoBInfo> {tipoVeiculo.tipo}
                             </S.ContentLineInfo>
                         </S.SectionInfo>

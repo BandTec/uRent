@@ -84,7 +84,7 @@ function CadastroGaragem() {
 							})
 					})
 					.catch(error => {
-						alert('Erro ao realizar cadastro');
+						alert('Erro ao realizar cadastro, tente novamente');
 						console.log(error);
 					})
 

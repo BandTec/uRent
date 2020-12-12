@@ -18,7 +18,7 @@ const socket = io.connect('http://localhost:5000');
 function Index() {
 
 	const [message, setMessage] = useState('');
-	const [chat, setChat] = useState([]);
+	// const [chat, setChat] = useState([]);
 
 	const [usuario, setUsuario] = useState('');
 	const [endereco, setEndereco] = useState('');
