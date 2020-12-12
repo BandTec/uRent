@@ -15,7 +15,7 @@ function Header() {
 				<S.ButtonMenu>Sobre nós</S.ButtonMenu>
 			</S.HeaderNavMenu>
 			<S.HeaderNav>		
-				<Link to="">
+				<Link to="/login">
 				<S.ButtonBlue>Entrar</S.ButtonBlue>
 				</Link>
 			</S.HeaderNav>
