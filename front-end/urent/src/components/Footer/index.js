@@ -23,12 +23,8 @@ function Footer() {
 			</div>
 			<div>
 				<S.FooterTitle>Precisa de um help?</S.FooterTitle>
-				<Link style={{ textDecoration: 'none', color: '#000' }}>
-					<S.FooterText>Entre em contato conosco, através</S.FooterText>
-				</Link>
-				<Link style={{ textDecoration: 'none', color: '#000' }}>
-					<S.FooterText>do nosso e-mail:</S.FooterText>
-				</Link>
+				<S.FooterText>Entre em contato conosco, através</S.FooterText>
+				<S.FooterText>do nosso e-mail:</S.FooterText>
 			</div>
 		</S.Footer>
 	)
