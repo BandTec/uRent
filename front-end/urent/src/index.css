@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  outline: none;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -14,4 +18,8 @@ code {
 
 button:hover {
   cursor: pointer;
+}
+
+a {
+  text-decoration: none;
 }
