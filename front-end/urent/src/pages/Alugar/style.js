@@ -12,3 +12,11 @@ export const SectionTitle = style.h1`
     font-size: 20px;
 `;
 
+export const PopContent = style.div`
+    height: 100%;
+    width: 100%;
+    // background-color: red;
+    text-align: center;
+    font-size: 20px;
+`;
+

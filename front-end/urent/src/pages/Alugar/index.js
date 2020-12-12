@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {useHistory, Link} from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 
 import api from '../../service/api';
@@ -22,9 +22,9 @@ function Alugar() {
   useEffect(() => {
 
     api.get(`usuarios/status`)
-			.catch(() => {
-				history.push('/login')
-			})
+      .catch(() => {
+        history.push('/login')
+      })
 
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
@@ -34,6 +34,10 @@ function Alugar() {
     api.get('/anuncios/latitude-longitude')
       .then(response => {
         setEnderecos(response.data)
+      })
+      .catch(error => {
+        alert('Erro ao buscar anúncios')
+        console.log(error)
       })
   }, [])
 
@@ -57,10 +61,12 @@ function Alugar() {
               enderecos.map(endereco =>
                 <Marker position={[endereco.latitude, endereco.longitude]}>
                   <Popup>
-                    R${endereco.valorDiaria}
-                    <Link onClick={() => {sessionStorage.setItem('anuncio', endereco.id); history.push('/detalhes-anuncio');}}>
-                      <p>Ver</p>
-                    </Link>
+                    <S.PopContent>
+                      R${endereco.valorDiaria}
+                      <Link onClick={() => { sessionStorage.setItem('anuncio', endereco.id); history.push('/detalhes-anuncio'); }}>
+                        <p>Clique aqui</p>
+                      </Link>
+                    </S.PopContent>
                   </Popup>
                 </Marker>
               )}
