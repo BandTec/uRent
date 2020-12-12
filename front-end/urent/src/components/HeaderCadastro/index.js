@@ -10,10 +10,11 @@ var anuncio = 1;
 
 function HeaderCadastro({ title }) {
 	return (
+		
 		<div>
 			<S.Header>
 				<S.HeaderNav>
-					<Link to="/"><FiArrowLeft color="#fff" size="30" /></Link>
+					<Link to="/feed"><FiArrowLeft color="#fff" size="30" /></Link>
 				</S.HeaderNav>
 				<S.HeaderTitle>
 					<h1 style={{ fontSize: '16px', color: '#fff', fontWeight: '400' }}>{title}</h1>
