@@ -221,3 +221,38 @@ export const AvaliacaoAnuncio = style.div`
         font-size: 20px;
         }
 `;
+
+export const Label = style.label`
+    color: #0752DE;
+    line-height: 2;
+    font-size: 18px;
+    font-weight: 600;
+    margin-right: 0.5vw;
+`;
+
+export const File = style.input`
+    height: 100%;
+    width: 70%;
+    border: 1px solid #E6E6F0;
+    border-radius: 8px;
+    background-color: #FAFAFC;
+    padding-left: 15px;
+    color: #9C98A6;
+    font-size: 18px;
+    margin-bottom: 24px;
+`;
+
+export const Calcular = style.button`
+background-color: #0752DE;
+border: 1px solid #0752DE;
+border-radius: 8px;
+height: 100%;
+width: 200px;
+margin-left: 5px;
+color: #fff;
+transition: margin-bottom .1s;
+&:hover {
+  background-color: #04399b;
+  border: 1px solid #04399b;
+}
+`;

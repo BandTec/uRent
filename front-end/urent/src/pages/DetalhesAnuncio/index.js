@@ -133,7 +133,7 @@ function DetalhesAnuncio() {
                     Preço Diário:
                                 </S.AvaliacaoAnuncio>
                   <S.AvaliacaoAnuncio style={{ fontSize: "30px", color: "#0752DE" }}>
-                    R$ {anuncio.valorDiaria},00
+                    R$ {anuncio.valorDiaria}
                                 </S.AvaliacaoAnuncio>
                 </div>
                 <S.TittleBuy style={{ width: "100%", marginLeft: "0" }}>Contate o anunciante:</S.TittleBuy>
