@@ -83,7 +83,8 @@ server.post('/pagar', (req, res) => {
 })
 
 server.get('/dowload', (req, res) => {
-    res.download('./boleto.pdf');
+    console.log(__dirname)
+    res.download(`${__dirname}/tmp/boletos/boleto.pdf`);
 })
 
 server.listen(2000, () => console.log('Servidor rodando na porta 2000'));
